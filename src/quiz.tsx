@@ -3,7 +3,7 @@
 // Exercises 2 to 5. Left: roadmap of the section's exercises (click a built one to open it). Top: a ... j of the open exercise, click to jump.
 // Imported by: quiz.html only. Data: exercise.ts (shape), quiz-data.ts (EX2), degree-data.ts (EX3), coefficient-data.ts (EX4), order-data.ts (EX5), section-data.ts.
 import { createRoot } from 'react-dom/client'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import katex from 'katex'
 import 'katex/dist/katex.min.css'
@@ -187,7 +187,7 @@ function Choices({ choices, math, onPick, right }: { choices: string[]; math?: b
 }
 
 // left: the exercises of sections 5.1 and 5.2 (the built ones open on click)
-function Side({ current, onOpen, results, grade, loaded }: { current: number; onOpen: (no: number) => void; results: Record<number, (Result | undefined)[]>; grade: number; loaded: boolean }) {
+function Side({ current, onOpen, results, grade, loaded, resumeRef }: { current: number; onOpen: (no: number) => void; results: Record<number, (Result | undefined)[]>; grade: number; loaded: boolean; resumeRef: { current: () => void } }) {
   const chapters = [
     { title: 'Chapter 1', sections: [{ title: '1.1 The real number system', nodes: NODES11 }, { title: '1.2 Square roots', nodes: NODES12 }, { title: '1.3 Non-perfect squares', nodes: NODES13 }, { title: '1.4 Exponents', nodes: NODES14 }, { title: '1.5 Order of operations', nodes: NODES15 }, { title: '1.6 Product and quotient rules', nodes: NODES16 }, { title: '1.7 Power rules', nodes: NODES17 }, { title: '1.8 Chapter review', nodes: NODES18 }] },
     { title: 'Chapter 3', sections: [{ title: '3.1 Rational numbers', nodes: NODES31 }, { title: '3.2 Adding and subtracting decimals', nodes: NODES32 }, { title: '3.3 Adding and subtracting fractions', nodes: NODES33 }, { title: '3.4 Multiplying and dividing fractions', nodes: NODES34 }, { title: '3.5 Chapter review', nodes: NODES35 }] },
@@ -208,16 +208,17 @@ function Side({ current, onOpen, results, grade, loaded }: { current: number; on
     const r = results[no] ?? []
     return EXERCISES[no] && r.filter(Boolean).length === EXERCISES[no].questions.length ? (r.every((x) => x === 'first') ? 'first' : 'learned') : undefined
   }
-  // once the saved progress is read, open the lesson after the last finished one (sidebar order) and unfold its section
-  useEffect(() => {
-    if (!loaded) return
+  // open the lesson after the last finished one (sidebar order) and unfold its section; runs once the saved progress is read, and for the header button
+  const resume = () => {
     const flat = chapters.flatMap((c) => c.sections.flatMap((s) => s.nodes.filter((n) => !REGULAR_OF[n.no] && EXERCISES[n.no]).map((n) => ({ no: n.no, c: c.title, s: s.title }))))
     const last = flat.map((x) => !!statusOf(x.no)).lastIndexOf(true)
     const t = flat[Math.min(last + 1, flat.length - 1)]
     if (!t) return
     onOpen(t.no)
     setClosed((c) => ({ ...c, [t.c]: false, [t.s]: false }))
-  }, [loaded]) // eslint-disable-line react-hooks/exhaustive-deps
+  }
+  resumeRef.current = resume
+  useEffect(() => { if (loaded) resume() }, [loaded]) // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <nav className="hidden w-60 shrink-0 space-y-1 border-r p-4 md:block">
       {grade !== 9 && <p className="pt-2 text-sm text-slate-500">No exercises for Grade {grade} yet.</p>}
@@ -310,6 +311,7 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
   const [stage, setStage] = useState<Stage>('ask')
   const [px, setPx] = useState(0) // practice question 0..2
   const [results, setResults] = useState<Record<number, (Result | undefined)[]>>({})
+  const resumeRef = useRef<() => void>(() => {})
   const [loaded, setLoaded] = useState(false) // the saved progress has been read: only then is it written back
   useEffect(() => {
     supabase.from('quiz_progress').select('results').eq('user_id', userId).maybeSingle().then(({ data }) => {
@@ -508,9 +510,9 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
 
   return (
     <>
-    <Header grade={grade} onGrade={setGrade} done={doneCount} total={regularNos.length} email={email} onContinue={() => open(LAST_NO)} />
+    <Header grade={grade} onGrade={setGrade} done={doneCount} total={regularNos.length} email={email} onContinue={() => resumeRef.current()} />
     <div className="flex min-h-[calc(100vh-3rem)]">
-      <Side current={no} onOpen={open} results={results} grade={grade} loaded={loaded} />
+      <Side current={no} onOpen={open} results={results} grade={grade} loaded={loaded} resumeRef={resumeRef} />
       <div className="min-w-0 flex-1">
         {stage === 'lesson' || stage === 'plesson' ? (
           <div className="flex items-center gap-3 px-4 pt-3">
