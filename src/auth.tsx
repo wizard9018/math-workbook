@@ -3,7 +3,7 @@ import { useEffect, useState, type ReactNode } from 'react'
 import type { Session } from '@supabase/supabase-js'
 import { supabase } from './supabase'
 
-export function AuthGate({ children }: { children: (userId: string) => ReactNode }) {
+export function AuthGate({ children }: { children: (userId: string, email: string) => ReactNode }) {
   const [session, setSession] = useState<Session | null | undefined>(undefined) // undefined = still checking
   const [mode, setMode] = useState<'in' | 'up'>('in')
   const [email, setEmail] = useState('')
@@ -36,12 +36,7 @@ export function AuthGate({ children }: { children: (userId: string) => ReactNode
   if (session === undefined) return null
   if (session) {
     return (
-      <>
-        {children(session.user.id)}
-        <button onClick={() => supabase.auth.signOut()} className="fixed bottom-2 left-2 z-50 rounded-lg border bg-white/90 px-2 py-1 text-xs text-slate-600 hover:bg-white">
-          Sign out · {session.user.email}
-        </button>
-      </>
+      <>{children(session.user.id, session.user.email ?? '')}</>
     )
   }
   return (

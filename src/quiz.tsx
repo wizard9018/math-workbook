@@ -187,7 +187,7 @@ function Choices({ choices, math, onPick, right }: { choices: string[]; math?: b
 }
 
 // left: the exercises of sections 5.1 and 5.2 (the built ones open on click)
-function Side({ current, onOpen, results }: { current: number; onOpen: (no: number) => void; results: Record<number, (Result | undefined)[]> }) {
+function Side({ current, onOpen, results, grade }: { current: number; onOpen: (no: number) => void; results: Record<number, (Result | undefined)[]>; grade: number }) {
   const chapters = [
     { title: 'Chapter 1', sections: [{ title: '1.1 The real number system', nodes: NODES11 }, { title: '1.2 Square roots', nodes: NODES12 }, { title: '1.3 Non-perfect squares', nodes: NODES13 }, { title: '1.4 Exponents', nodes: NODES14 }, { title: '1.5 Order of operations', nodes: NODES15 }, { title: '1.6 Product and quotient rules', nodes: NODES16 }, { title: '1.7 Power rules', nodes: NODES17 }, { title: '1.8 Chapter review', nodes: NODES18 }] },
     { title: 'Chapter 3', sections: [{ title: '3.1 Rational numbers', nodes: NODES31 }, { title: '3.2 Adding and subtracting decimals', nodes: NODES32 }, { title: '3.3 Adding and subtracting fractions', nodes: NODES33 }, { title: '3.4 Multiplying and dividing fractions', nodes: NODES34 }, { title: '3.5 Chapter review', nodes: NODES35 }] },
@@ -202,7 +202,6 @@ function Side({ current, onOpen, results }: { current: number; onOpen: (no: numb
     { title: 'Chapter 6', sections: [{ title: '6.1 Linear equations', nodes: NODES61 }, { title: '6.2 Fractions and decimals', nodes: NODES62 }, { title: '6.3 Inequalities', nodes: NODES63 }, { title: '6.4 Solving inequalities', nodes: NODES64 }, { title: '6.5 Solving inequalities (more)', nodes: NODES65 }, { title: '6.6 Linear relations', nodes: NODES66 }] },
   ]
   const sections = chapters.flatMap((c) => c.sections)
-  const [grade, setGrade] = useState(9) // only Grade 9 has exercises so far
   const [closed, setClosed] = useState<Record<string, boolean>>(() => Object.fromEntries([...chapters, ...sections].map((s) => [s.title, !LAST_OPEN.includes(s.title)]))) // every section starts folded; click a section title to unfold its exercises
   // an exercise with every question done is 'first' (all right first time) or 'learned' (some needed the lesson)
   const statusOf = (no: number): Result | undefined => {
@@ -211,9 +210,6 @@ function Side({ current, onOpen, results }: { current: number; onOpen: (no: numb
   }
   return (
     <nav className="hidden w-60 shrink-0 space-y-1 border-r p-4 md:block">
-      <select value={grade} onChange={(e) => setGrade(Number(e.target.value))} className="mb-2 w-full rounded-lg border bg-white px-2 py-1.5 text-sm font-semibold text-slate-700">
-        {[8, 9, 10, 11, 12].map((g) => <option key={g} value={g}>Grade {g}</option>)}
-      </select>
       {grade !== 9 && <p className="pt-2 text-sm text-slate-500">No exercises for Grade {grade} yet.</p>}
       {grade === 9 && chapters.map((ch) => (
         <div key={ch.title} className="space-y-1">
@@ -280,7 +276,24 @@ function Road({ ex, i, result, onJump }: { ex: Exercise; i: number; result: (Res
   )
 }
 
-function Quiz({ userId }: { userId: string }) {
+// top bar: the grade, how far along, back to the last exercise, and the account
+function Header({ grade, onGrade, done, total, email, onContinue }: { grade: number; onGrade: (g: number) => void; done: number; total: number; email: string; onContinue: () => void }) {
+  return (
+    <header className="sticky top-0 z-40 flex h-12 items-center gap-3 border-b bg-white/90 px-4 backdrop-blur">
+      <span className="font-serif text-lg font-bold text-slate-800">Math Workbook</span>
+      <select value={grade} onChange={(e) => onGrade(Number(e.target.value))} aria-label="Grade" className="rounded-lg border bg-white px-2 py-1 text-sm font-semibold text-slate-700">
+        {[8, 9, 10, 11, 12].map((g) => <option key={g} value={g}>Grade {g}</option>)}
+      </select>
+      <button onClick={onContinue} className="hidden rounded-lg border px-2 py-1 text-sm text-slate-600 hover:bg-slate-50 sm:block">Latest exercise</button>
+      <span className="ml-auto hidden text-sm text-slate-500 sm:block">{done} / {total} exercises done</span>
+      <span className="hidden max-w-48 truncate text-sm text-slate-500 md:block" title={email}>{email}</span>
+      <button onClick={() => supabase.auth.signOut()} className="rounded-lg border px-2 py-1 text-sm text-slate-600 hover:bg-slate-50">Sign out</button>
+    </header>
+  )
+}
+
+function Quiz({ userId, email }: { userId: string; email: string }) {
+  const [grade, setGrade] = useState(9) // only Grade 9 has exercises so far
   const [no, setNo] = useState(LAST_NO)
   const [i, setI] = useState(0)
   const [stage, setStage] = useState<Stage>('ask')
@@ -298,6 +311,8 @@ function Quiz({ userId }: { userId: string }) {
     const t = setTimeout(() => { supabase.from('quiz_progress').upsert({ user_id: userId, results, updated_at: new Date().toISOString() }) }, 800)
     return () => clearTimeout(t)
   }, [results, loaded, userId])
+  const regularNos = Object.keys(EXERCISES).map(Number).filter((n) => !REGULAR_OF[n]) // challenges do not count
+  const doneCount = regularNos.filter((n) => (results[n] ?? []).filter(Boolean).length === EXERCISES[n].questions.length).length
   const ex = EXERCISES[no]
   const [drawn, setDrawn] = useState<Record<string, Slot>>({}) // a slot redone after the lesson asks a new random variant
   const q = drawn[`${no}:${i}`] ?? ex.questions[i]
@@ -480,13 +495,16 @@ function Quiz({ userId }: { userId: string }) {
   }
 
   return (
-    <div className="flex min-h-screen">
-      <Side current={no} onOpen={open} results={results} />
+    <>
+    <Header grade={grade} onGrade={setGrade} done={doneCount} total={regularNos.length} email={email} onContinue={() => open(LAST_NO)} />
+    <div className="flex min-h-[calc(100vh-3rem)]">
+      <Side current={no} onOpen={open} results={results} grade={grade} />
       <div className="min-w-0 flex-1">
         <Road ex={ex} i={stage === 'done' ? -1 : i} result={result} onJump={jump} />
         {body}
       </div>
     </div>
+    </>
   )
 }
 
@@ -501,4 +519,4 @@ const QuestionStrip = ({ tex }: { tex: string }) => (
   </div>
 )
 
-createRoot(document.getElementById('root')!).render(<AuthGate>{(userId) => <Quiz key={userId} userId={userId} />}</AuthGate>)
+createRoot(document.getElementById('root')!).render(<AuthGate>{(userId, email) => <Quiz key={userId} userId={userId} email={email} />}</AuthGate>)
