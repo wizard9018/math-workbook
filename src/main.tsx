@@ -138,6 +138,8 @@ export function LessonPlayer({ lesson: forced, onDone }: { lesson?: Lesson; onDo
   const cheerCount = useRef(0)
   const streak = useRef(0) // right answers in a row (a wrong answer starts the count again)
   const alive = useRef(true)
+  const top = useRef<HTMLDivElement>(null)
+  useEffect(() => { top.current?.scrollIntoView({ block: 'start' }) }, [lesson.key]) // a lesson starts at the top of the screen: no scrolling down
   const run = useRef(0) // bumped by Restart so timers of an interrupted step do nothing
   const chain = useRef<HTMLDivElement>(null)
   const figRef = useRef<HTMLDivElement>(null) // the figure above the working (arrows can point to its parts)
@@ -495,7 +497,7 @@ export function LessonPlayer({ lesson: forced, onDone }: { lesson?: Lesson; onDo
             if (!bl || !c) return <span key={t.id} ref={(el) => { els.current[`${n + 1}:${t.id}`] = el }} className={tokenClass + ' flex h-9 shrink-0 items-center text-xl'} dangerouslySetInnerHTML={tex(t.tex)} />
             const done = bOk.includes(t.id)
             return (
-              <span key={t.id} className="inline-flex flex-col items-center gap-3">
+              <span key={t.id} className="inline-flex items-start gap-3">
                 <span className="flex items-center gap-1">
                   <span ref={(el) => { els.current[`blank:${t.id}`] = el }} className="inline-block h-9 w-12 shrink-0 rounded-md border-2 border-dashed border-sky-400 bg-sky-50" />
                   {bl.after && <span className="text-xl" dangerouslySetInnerHTML={tex(bl.after)} />}
@@ -625,7 +627,7 @@ export function LessonPlayer({ lesson: forced, onDone }: { lesson?: Lesson; onDo
 
   const lines = Array.from({ length: n + 1 + (saying || calcing ? 1 : 0) }, (_, i) => i)
   return (
-    <div className="mx-auto max-w-4xl space-y-4 p-6">
+    <div ref={top} className="mx-auto max-w-4xl scroll-mt-14 space-y-4 p-6">
       <div className="flex flex-wrap items-center gap-3">
         <h1 className="text-xl font-bold">{lesson.title}</h1>
         {!forced && (
