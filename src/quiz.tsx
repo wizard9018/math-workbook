@@ -226,7 +226,7 @@ function Side({ current, onOpen, results, grade }: { current: number; onOpen: (n
             <span className={'inline-block transition-transform ' + (closed[s.title] ? '' : 'rotate-90')}>▸</span>
             {s.title}
             {/* every exercise of the section done: a tick (all right first time) or a pencil */}
-            {s.nodes.filter((n) => !REGULAR_OF[n.no]).every((n) => statusOf(n.no)) && <span className={'ml-1 text-sm ' + (s.nodes.filter((n) => !REGULAR_OF[n.no]).every((n) => statusOf(n.no) === 'first') ? 'text-emerald-600' : 'text-amber-500')}>{s.nodes.filter((n) => !REGULAR_OF[n.no]).every((n) => statusOf(n.no) === 'first') ? '✓' : '✎'}</span>}
+            {s.nodes.filter((n) => !REGULAR_OF[n.no]).every((n) => statusOf(n.no)) && <span className="ml-1 text-sm text-emerald-600">✓</span>}
           </button>
           {!closed[s.title] && s.nodes.filter((n) => !REGULAR_OF[n.no]).map((n) => {
             const built = !!EXERCISES[n.no]
@@ -234,7 +234,8 @@ function Side({ current, onOpen, results, grade }: { current: number; onOpen: (n
             // every question done: a tick when all were right first time, a pencil when some needed the lesson
             const status = statusOf(n.no)
             const finished = built && !!status
-            const mark = status === 'first' ? '✓' : status === 'learned' ? '✎' : n.show
+            const challengeDone = !!CHALLENGE_OF[n.no] && !!statusOf(CHALLENGE_OF[n.no])
+            const mark = challengeDone ? '👍' : status ? '✓' : n.show
             return (
               <button
                 key={n.no}
@@ -373,23 +374,24 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
 
   let body
   if (stage === 'done') {
+    const challenge = CHALLENGE_OF[no]
+    const regular = REGULAR_OF[no]
     body = (
-      <div className="mx-auto max-w-2xl space-y-4 p-6">
-        <h1 className="text-xl font-bold">Done!</h1>
-        <ul className="space-y-1">
-          {ex.questions.map((x, k) => (
-            <li key={x.part} className="flex items-center gap-3">
-              <b className="w-8">
-                {ex.no}
-                {x.part}
-              </b>
-              <span dangerouslySetInnerHTML={html(x.tex)} />
-              <span className={result[k] === 'first' ? 'text-emerald-600' : 'text-amber-600'}>
-                {result[k] === 'first' ? '✓ right first time' : result[k] === 'learned' ? '✎ learned' : 'skipped'}
-              </span>
-            </li>
-          ))}
-        </ul>
+      <div className="mx-auto max-w-md space-y-4 p-10 text-center">
+        {challenge ? (
+          <>
+            <h1 className="text-xl font-bold">Well done! Start the challenge?</h1>
+            <p className="text-slate-600">Harder questions on the same topic. Optional.</p>
+            <button onClick={() => open(challenge)} className="rounded-xl bg-emerald-500 px-5 py-2 font-semibold text-white hover:bg-emerald-600">Start challenge</button>
+          </>
+        ) : regular ? (
+          <>
+            <h1 className="text-xl font-bold">👍 Challenge complete!</h1>
+            <button onClick={() => open(regular)} className="rounded-xl border px-5 py-2 font-semibold text-slate-700 hover:bg-slate-50">Back to the regular exercise</button>
+          </>
+        ) : (
+          <h1 className="text-xl font-bold">Done!</h1>
+        )}
       </div>
     )
   } else if (stage === 'lesson') {
