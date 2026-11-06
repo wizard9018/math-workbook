@@ -1,0 +1,1702 @@
+{
+ "a": [
+  [
+   [
+    "The temperature",
+    "t"
+   ],
+   [
+    "is more than",
+    ">"
+   ],
+   [
+    "30 degrees",
+    "30"
+   ]
+  ],
+  [
+   [
+    "The cost",
+    "c"
+   ],
+   [
+    "is at most",
+    "<="
+   ],
+   [
+    "45 dollars",
+    "45"
+   ]
+  ],
+  [
+   [
+    "The height",
+    "h"
+   ],
+   [
+    "must be at least",
+    ">="
+   ],
+   [
+    "1.5 meters",
+    "1.5"
+   ]
+  ],
+  [
+   [
+    "The weight",
+    "w"
+   ],
+   [
+    "is less than",
+    "<"
+   ],
+   [
+    "12 kilograms",
+    "12"
+   ]
+  ],
+  [
+   [
+    "The speed",
+    "s"
+   ],
+   [
+    "is not more than",
+    "<="
+   ],
+   [
+    "65 miles per hour",
+    "65"
+   ]
+  ],
+  [
+   [
+    "The distance",
+    "d"
+   ],
+   [
+    "is greater than",
+    ">"
+   ],
+   [
+    "80 kilometers",
+    "80"
+   ]
+  ],
+  [
+   [
+    "The age",
+    "a"
+   ],
+   [
+    "is at least",
+    ">="
+   ],
+   [
+    "18 years",
+    "18"
+   ]
+  ],
+  [
+   [
+    "The volume",
+    "v"
+   ],
+   [
+    "must be at most",
+    "<="
+   ],
+   [
+    "250 milliliters",
+    "250"
+   ]
+  ],
+  [
+   [
+    "The length",
+    "l"
+   ],
+   [
+    "must be more than",
+    ">"
+   ],
+   [
+    "10 centimeters",
+    "10"
+   ]
+  ],
+  [
+   [
+    "The price",
+    "p"
+   ],
+   [
+    "is under",
+    "<"
+   ],
+   [
+    "20 dollars",
+    "20"
+   ]
+  ],
+  [
+   [
+    "The mass",
+    "m"
+   ],
+   [
+    "is not less than",
+    ">="
+   ],
+   [
+    "500 grams",
+    "500"
+   ]
+  ],
+  [
+   [
+    "A number",
+    "n"
+   ],
+   [
+    "must be less than",
+    "<"
+   ],
+   [
+    "7",
+    "7"
+   ]
+  ]
+ ],
+ "b": [
+  [
+   [
+    "The temperature",
+    "t"
+   ],
+   [
+    "is more than",
+    ">"
+   ],
+   [
+    "thirty degrees",
+    "30"
+   ]
+  ],
+  [
+   [
+    "The weight of the suitcase",
+    "w"
+   ],
+   [
+    "is at most",
+    "<="
+   ],
+   [
+    "twenty-three kilograms",
+    "23"
+   ]
+  ],
+  [
+   [
+    "A rider's height",
+    "h"
+   ],
+   [
+    "must be at least",
+    ">="
+   ],
+   [
+    "1.4 meters",
+    "1.4"
+   ]
+  ],
+  [
+   [
+    "The total cost",
+    "c"
+   ],
+   [
+    "is not more than",
+    "<="
+   ],
+   [
+    "fifty dollars",
+    "50"
+   ]
+  ],
+  [
+   [
+    "The speed of the car",
+    "s"
+   ],
+   [
+    "is greater than",
+    ">"
+   ],
+   [
+    "sixty miles per hour",
+    "60"
+   ]
+  ],
+  [
+   [
+    "A number",
+    "n"
+   ],
+   [
+    "is less than",
+    "<"
+   ],
+   [
+    "negative seven",
+    "-7"
+   ]
+  ],
+  [
+   [
+    "A person's age",
+    "a"
+   ],
+   [
+    "is at least",
+    ">="
+   ],
+   [
+    "eighteen years",
+    "18"
+   ]
+  ],
+  [
+   [
+    "The water depth",
+    "d"
+   ],
+   [
+    "is less than",
+    "<"
+   ],
+   [
+    "two meters",
+    "2"
+   ]
+  ],
+  [
+   [
+    "The volume of the container",
+    "v"
+   ],
+   [
+    "is no more than",
+    "<="
+   ],
+   [
+    "500 milliliters",
+    "500"
+   ]
+  ],
+  [
+   [
+    "The ticket price",
+    "p"
+   ],
+   [
+    "is less than",
+    "<"
+   ],
+   [
+    "fifteen dollars",
+    "15"
+   ]
+  ],
+  [
+   [
+    "The elevation",
+    "e"
+   ],
+   [
+    "is not less than",
+    ">="
+   ],
+   [
+    "1200 meters",
+    "1200"
+   ]
+  ],
+  [
+   [
+    "The length of the board",
+    "l"
+   ],
+   [
+    "must be at most",
+    "<="
+   ],
+   [
+    "eight feet",
+    "8"
+   ]
+  ]
+ ],
+ "c": [
+  [
+   [
+    "The ticket price",
+    "p"
+   ],
+   [
+    "is less than",
+    "<"
+   ],
+   [
+    "twenty dollars.",
+    "20"
+   ]
+  ],
+  [
+   [
+    "The water temperature",
+    "t"
+   ],
+   [
+    "is more than",
+    ">"
+   ],
+   [
+    "eighty degrees.",
+    "80"
+   ]
+  ],
+  [
+   [
+    "The age of the driver",
+    "a"
+   ],
+   [
+    "is at least",
+    ">="
+   ],
+   [
+    "eighteen years.",
+    "18"
+   ]
+  ],
+  [
+   [
+    "The luggage weight",
+    "w"
+   ],
+   [
+    "is at most",
+    "<="
+   ],
+   [
+    "twenty-three kilograms.",
+    "23"
+   ]
+  ],
+  [
+   [
+    "The height of the plant",
+    "h"
+   ],
+   [
+    "must be at least",
+    ">="
+   ],
+   [
+    "one point six meters.",
+    "1.6"
+   ]
+  ],
+  [
+   [
+    "The waiting time",
+    "m"
+   ],
+   [
+    "is not more than",
+    "<="
+   ],
+   [
+    "forty-five minutes.",
+    "45"
+   ]
+  ],
+  [
+   [
+    "The wind speed",
+    "s"
+   ],
+   [
+    "is greater than",
+    ">"
+   ],
+   [
+    "fifty kilometers per hour.",
+    "50"
+   ]
+  ],
+  [
+   [
+    "The depth of the snow",
+    "d"
+   ],
+   [
+    "is strictly less than",
+    "<"
+   ],
+   [
+    "ten centimeters.",
+    "10"
+   ]
+  ],
+  [
+   [
+    "The elevator load",
+    "l"
+   ],
+   [
+    "cannot exceed",
+    "<="
+   ],
+   [
+    "eight hundred kilograms.",
+    "800"
+   ]
+  ],
+  [
+   [
+    "The bank balance",
+    "b"
+   ],
+   [
+    "is no less than",
+    ">="
+   ],
+   [
+    "one hundred dollars.",
+    "100"
+   ]
+  ],
+  [
+   [
+    "The flight distance",
+    "f"
+   ],
+   [
+    "exceeds",
+    ">"
+   ],
+   [
+    "three hundred miles.",
+    "300"
+   ]
+  ],
+  [
+   [
+    "The total cost",
+    "c"
+   ],
+   [
+    "must not exceed",
+    "<="
+   ],
+   [
+    "fifty dollars.",
+    "50"
+   ]
+  ]
+ ],
+ "d": [
+  [
+   [
+    "The cost of the ticket",
+    "c"
+   ],
+   [
+    "is at most",
+    "<="
+   ],
+   [
+    "45 dollars.",
+    "45"
+   ]
+  ],
+  [
+   [
+    "The water temperature",
+    "t"
+   ],
+   [
+    "is greater than",
+    ">"
+   ],
+   [
+    "80 degrees.",
+    "80"
+   ]
+  ],
+  [
+   [
+    "The height of the plant",
+    "h"
+   ],
+   [
+    "must be at least",
+    ">="
+   ],
+   [
+    "2.5 meters.",
+    "2.5"
+   ]
+  ],
+  [
+   [
+    "The weight of the luggage",
+    "w"
+   ],
+   [
+    "is less than",
+    "<"
+   ],
+   [
+    "23 kilograms.",
+    "23"
+   ]
+  ],
+  [
+   [
+    "The driving speed",
+    "s"
+   ],
+   [
+    "is not more than",
+    "<="
+   ],
+   [
+    "60 miles per hour.",
+    "60"
+   ]
+  ],
+  [
+   [
+    "The number of applicants",
+    "n"
+   ],
+   [
+    "is more than",
+    ">"
+   ],
+   [
+    "150 students.",
+    "150"
+   ]
+  ],
+  [
+   [
+    "The depth of the river",
+    "d"
+   ],
+   [
+    "is no more than",
+    "<="
+   ],
+   [
+    "4.2 meters.",
+    "4.2"
+   ]
+  ],
+  [
+   [
+    "The exam score",
+    "e"
+   ],
+   [
+    "has to be at least",
+    ">="
+   ],
+   [
+    "75 points.",
+    "75"
+   ]
+  ],
+  [
+   [
+    "The volume of milk",
+    "v"
+   ],
+   [
+    "is under",
+    "<"
+   ],
+   [
+    "2 liters.",
+    "2"
+   ]
+  ],
+  [
+   [
+    "The daily profit",
+    "p"
+   ],
+   [
+    "exceeds",
+    ">"
+   ],
+   [
+    "500 dollars.",
+    "500"
+   ]
+  ],
+  [
+   [
+    "The age of the driver",
+    "a"
+   ],
+   [
+    "is at least",
+    ">="
+   ],
+   [
+    "18 years.",
+    "18"
+   ]
+  ],
+  [
+   [
+    "The monthly rainfall",
+    "r"
+   ],
+   [
+    "is strictly less than",
+    "<"
+   ],
+   [
+    "12 millimeters.",
+    "12"
+   ]
+  ]
+ ],
+ "e": [
+  [
+   [
+    "The height of the doorway ",
+    "h"
+   ],
+   [
+    "is at least ",
+    ">="
+   ],
+   [
+    "2.1 metres.",
+    "2.1"
+   ]
+  ],
+  [
+   [
+    "The temperature today ",
+    "t"
+   ],
+   [
+    "will be more than ",
+    ">"
+   ],
+   [
+    "30 degrees.",
+    "30"
+   ]
+  ],
+  [
+   [
+    "The weight of the parcel ",
+    "w"
+   ],
+   [
+    "is at most ",
+    "<="
+   ],
+   [
+    "5 kilograms.",
+    "5"
+   ]
+  ],
+  [
+   [
+    "The speed of the car ",
+    "s"
+   ],
+   [
+    "was less than ",
+    "<"
+   ],
+   [
+    "60 kilometres per hour.",
+    "60"
+   ]
+  ],
+  [
+   [
+    "The mark on the exam ",
+    "m"
+   ],
+   [
+    "must be at least ",
+    ">="
+   ],
+   [
+    "75 percent.",
+    "75"
+   ]
+  ],
+  [
+   [
+    "The depth of the pool ",
+    "d"
+   ],
+   [
+    "is not more than ",
+    "<="
+   ],
+   [
+    "1.8 metres.",
+    "1.8"
+   ]
+  ],
+  [
+   [
+    "The price of the jacket ",
+    "p"
+   ],
+   [
+    "is more than ",
+    ">"
+   ],
+   [
+    "80 dollars.",
+    "80"
+   ]
+  ],
+  [
+   [
+    "The volume of water ",
+    "v"
+   ],
+   [
+    "is less than ",
+    "<"
+   ],
+   [
+    "250 millilitres.",
+    "250"
+   ]
+  ],
+  [
+   [
+    "The length of the board ",
+    "l"
+   ],
+   [
+    "is at most ",
+    "<="
+   ],
+   [
+    "2.4 metres.",
+    "2.4"
+   ]
+  ],
+  [
+   [
+    "The attendance at the concert ",
+    "a"
+   ],
+   [
+    "was more than ",
+    ">"
+   ],
+   [
+    "500 people.",
+    "500"
+   ]
+  ],
+  [
+   [
+    "The battery level ",
+    "b"
+   ],
+   [
+    "is less than ",
+    "<"
+   ],
+   [
+    "15 percent.",
+    "15"
+   ]
+  ],
+  [
+   [
+    "The number of tickets sold ",
+    "n"
+   ],
+   [
+    "was at least ",
+    ">="
+   ],
+   [
+    "120.",
+    "120"
+   ]
+  ]
+ ],
+ "f": [
+  [
+   [
+    "The passenger height",
+    "h"
+   ],
+   [
+    "must be at least",
+    ">="
+   ],
+   [
+    "140 centimeters.",
+    "140"
+   ]
+  ],
+  [
+   [
+    "The suitcase weight",
+    "w"
+   ],
+   [
+    "is at most",
+    "<="
+   ],
+   [
+    "23 kilograms.",
+    "23"
+   ]
+  ],
+  [
+   [
+    "The repair cost",
+    "c"
+   ],
+   [
+    "is less than",
+    "<"
+   ],
+   [
+    "50 dollars.",
+    "50"
+   ]
+  ],
+  [
+   [
+    "The vehicle speed",
+    "s"
+   ],
+   [
+    "is more than",
+    ">"
+   ],
+   [
+    "65 miles per hour.",
+    "65"
+   ]
+  ],
+  [
+   [
+    "The baking time",
+    "t"
+   ],
+   [
+    "is not more than",
+    "<="
+   ],
+   [
+    "30 minutes.",
+    "30"
+   ]
+  ],
+  [
+   [
+    "The pool depth",
+    "d"
+   ],
+   [
+    "exceeds",
+    ">"
+   ],
+   [
+    "4.5 meters.",
+    "4.5"
+   ]
+  ],
+  [
+   [
+    "The applicant age",
+    "a"
+   ],
+   [
+    "is no less than",
+    ">="
+   ],
+   [
+    "18 years.",
+    "18"
+   ]
+  ],
+  [
+   [
+    "The tank volume",
+    "v"
+   ],
+   [
+    "is strictly below",
+    "<"
+   ],
+   [
+    "15 liters.",
+    "15"
+   ]
+  ],
+  [
+   [
+    "The tire pressure",
+    "p"
+   ],
+   [
+    "has to be at least",
+    ">="
+   ],
+   [
+    "2.4 bars.",
+    "2.4"
+   ]
+  ],
+  [
+   [
+    "The package mass",
+    "m"
+   ],
+   [
+    "cannot exceed",
+    "<="
+   ],
+   [
+    "500 grams.",
+    "500"
+   ]
+  ],
+  [
+   [
+    "The class size",
+    "n"
+   ],
+   [
+    "is fewer than",
+    "<"
+   ],
+   [
+    "20 students.",
+    "20"
+   ]
+  ],
+  [
+   [
+    "The cable length",
+    "l"
+   ],
+   [
+    "is greater than",
+    ">"
+   ],
+   [
+    "8.5 meters.",
+    "8.5"
+   ]
+  ]
+ ],
+ "g": [
+  [
+   [
+    "The luggage weight",
+    "w"
+   ],
+   [
+    "must not exceed",
+    "<="
+   ],
+   [
+    "23 kilograms.",
+    "23"
+   ]
+  ],
+  [
+   [
+    "A rider's height",
+    "h"
+   ],
+   [
+    "must be at least",
+    ">="
+   ],
+   [
+    "140 centimeters.",
+    "140"
+   ]
+  ],
+  [
+   [
+    "The driving speed",
+    "s"
+   ],
+   [
+    "was more than",
+    ">"
+   ],
+   [
+    "65 miles per hour.",
+    "65"
+   ]
+  ],
+  [
+   [
+    "The water depth",
+    "d"
+   ],
+   [
+    "is less than",
+    "<"
+   ],
+   [
+    "1.2 meters.",
+    "1.2"
+   ]
+  ],
+  [
+   [
+    "The cost of lunch",
+    "c"
+   ],
+   [
+    "is at most",
+    "<="
+   ],
+   [
+    "15 dollars.",
+    "15"
+   ]
+  ],
+  [
+   [
+    "The oven temperature",
+    "t"
+   ],
+   [
+    "is greater than",
+    ">"
+   ],
+   [
+    "200 degrees.",
+    "200"
+   ]
+  ],
+  [
+   [
+    "A child's age",
+    "a"
+   ],
+   [
+    "must be under",
+    "<"
+   ],
+   [
+    "5 years.",
+    "5"
+   ]
+  ],
+  [
+   [
+    "The passing score",
+    "p"
+   ],
+   [
+    "cannot be less than",
+    ">="
+   ],
+   [
+    "75 points.",
+    "75"
+   ]
+  ],
+  [
+   [
+    "The volume of liquid",
+    "v"
+   ],
+   [
+    "is no more than",
+    "<="
+   ],
+   [
+    "2.5 liters.",
+    "2.5"
+   ]
+  ],
+  [
+   [
+    "The number of attendees",
+    "n"
+   ],
+   [
+    "exceeds",
+    ">"
+   ],
+   [
+    "100 people.",
+    "100"
+   ]
+  ],
+  [
+   [
+    "The daily rainfall",
+    "r"
+   ],
+   [
+    "is a minimum of",
+    ">="
+   ],
+   [
+    "10 millimeters.",
+    "10"
+   ]
+  ],
+  [
+   [
+    "The battery level",
+    "b"
+   ],
+   [
+    "is strictly below",
+    "<"
+   ],
+   [
+    "20 percent.",
+    "20"
+   ]
+  ]
+ ],
+ "h": [
+  [
+   [
+    "The temperature",
+    "t"
+   ],
+   [
+    "is more than",
+    ">"
+   ],
+   [
+    "35 degrees.",
+    "35"
+   ]
+  ],
+  [
+   [
+    "The speed",
+    "s"
+   ],
+   [
+    "must be at least",
+    ">="
+   ],
+   [
+    "45 miles per hour.",
+    "45"
+   ]
+  ],
+  [
+   [
+    "The weight",
+    "w"
+   ],
+   [
+    "is less than",
+    "<"
+   ],
+   [
+    "12 kilograms.",
+    "12"
+   ]
+  ],
+  [
+   [
+    "The height",
+    "h"
+   ],
+   [
+    "is at most",
+    "<="
+   ],
+   [
+    "1.75 meters.",
+    "1.75"
+   ]
+  ],
+  [
+   [
+    "The distance",
+    "d"
+   ],
+   [
+    "is not more than",
+    "<="
+   ],
+   [
+    "80 kilometers.",
+    "80"
+   ]
+  ],
+  [
+   [
+    "The age",
+    "a"
+   ],
+   [
+    "has to be at least",
+    ">="
+   ],
+   [
+    "21 years.",
+    "21"
+   ]
+  ],
+  [
+   [
+    "The volume",
+    "v"
+   ],
+   [
+    "is greater than",
+    ">"
+   ],
+   [
+    "50 liters.",
+    "50"
+   ]
+  ],
+  [
+   [
+    "The length",
+    "l"
+   ],
+   [
+    "is under",
+    "<"
+   ],
+   [
+    "15 centimeters.",
+    "15"
+   ]
+  ],
+  [
+   [
+    "The pressure",
+    "p"
+   ],
+   [
+    "cannot exceed",
+    "<="
+   ],
+   [
+    "32 pounds per square inch.",
+    "32"
+   ]
+  ],
+  [
+   [
+    "The balance",
+    "b"
+   ],
+   [
+    "is no less than",
+    ">="
+   ],
+   [
+    "150 dollars.",
+    "150"
+   ]
+  ],
+  [
+   [
+    "A number",
+    "n"
+   ],
+   [
+    "is smaller than",
+    "<"
+   ],
+   [
+    "8.",
+    "8"
+   ]
+  ],
+  [
+   [
+    "The mass",
+    "m"
+   ],
+   [
+    "exceeds",
+    ">"
+   ],
+   [
+    "4.2 grams.",
+    "4.2"
+   ]
+  ]
+ ],
+ "i": [
+  [
+   [
+    "Your driving speed",
+    "s"
+   ],
+   [
+    "must not exceed",
+    "<="
+   ],
+   [
+    "fifty kilometers per hour.",
+    "50"
+   ]
+  ],
+  [
+   [
+    "The rider's height",
+    "h"
+   ],
+   [
+    "must be at least",
+    ">="
+   ],
+   [
+    "one point four meters.",
+    "1.4"
+   ]
+  ],
+  [
+   [
+    "The freezer temperature",
+    "t"
+   ],
+   [
+    "is less than",
+    "<"
+   ],
+   [
+    "six degrees Celsius.",
+    "6"
+   ]
+  ],
+  [
+   [
+    "The repair cost",
+    "c"
+   ],
+   [
+    "will be more than",
+    ">"
+   ],
+   [
+    "seventy-five dollars.",
+    "75"
+   ]
+  ],
+  [
+   [
+    "A driver's age",
+    "a"
+   ],
+   [
+    "cannot be less than",
+    ">="
+   ],
+   [
+    "sixteen years.",
+    "16"
+   ]
+  ],
+  [
+   [
+    "The parcel weight",
+    "w"
+   ],
+   [
+    "is at most",
+    "<="
+   ],
+   [
+    "eight point five kilograms.",
+    "8.5"
+   ]
+  ],
+  [
+   [
+    "The hiking distance",
+    "d"
+   ],
+   [
+    "is over",
+    ">"
+   ],
+   [
+    "ten kilometers.",
+    "10"
+   ]
+  ],
+  [
+   [
+    "The water volume",
+    "v"
+   ],
+   [
+    "is no more than",
+    "<="
+   ],
+   [
+    "five hundred milliliters.",
+    "500"
+   ]
+  ],
+  [
+   [
+    "The class size",
+    "p"
+   ],
+   [
+    "is fewer than",
+    "<"
+   ],
+   [
+    "thirty students.",
+    "30"
+   ]
+  ],
+  [
+   [
+    "An unknown number",
+    "n"
+   ],
+   [
+    "is strictly greater than",
+    ">"
+   ],
+   [
+    "twenty-four.",
+    "24"
+   ]
+  ],
+  [
+   [
+    "The daily rainfall",
+    "r"
+   ],
+   [
+    "is not more than",
+    "<="
+   ],
+   [
+    "twelve millimeters.",
+    "12"
+   ]
+  ],
+  [
+   [
+    "The battery level",
+    "b"
+   ],
+   [
+    "must be no less than",
+    ">="
+   ],
+   [
+    "twenty percent.",
+    "20"
+   ]
+  ]
+ ],
+ "j": [
+  [
+   [
+    "The water temperature ",
+    "t"
+   ],
+   [
+    "is less than ",
+    "<"
+   ],
+   [
+    "20 degrees.",
+    "20"
+   ]
+  ],
+  [
+   [
+    "The baggage weight ",
+    "w"
+   ],
+   [
+    "must be at most ",
+    "<="
+   ],
+   [
+    "23 kilograms.",
+    "23"
+   ]
+  ],
+  [
+   [
+    "A participant's age ",
+    "a"
+   ],
+   [
+    "is at least ",
+    ">="
+   ],
+   [
+    "18 years.",
+    "18"
+   ]
+  ],
+  [
+   [
+    "The wind speed ",
+    "s"
+   ],
+   [
+    "is more than ",
+    ">"
+   ],
+   [
+    "40 knots.",
+    "40"
+   ]
+  ],
+  [
+   [
+    "The repair cost ",
+    "c"
+   ],
+   [
+    "is not more than ",
+    "<="
+   ],
+   [
+    "150 dollars.",
+    "150"
+   ]
+  ],
+  [
+   [
+    "The liquid volume ",
+    "v"
+   ],
+   [
+    "is greater than ",
+    ">"
+   ],
+   [
+    "2.5 liters.",
+    "2.5"
+   ]
+  ],
+  [
+   [
+    "The travel distance ",
+    "d"
+   ],
+   [
+    "is less than ",
+    "<"
+   ],
+   [
+    "100 kilometers.",
+    "100"
+   ]
+  ],
+  [
+   [
+    "The test score ",
+    "p"
+   ],
+   [
+    "must be at least ",
+    ">="
+   ],
+   [
+    "75 points.",
+    "75"
+   ]
+  ],
+  [
+   [
+    "The event budget ",
+    "b"
+   ],
+   [
+    "is at most ",
+    "<="
+   ],
+   [
+    "500 dollars.",
+    "500"
+   ]
+  ],
+  [
+   [
+    "An unknown number ",
+    "n"
+   ],
+   [
+    "is not less than ",
+    ">="
+   ],
+   [
+    "12.",
+    "12"
+   ]
+  ],
+  [
+   [
+    "The rope length ",
+    "l"
+   ],
+   [
+    "is more than ",
+    ">"
+   ],
+   [
+    "8.5 meters.",
+    "8.5"
+   ]
+  ],
+  [
+   [
+    "The study time ",
+    "h"
+   ],
+   [
+    "is less than ",
+    "<"
+   ],
+   [
+    "4 hours.",
+    "4"
+   ]
+  ]
+ ]
+}
