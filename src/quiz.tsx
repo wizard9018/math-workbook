@@ -258,9 +258,9 @@ function Side({ current, onOpen, results, grade }: { current: number; onOpen: (n
 }
 
 // top: a ... j of the open exercise; click a circle to jump to that question
-function Road({ ex, i, result, onJump }: { ex: Exercise; i: number; result: (Result | undefined)[]; onJump: (k: number) => void }) {
+function Road({ ex, i, result, onJump, compact }: { ex: Exercise; i: number; result: (Result | undefined)[]; onJump: (k: number) => void; compact?: boolean }) {
   return (
-    <div className="mx-auto flex max-w-2xl items-center px-6 pt-6">
+    <div className={'mx-auto flex max-w-2xl items-center ' + (compact ? '' : 'px-6 pt-6')}>
       {ex.questions.map((q, k) => {
         const r = result[k]
         const cls = k === i ? 'bg-sky-500 text-white ring-4 ring-sky-200' : r === 'first' ? 'bg-emerald-500 text-white' : r === 'learned' ? 'bg-amber-400 text-white' : 'bg-slate-200 text-slate-500'
@@ -502,7 +502,14 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
     <div className="flex min-h-[calc(100vh-3rem)]">
       <Side current={no} onOpen={open} results={results} grade={grade} />
       <div className="min-w-0 flex-1">
-        <Road ex={ex} i={stage === 'done' ? -1 : i} result={result} onJump={jump} />
+        {stage === 'lesson' || stage === 'plesson' ? (
+          <div className="flex items-center gap-3 px-4 pt-3">
+            <div id="lesson-controls" className="flex shrink-0 items-center gap-2" />
+            <div className="min-w-0 flex-1"><Road ex={ex} i={i} result={result} onJump={jump} compact /></div>
+          </div>
+        ) : (
+          <Road ex={ex} i={stage === 'done' ? -1 : i} result={result} onJump={jump} />
+        )}
         {body}
       </div>
     </div>
@@ -511,14 +518,18 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
 }
 
 // the original question, kept on screen above a lesson
-const QuestionStrip = ({ tex }: { tex: string }) => (
-  <div className="mx-auto max-w-2xl px-6 pt-4">
-    {isSentence(tex) ? (
-      <div className="rounded-xl border bg-white p-4 text-center font-serif text-lg leading-relaxed" dangerouslySetInnerHTML={sentenceHtml(tex)} />
-    ) : (
-      <div className="overflow-x-auto whitespace-nowrap rounded-xl border bg-white p-4 text-center [&_.katex-html]:whitespace-nowrap" style={{ fontSize: Math.min(sizeFor(tex), 24) }} dangerouslySetInnerHTML={html(tex)} />
-    )}
-  </div>
-)
+// the original question, kept on screen above a lesson: ONE line
+const QuestionStrip = ({ tex }: { tex: string }) => {
+  const one = tex.replace(/\}\\\\ /g, '} ') // a line break between the sentence and the expression becomes a space
+  return (
+    <div className="px-4 pt-2">
+      {isSentence(one) ? (
+        <div className="overflow-x-auto whitespace-nowrap rounded-xl border bg-white px-3 py-1.5 [scrollbar-width:none] text-center font-serif text-base" dangerouslySetInnerHTML={sentenceHtml(one)} />
+      ) : (
+        <div className="overflow-x-auto whitespace-nowrap rounded-xl border bg-white px-3 py-1.5 [scrollbar-width:none] text-center text-lg [&_.katex-html]:whitespace-nowrap" dangerouslySetInnerHTML={html(one)} />
+      )}
+    </div>
+  )
+}
 
 createRoot(document.getElementById('root')!).render(<AuthGate>{(userId, email) => <Quiz key={userId} userId={userId} email={email} />}</AuthGate>)

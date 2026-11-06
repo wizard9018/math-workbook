@@ -3,6 +3,7 @@
 // Right answers -> the step's sentence appears at the left of the new line, the part that changes lights up and becomes the new value;
 // every line of the working stays on screen. Wrong answer -> a hint (BEDMAS review card for the "which operation" question).
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'motion/react'
 import katex from 'katex'
 import 'katex/dist/katex.min.css'
@@ -139,7 +140,10 @@ export function LessonPlayer({ lesson: forced, onDone }: { lesson?: Lesson; onDo
   const streak = useRef(0) // right answers in a row (a wrong answer starts the count again)
   const alive = useRef(true)
   const top = useRef<HTMLDivElement>(null)
-  useEffect(() => { top.current?.scrollIntoView({ block: 'start' }) }, [lesson.key]) // a lesson starts at the top of the screen: no scrolling down
+  // the page can offer a slot beside the roadmap (#lesson-controls): Back / Restart / Step go there and the lesson fits one screen
+  const [slot, setSlot] = useState<HTMLElement | null>(null)
+  useLayoutEffect(() => { setSlot(forced ? document.getElementById('lesson-controls') : null) }, [forced])
+  useEffect(() => { if (slot) window.scrollTo({ top: 0 }); else top.current?.scrollIntoView({ block: 'start' }) }, [lesson.key, slot]) // a lesson starts at the top of the screen: no scrolling down
   const run = useRef(0) // bumped by Restart so timers of an interrupted step do nothing
   const chain = useRef<HTMLDivElement>(null)
   const figRef = useRef<HTMLDivElement>(null) // the figure above the working (arrows can point to its parts)
@@ -626,9 +630,45 @@ export function LessonPlayer({ lesson: forced, onDone }: { lesson?: Lesson; onDo
   }
 
   const lines = Array.from({ length: n + 1 + (saying || calcing ? 1 : 0) }, (_, i) => i)
+  const ctl = (
+    <>
+        <button
+          className="rounded-lg border px-4 py-1.5 disabled:opacity-30"
+          disabled={!started || n === 0}
+          onClick={() => {
+            // back to the question of the previous step (its line of the working goes away)
+            run.current++
+            streak.current = 0
+            setCheer(null)
+            setN(n - 1)
+            begin(n - 1)
+          }}
+        >
+          Back
+        </button>
+        <button
+          className="rounded-lg border px-4 py-1.5"
+          onClick={() => {
+            run.current++
+            streak.current = 0
+            setN(0)
+            setPhase('idle')
+            setStarted(false)
+            setWrongPicks([])
+            setPicked(null)
+            if (forced) begin(0)
+          }}
+        >
+          Restart
+        </button>
+        <span className="text-sm text-muted-foreground">
+          Step {Math.min(n + (phase !== 'idle' ? 1 : 0), STEPS.length)} / {STEPS.length}
+        </span>
+    </>
+  )
   return (
-    <div ref={top} className="mx-auto max-w-4xl scroll-mt-14 space-y-4 p-6">
-      <div className="flex flex-wrap items-center gap-3">
+    <div ref={top} className={'mx-auto max-w-4xl scroll-mt-14 ' + (slot ? 'space-y-2 p-3' : 'space-y-4 p-6')}>
+      <div className={'flex flex-wrap items-center gap-3' + (slot ? ' hidden' : '')}>
         <h1 className="text-xl font-bold">{lesson.title}</h1>
         {!forced && (
           <>
@@ -681,38 +721,7 @@ export function LessonPlayer({ lesson: forced, onDone }: { lesson?: Lesson; onDo
             Start
           </button>
         )}
-        <button
-          className="rounded-lg border px-4 py-1.5 disabled:opacity-30"
-          disabled={!started || n === 0}
-          onClick={() => {
-            // back to the question of the previous step (its line of the working goes away)
-            run.current++
-            streak.current = 0
-            setCheer(null)
-            setN(n - 1)
-            begin(n - 1)
-          }}
-        >
-          Back
-        </button>
-        <button
-          className="rounded-lg border px-4 py-1.5"
-          onClick={() => {
-            run.current++
-            streak.current = 0
-            setN(0)
-            setPhase('idle')
-            setStarted(false)
-            setWrongPicks([])
-            setPicked(null)
-            if (forced) begin(0)
-          }}
-        >
-          Restart
-        </button>
-        <span className="text-sm text-muted-foreground">
-          Step {Math.min(n + (phase !== 'idle' ? 1 : 0), STEPS.length)} / {STEPS.length}
-        </span>
+        {slot ? createPortal(ctl, slot) : ctl}
         {asking && step && (
           <motion.p key={`${n}-${asking ? 'a' : 'c'}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex-1 rounded-lg border-2 border-sky-300 bg-sky-50 px-3 py-1 text-base font-semibold text-sky-900">
             {step.ask!.q}
