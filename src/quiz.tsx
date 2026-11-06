@@ -277,13 +277,15 @@ function Road({ ex, i, result, onJump, compact }: { ex: Exercise; i: number; res
         const cls = k === i ? 'bg-sky-500 text-white ring-4 ring-sky-200' : r === 'first' ? 'bg-emerald-500 text-white' : r === 'learned' ? 'bg-amber-400 text-white' : 'bg-slate-200 text-slate-500'
         return (
           <div key={q.part} className="flex flex-1 items-center last:flex-none">
-            <button title={`${ex.no}${q.part}`} onClick={() => onJump(k)} className={'flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold transition hover:scale-110 ' + cls}>
-              {k !== i && r === 'first' ? '✓' : k !== i && r === 'learned' ? '✎' : q.part}
+            <button title={`${ex.no}${q.part}`} onClick={() => onJump(k)} className={'relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold transition hover:scale-110 ' + cls}>
+              {k !== i && r ? '✓' : q.part}
+              {r === 'first' && <span className="absolute -right-1 -top-2 text-xs">👍</span>}
             </button>
             {k < ex.questions.length - 1 && <div className={'h-1 flex-1 ' + (r ? 'bg-emerald-300' : 'bg-slate-200')} />}
           </div>
         )
       })}
+      <span className="ml-3 shrink-0 text-sm font-semibold text-slate-600">{result.filter((x) => x === 'first').length}/{ex.questions.length}</span>
     </div>
   )
 }
