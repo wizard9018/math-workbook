@@ -235,6 +235,9 @@ export const NODES32: (Node & { show: number })[] = [
   { no: 1711, show: 11, name: 'Challenge: Add integers', parts: 4, how: 'Harder: more numbers and more decimal places. Optional extra practice.', state: 'ready' },
   { no: 1714, show: 14, name: 'Challenge: Subtract integers', parts: 4, how: 'Harder: more numbers and more decimal places. Optional extra practice.', state: 'ready' },
   { no: 1716, show: 16, name: 'Challenge: Add and subtract decimals', parts: 4, how: 'Harder: more numbers and more decimal places. Optional extra practice.', state: 'ready' },
+  { no: 1717, show: 17, name: 'Challenge: Solve with a box', parts: 4, how: 'Harder: three decimal places. Optional extra practice.', state: 'ready' },
+  { no: 1719, show: 19, name: 'Challenge: Order decimals', parts: 4, how: 'Harder: 8 numbers that are very close. Optional extra practice.', state: 'ready' },
+  { no: 1720, show: 20, name: 'Challenge: Word problems with decimals', parts: 4, how: 'Harder: bigger numbers, a small difference. Optional extra practice.', state: 'ready' },
 ]
 
 export const NODES31: (Node & { show: number })[] = [

@@ -401,8 +401,25 @@ const H6 = (specs: [number, string, number, number, number][]): [string, E6, E6[
     const mk = (): E6 => { const a = rdec(r, da, 99); const b = rdec(r, db, 99); return { a: { n: sa * a.n, d: a.d }, op, b: { n: sb * b.n, d: b.d } } }
     return [letterOf(i), mk(), range(0, 14).map(mk)]
   })
+const H7 = (specs: [string, number, number, number, number][]): [string, E7, E7[]][] =>
+  specs.map(([form, sa, sb, da, db], i) => {
+    const r = rng(1700 + i)
+    const mk = (): E7 => { const a = rdec(r, da, 99); const b = rdec(r, db, 99); return { form, a: { n: sa * a.n, d: a.d }, b: { n: sb * b.n, d: b.d } } }
+    return [letterOf(i), mk(), range(0, 14).map(mk)]
+  })
+// exercise 9 harder: 8 numbers with the same whole part that differ only far to the right; the other 9 questions move the whole part
+const bump = (s: string, k: number) => s.replace(/^(-?)(\d+)/, (_m, sg, w) => sg + (Number(w) + k))
+const BASE9H: [string, string[]][] = [
+  ['a', ['-0.5', '-0.55', '-0.505', '-0.5005', '-0.5055', '-0.55005', '-0.4999', '-0.05']],
+  ['b', ['3.07', '3.7', '3.07007', '3.007', '3.0707', '3.077', '3.0077', '3.70001']],
+  ['c', ['-12.3', '-12.03', '-12.303', '-12.0303', '-12.33', '-12.3003', '-12.0033', '-12.003']],
+  ['d', ['0.1', '0.09999', '0.10001', '0.0999', '0.101', '0.1001', '0.0101', '0.01']],
+]
+const rows9H: [string, E9, E9[]][] = BASE9H.map(([p, xs]) => [p, { xs }, range(1, 9).map((k): E9 => ({ xs: xs.map((s) => bump(s, k)) }))])
 export const EX_INT32H = [
   build(11, 'Choose the sum.', H1(1, [[1, -1, 1, -1], [-1, -1, 1, -1, 1], [1, 1, -1, -1, 1], [-1, 1, -1, -1, 1, 1]]), mk1, idE1, 'Add integers (challenge)', 5011, '3.2', (e: E1) => e.ts.length),
   build(14, 'Choose the difference.', H4(4, [[1, false, [['-', 1], ['-', -1], ['-', 1]]], [-1, false, [['-', -1], ['-', 1], ['+', -1]]], [-1, true, [['-', 1], ['-', -1], ['-', -1]]], [-1, false, [['-', -1], ['-', 1], ['-', -1], ['+', 1]]]]), mk4, exprTex4, 'Subtract integers (challenge)', 5014, '3.2', (e: E4) => e.rest.length + (e.neg0 ? 1 : 0)),
   build(16, 'Choose the answer.', H6([[-1, '+', 1, 4, 3], [1, '-', -1, 4, 3], [-1, '-', -1, 5, 3], [-1, '+', -1, 4, 5]]), mk6, idE6, 'Add and subtract decimals (challenge)', 5016, '3.2', (e: E6) => e.a.d + e.b.d),
+  build(17, 'Choose the number in the box.', H7([['x+a', -1, 1, 3, 3], ['x-a', 1, -1, 3, 2], ['a+x', -1, -1, 3, 3], ['a-x', 1, -1, 2, 3]]), mk7, idE7, 'Solve with a box (challenge)', 5017, '3.2', (e: E7) => e.a.d + e.b.d),
+  build(19, 'Choose the order.', rows9H, mk9, idE9, 'Order decimals (challenge)', 5019, '3.2'),
 ]

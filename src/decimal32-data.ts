@@ -193,3 +193,29 @@ const parts = [
   build(10, 'Choose the answer.', D_ROWS, mkD, idD, 'Word problems with decimals', 4013, '3.2'),
 ]
 export const EX_DEC32 = [{ ...parts[0], questions: parts.flatMap((p) => p.questions) }]
+
+// ================= challenge (3.2 exercise 10, harder): bigger numbers, the answer is a small difference; optional extra practice (no 20) =================
+const hpool = <T,>(seed: number, f: (r: () => number, i: number) => T): T[] => { const r = rng(seed); return Array.from({ length: 16 }, (_, i) => f(r, i)) }
+const HA_ROWS: [string, A, A[]][] = (() => {
+  const l = hpool(2201, (r, i): A => { const [who, what] = NAMES[i % NAMES.length]; const wk = between(r, 2000, 6000) * 5 + 5 * i; const n = between(r, 8, 15); const saved = between(r, 100000, 400000) + 7 * i; return { who, what, cost: saved + n * wk + between(r, 1000, 9000) + 95, saved, wk, n } })
+  return [['a', l[0], l.slice(1, 11)]]
+})()
+const HB_ROWS: [string, B, B[]][] = (() => {
+  const l = hpool(2202, (r, i): B => { const service = (80 + (i % 4) * 10) * 10000; const trip = between(r, 20000, 90000) * 10 + 3 + (i % 3) * 2; const left = between(r, 150, 900); return { who: WHO_B[i % WHO_B.length], reading: service - trip - left - 7 - i, trip, service } })
+  return [['b', l[0], l.slice(1, 11)]]
+})()
+const HC_ROWS: [string, C, C[]][] = (() => {
+  const l = hpool(2203, (r, i): C => { const items = GEAR[i % GEAR.length].map((n, k): [string, number] => [n, between(r, 12000, 49500) + 3 + 4 * k]); return { who: WHO_C[i % WHO_C.length], money: items.reduce((t, [, c]) => t + c, 0) + between(r, 5, 995) + 2 * i, items } })
+  return [['c', l[0], l.slice(1, 11)]]
+})()
+const HD_ROWS: [string, D, D[]][] = (() => {
+  const l = hpool(2204, (r, i): D => { const prices = [0, 1, 2].map(() => between(r, 20, 190) * 100 + [99, 49, 79][between(r, 0, 2)]); const total = prices.reduce((t, c) => t + c, 0); return { who: WHO_D[i % WHO_D.length], prices, money: total + (i % 2 ? -1 : 1) * between(r, 1, 99) } })
+  return [['d', l[0], l.slice(1, 11)]]
+})()
+const hparts = [
+  build(20, 'Choose the answer.', HA_ROWS, mkA, idA, 'Word problems with decimals (challenge)', 4020, '3.2'),
+  build(20, 'Choose the answer.', HB_ROWS, mkB, idB, 'Word problems with decimals (challenge)', 4021, '3.2'),
+  build(20, 'Choose the answer.', HC_ROWS, mkC, idC, 'Word problems with decimals (challenge)', 4022, '3.2'),
+  build(20, 'Choose the answer.', HD_ROWS, mkD, idD, 'Word problems with decimals (challenge)', 4023, '3.2'),
+]
+export const EX_DEC32H = [{ ...hparts[0], questions: hparts.flatMap((p) => p.questions) }]
