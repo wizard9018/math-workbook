@@ -187,7 +187,7 @@ function Choices({ choices, math, onPick, right }: { choices: string[]; math?: b
 }
 
 // left: the exercises of sections 5.1 and 5.2 (the built ones open on click)
-function Side({ current, onOpen, results, grade }: { current: number; onOpen: (no: number) => void; results: Record<number, (Result | undefined)[]>; grade: number }) {
+function Side({ current, onOpen, results, grade, loaded }: { current: number; onOpen: (no: number) => void; results: Record<number, (Result | undefined)[]>; grade: number; loaded: boolean }) {
   const chapters = [
     { title: 'Chapter 1', sections: [{ title: '1.1 The real number system', nodes: NODES11 }, { title: '1.2 Square roots', nodes: NODES12 }, { title: '1.3 Non-perfect squares', nodes: NODES13 }, { title: '1.4 Exponents', nodes: NODES14 }, { title: '1.5 Order of operations', nodes: NODES15 }, { title: '1.6 Product and quotient rules', nodes: NODES16 }, { title: '1.7 Power rules', nodes: NODES17 }, { title: '1.8 Chapter review', nodes: NODES18 }] },
     { title: 'Chapter 3', sections: [{ title: '3.1 Rational numbers', nodes: NODES31 }, { title: '3.2 Adding and subtracting decimals', nodes: NODES32 }, { title: '3.3 Adding and subtracting fractions', nodes: NODES33 }, { title: '3.4 Multiplying and dividing fractions', nodes: NODES34 }, { title: '3.5 Chapter review', nodes: NODES35 }] },
@@ -208,6 +208,16 @@ function Side({ current, onOpen, results, grade }: { current: number; onOpen: (n
     const r = results[no] ?? []
     return EXERCISES[no] && r.filter(Boolean).length === EXERCISES[no].questions.length ? (r.every((x) => x === 'first') ? 'first' : 'learned') : undefined
   }
+  // once the saved progress is read, open the lesson after the last finished one (sidebar order) and unfold its section
+  useEffect(() => {
+    if (!loaded) return
+    const flat = chapters.flatMap((c) => c.sections.flatMap((s) => s.nodes.filter((n) => !REGULAR_OF[n.no] && EXERCISES[n.no]).map((n) => ({ no: n.no, c: c.title, s: s.title }))))
+    const last = flat.map((x) => !!statusOf(x.no)).lastIndexOf(true)
+    const t = flat[Math.min(last + 1, flat.length - 1)]
+    if (!t) return
+    onOpen(t.no)
+    setClosed((c) => ({ ...c, [t.c]: false, [t.s]: false }))
+  }, [loaded]) // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <nav className="hidden w-60 shrink-0 space-y-1 border-r p-4 md:block">
       {grade !== 9 && <p className="pt-2 text-sm text-slate-500">No exercises for Grade {grade} yet.</p>}
@@ -500,7 +510,7 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
     <>
     <Header grade={grade} onGrade={setGrade} done={doneCount} total={regularNos.length} email={email} onContinue={() => open(LAST_NO)} />
     <div className="flex min-h-[calc(100vh-3rem)]">
-      <Side current={no} onOpen={open} results={results} grade={grade} />
+      <Side current={no} onOpen={open} results={results} grade={grade} loaded={loaded} />
       <div className="min-w-0 flex-1">
         {stage === 'lesson' || stage === 'plesson' ? (
           <div className="flex items-center gap-3 px-4 pt-3">
