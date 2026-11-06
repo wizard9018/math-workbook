@@ -309,7 +309,7 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
   }, [userId])
   useEffect(() => {
     if (!loaded) return
-    const t = setTimeout(() => { supabase.from('quiz_progress').upsert({ user_id: userId, results, updated_at: new Date().toISOString() }) }, 800)
+    const t = setTimeout(() => { supabase.from('quiz_progress').upsert({ user_id: userId, results, updated_at: new Date().toISOString() }).then(({ error }) => { if (error) console.error('save progress', error) }) }, 800) // the request is only sent once .then is attached
     return () => clearTimeout(t)
   }, [results, loaded, userId])
   const regularNos = Object.keys(EXERCISES).map(Number).filter((n) => !REGULAR_OF[n]) // challenges do not count
