@@ -483,7 +483,41 @@ const H6_ROWS: [string, E6, E6[]][] = [[false, false], [true, false], [false, tr
   const l = close6(1600 + i, neg, mx)
   return [String.fromCharCode(97 + i), l[0], l.slice(1)]
 })
+// exercises 2, 4, 7, 8 harder: tenths-free tick marks of 7 to 12 per unit, denominators up to 252, fractions that are almost equal, decimals with 3 to 4 places or repeating
+const rows31 = <T,>(lists: T[][]): [string, T, T[]][] => lists.map((l, i) => [String.fromCharCode(97 + i), l[0], l.slice(1)])
+const hardQ = (seed: number, f: (r: () => number) => E2): E2[] => {
+  const r = rng(seed)
+  const out: E2[] = []
+  for (let t = 0; t < 600 && out.length < 12; t++) { const e = f(r); if (!out.some((o) => o.x.tex === e.x.tex)) out.push(e) }
+  return out
+}
+const hp = (r: () => number, a: number, b: number) => a + Math.floor(r() * (b - a + 1))
+const cop = (r: () => number, lo: number, hi: number, f: (q: number, n: number) => E2): E2 => { for (;;) { const q = hp(r, 7, 12); const n = hp(r, lo * q + 1, hi * q - 1); if (gcd(n, q) === 1) return f(q, n) } }
+const H2_ROWS = rows31<E2>([
+  hardQ(1201, (r) => cop(r, 1, 4, (q, n) => ({ x: fr(n, q), den: q }))),
+  hardQ(1202, (r) => cop(r, 0, 1, (q, n) => ({ x: fr(-n, q), den: q }))),
+  hardQ(1203, (r) => cop(r, 1, 4, (q, n) => ({ x: mixed(true, Math.floor(n / q), n % q, q), den: q }))).filter((e) => e.x.n % e.x.d !== 0),
+  hardQ(1204, (r) => cop(r, 1, 4, (q, n) => ({ x: mixed(false, Math.floor(n / q), n % q, q), den: q }))),
+])
+const H4_ROWS = rows31<E4>([
+  [[36, 48], [45, 60], [24, 40], [42, 63]],
+  [[56, 84], [72, 90], [63, 105], [48, 72]],
+  [[120, 150], [168, 210], [96, 144], [110, 176]],
+  [[84, 126], [132, 198], [180, 252], [140, 210]],
+].map((qs) => P4(qs as [number, number][])))
+const toE78 = (l: E6[]): E78[] => l.map((e) => ({ a: e.x, b: e.y }))
+const H7_ROWS = rows31<E78>([toE78(close6(1701, false, false)), toE78(close6(1702, true, false)), toE78(close6(1703, false, true)), toE78(close6(1704, true, true))])
+const H8_ROWS = rows31<E78>([
+  gen8([['12.345', '12.346'], ['3.4567', '3.4568'], ['5.678', '5.679'], ['9.012', '9.013'], ['7.8901', '7.8902'], ['1.2345', '1.2346'], ['4.567', '4.568'], ['6.789', '6.790'], ['8.9012', '8.9013'], ['2.3456', '2.3457'], ['10.101', '10.102'], ['3.0456', '3.0457']]),
+  gen8([['-12.345', '-12.346'], ['-3.4567', '-3.4568'], ['-5.678', '-5.679'], ['-9.012', '-9.013'], ['-7.8901', '-7.8902'], ['-1.2345', '-1.2346'], ['-4.567', '-4.568'], ['-6.789', '-6.790'], ['-8.9012', '-8.9013'], ['-2.3456', '-2.3457'], ['-10.101', '-10.102'], ['-3.0456', '-3.0457']]),
+  gen8([['3.\\overline{4}', '3.45'], ['2.\\overline{7}', '2.78'], ['5.\\overline{3}', '5.34'], ['1.\\overline{2}', '1.23'], ['6.\\overline{8}', '6.89'], ['4.\\overline{1}', '4.12'], ['7.\\overline{5}', '7.56'], ['9.\\overline{6}', '9.67'], ['8.\\overline{2}', '8.23'], ['3.\\overline{9}', '3.99'], ['1.\\overline{8}', '1.89'], ['5.\\overline{7}', '5.78']]),
+  gen8([['-2.\\overline{3}', '-2.34'], ['-4.\\overline{6}', '-4.67'], ['-1.\\overline{5}', '-1.56'], ['-6.\\overline{2}', '-6.23'], ['-3.\\overline{8}', '-3.89'], ['-5.\\overline{1}', '-5.12'], ['-7.\\overline{4}', '-7.45'], ['-8.\\overline{9}', '-8.99'], ['-2.\\overline{7}', '-2.78'], ['-9.\\overline{3}', '-9.34'], ['-1.\\overline{2}', '-1.23'], ['-4.\\overline{8}', '-4.89']]),
+])
 export const EX_RATIONAL31H = [
   build(15, 'Order the numbers.', H5_ROWS, mk5, e5id, 'Order from least to greatest (challenge)', 3515, '3.1'),
   build(16, 'Choose < or >.', H6_ROWS, mk6, e6id, 'Compare (challenge)', 3616, '3.1'),
+  build(12, 'Click the point.', H2_ROWS, mk2, e2id, 'Graph rational numbers (challenge)', 3212, '3.1'),
+  build(14, 'Choose the common denominator.', H4_ROWS, mk4, e4id, 'Common denominator (challenge)', 3414, '3.1'),
+  build(17, 'Choose the fraction between.', H7_ROWS, mk7, e78id, 'A fraction between (challenge)', 3717, '3.1'),
+  build(18, 'Choose the fraction between.', H8_ROWS, mk8, e78id, 'A fraction between (challenge)', 3818, '3.1'),
 ]

@@ -246,6 +246,10 @@ export const NODES31: (Node & { show: number })[] = [
   { no: 1608, show: 8, name: 'A fraction between', parts: 9, how: 'Write both decimals as fractions, then find a fraction between them.', state: 'ready' },
   { no: 1615, show: 15, name: 'Challenge: Order the numbers', parts: 4, how: 'Harder: 7 numbers. Optional extra practice.', state: 'ready' },
   { no: 1616, show: 16, name: 'Challenge: Compare', parts: 4, how: 'Harder: numbers that are very close. Optional extra practice.', state: 'ready' },
+  { no: 1612, show: 12, name: 'Challenge: Graph rational numbers', parts: 4, how: 'Harder: 7 to 12 small steps per unit. Optional extra practice.', state: 'ready' },
+  { no: 1614, show: 14, name: 'Challenge: Common denominator', parts: 4, how: 'Harder: bigger denominators. Optional extra practice.', state: 'ready' },
+  { no: 1617, show: 17, name: 'Challenge: A fraction between', parts: 4, how: 'Harder: fractions that are almost equal. Optional extra practice.', state: 'ready' },
+  { no: 1618, show: 18, name: 'Challenge: A fraction between', parts: 4, how: 'Harder: more decimal places, repeating decimals. Optional extra practice.', state: 'ready' },
 ]
 
 export const NODES45: (Node & { show: number })[] = [
