@@ -79,7 +79,7 @@ function mk7r(e: E7r, key: string): It {
       },
     ],
   }
-  return drawIt(d, g, second, `Graph the equation ${eq}. Click two points, then press Submit.`, w)
+  return drawIt(d, g, second, `Graph the equation §${eq}§. Click two points, then press Submit.`, w)
 }
 const T7r = (pq: [number, number][], bs: number[]): E7r[] => pq.flatMap(([p, q]) => bs.map((b): E7r => ({ p, q, b }))).filter((e) => Math.abs(e.q) <= 6 && Math.abs(e.b) <= 6 && (Math.abs(e.b + e.p) <= 6 || Math.abs(e.b - e.p) <= 6))
 const E7R: [string, E7r, E7r[]][] = [

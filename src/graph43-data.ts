@@ -112,7 +112,7 @@ const e1id = (e: E1) => JSON.stringify(e)
 
 // ================= the drawing questions: the lesson picture (the line and the points found so far) and the answer =================
 export function drawIt(d: Draw, p1: P, p2: P, story: string, w: Omit<Wp, 'tex'>, figAt?: (n: number) => string): It {
-  return { w: { ...w, tex: text(story) }, fig: planeSvg(d, [p1, p2]), figAt: figAt ?? ((n: number) => planeSvg(d, [p1, p2].slice(0, Math.min(n, 2)), n >= 2)), draw: d }
+  return { w: { ...w, tex: story.split('§').map((t, i) => (i % 2 ? t : t ? text(t) : '')).join('') }, fig: planeSvg(d, [p1, p2]), figAt: figAt ?? ((n: number) => planeSvg(d, [p1, p2].slice(0, Math.min(n, 2)), n >= 2)), draw: d }
 }
 export const pairTex = (p1: P, p2: P) => `${ptTex(p1[0], p1[1])},\\ ${ptTex(p2[0], p2[1])}`
 export const pairWrong = (p1: P, p2: P) => uniq([pairTex([p1[1], p1[0]], [p2[1], p2[0]]), pairTex(p1, [p2[0], -p2[1]]), pairTex([-p1[0], p1[1]], p2), pairTex([p1[0], p1[1] + 1], p2)], (s) => s)
@@ -190,7 +190,7 @@ export function mk2(e: E2, key: string): It {
     toks: [{ id: `${id}a`, tex: 'y' }, { id: `${id}g`, tex: '=' }, { id: `${id}b`, tex: n4(p[1]) }],
     blanks: [blk(`${id}b`, 'r1m', `$\\text{When } x = ${p[0]}\\text{: } y = ${num(m, dec)}\\cdot ${par(p[0], dec)}${noK ? '' : ` ${sk(c0)}`} = \\square$`, [n4(-p[1]), n4(p[1] + 1), n4(p[1] - 1), n4((e.c + e.a * p[0]) / e.b)], 'Put the x-value in y = mx + b and work it out.')],
   })
-  return drawIt(d, p1, p2, `Graph the equation ${eq}. Click two points on the line, then press Submit.`, { short: eq, startToks, key, answer: ans, wrong: pairWrong(p1, p2).filter((s) => s !== ans), steps: [...isolate, step('u1', p1, 'left'), step('u2', p2, 'right')] })
+  return drawIt(d, p1, p2, `Graph the equation §${eq}§. Click two points on the line, then press Submit.`, { short: eq, startToks, key, answer: ans, wrong: pairWrong(p1, p2).filter((s) => s !== ans), steps: [...isolate, step('u1', p1, 'left'), step('u2', p2, 'right')] })
 }
 // equations with a, b from the lists and a whole-number point on the line (so that two points can be clicked)
 export const g2 = (as: number[], bs: number[], dec = false): E2[] =>
@@ -239,7 +239,7 @@ function mk3(e: E3, key: string): It {
       step('v2', p2, 'right', 'v1b'),
     ],
   }
-  return drawIt(d, p1, p2, `Graph: ${eq}. Click two points on the line, then press Submit.`, w, (n: number) => planeSvg(d, [p1, p2].slice(0, Math.max(0, Math.min(n - 1, 2))), n >= 3))
+  return drawIt(d, p1, p2, `Graph: §${eq}§. Click two points on the line, then press Submit.`, w, (n: number) => planeSvg(d, [p1, p2].slice(0, Math.max(0, Math.min(n - 1, 2))), n >= 3))
 }
 const E3_ROWS: [string, E3, E3[]][] = [
   ['a', { kind: 'x', v: 3 }, [-5, -4, -2, -1, 1, 2, 4, 5].map((v): E3 => ({ kind: 'x', v }))],
@@ -327,7 +327,7 @@ function mk5(e: E5, key: string): It {
     },
   ]
   const w: Omit<Wp, 'tex' | 'startToks'> = { short: eq, key, answer: ans, wrong, steps }
-  return drawIt(d, g, second, `Sketch a graph of a linear equation parallel to ${eq} that passes through the point (${e.x0}, ${e.y0}). Click two points, then press Submit.`, w, (n: number) => planeSvg(d, n >= 2 ? [g, second] : [g], n >= 2))
+  return drawIt(d, g, second, `Sketch a graph of a linear equation parallel to §${eq}§ that passes through the point (${e.x0}, ${e.y0}). Click two points, then press Submit.`, w, (n: number) => planeSvg(d, n >= 2 ? [g, second] : [g], n >= 2))
 }
 const slopeForm = (m: number, k: number): E5 => ({ std: false, m, k, a: 0, b: 0, c: 0, x0: 0, y0: 0 })
 const g5 = (ms: number[], ks: number[], pts: P[]): E5[] => ms.flatMap((m) => ks.flatMap((k) => pts.map(([x0, y0]): E5 => ({ ...slopeForm(m, k), x0, y0 })))).filter((e) => lattice(e.m, e.y0 - e.m * e.x0).length >= 2)

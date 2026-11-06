@@ -99,7 +99,7 @@ export function mk1(e: E1, key: string): It {
           blk('b1b', iso ? 'r1m' : 'smx', '$y = m\\,x + b\\text{: what is } m\\text{?}$', [num(-L2.m, false), num(1 / L2.m, false), num(-1 / L2.m, false), num(L2.m + 1, false)].filter((s) => s !== num(L2.m, false)), 'm is the number in front of x.'),
         ],
       },
-      last(`Which graph crosses the y-axis at ${n4(L2.c)} and goes ${dir}? (the slope is ${num(L2.m, false)})`),
+      last(`Which graph crosses the y-axis at ${n4(L2.c)} and goes ${dir}? (the slope is $${num(L2.m, false)}$)`),
     ]
   } else if (e.k === 'v') {
     steps = [
