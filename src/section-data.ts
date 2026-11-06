@@ -152,6 +152,7 @@ export const NODES12: (Node & { show: number })[] = [
   { no: 2312, show: 12, name: 'Challenge: Simplify a square root', parts: 4, how: 'Harder: bigger numbers. Optional extra practice.', state: 'ready' },
   { no: 2313, show: 13, name: 'Challenge: Simplify', parts: 4, how: 'Harder: bigger numbers. Optional extra practice.', state: 'ready' },
   { no: 2315, show: 15, name: 'Challenge: The rational square root', parts: 4, how: 'Harder: bigger numbers. Optional extra practice.', state: 'ready' },
+  { no: 2316, show: 16, name: 'Challenge: Word problems', parts: 4, how: 'Harder: bigger numbers. Optional extra practice.', state: 'ready' },
 ]
 
 export const NODES13: (Node & { show: number })[] = [
@@ -168,6 +169,7 @@ export const NODES13: (Node & { show: number })[] = [
   { no: 2414, show: 14, name: 'Challenge: One decimal place', parts: 4, how: 'Harder: bigger numbers. Optional extra practice.', state: 'ready' },
   { no: 2415, show: 15, name: "Challenge: Heron's method", parts: 4, how: 'Harder: bigger numbers. Optional extra practice.', state: 'ready' },
   { no: 2417, show: 17, name: 'Challenge: Pythagorean triples', parts: 4, how: 'Harder: bigger numbers. Optional extra practice.', state: 'ready' },
+  { no: 2418, show: 18, name: 'Challenge: Baseball', parts: 3, how: 'Harder: bigger diamonds. Optional extra practice.', state: 'ready' },
 ]
 
 export const NODES35: (Node & { show: number })[] = [

@@ -404,9 +404,16 @@ const H12_3: Item[][] = [
 const BIGSQ = [121, 144, 169, 196, 225, 256, 289, 324, 361, 400]
 const h5 = (seed: number, es: number[]): Item[] => hardList(seed, 15, (r) => item5(BIGSQ[bt(r, 0, BIGSQ.length - 1)], es[bt(r, 0, es.length - 1)]))
 const H12_5: Item[][] = [h5(21, [0, 2, 4]), h5(22, [1, 3, 5]), h5(23, [-2, -4, -6]), h5(24, [-1, -3, -5])]
+const H12_6: Item[][] = [
+  hardList(41, 15, (r) => rect(bt(r, 2, 6), bt(r, 12, 40))),
+  hardList(42, 15, (r) => rectP([10, 20, 25, 50][bt(r, 0, 3)], 10 * bt(r, 2, 8))),
+  hardList(43, 15, (r) => solid(bt(r, 12, 30), bt(r, 2, 12))),
+  hardList(44, 15, (r) => solid2(bt(r, 12, 30), bt(r, 2, 12))),
+]
 const rank12 = (it: Item) => it.steps.length
 export const EX_SQRT12H = [
   build(12, 'Choose the answer.', rows(H12_2), mk, idOf, 'Simplify a square root (challenge)', 12212, '1.2', rank12),
   build(13, 'Choose the answer.', rows(H12_3), mk, idOf, 'Simplify (challenge)', 12213, '1.2', rank12),
   build(15, 'Choose the answer.', rows(H12_5), mk, idOf, 'The rational square root (challenge)', 12215, '1.2', rank12),
+  build(16, 'Choose the answer.', rows(H12_6), mk, idOf, 'Word problems (challenge)', 12216, '1.2', rank12),
 ]

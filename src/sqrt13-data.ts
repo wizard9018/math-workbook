@@ -234,6 +234,11 @@ const H13_7: Item[][] = [
   hardList(83, 15, (r) => { const a = bt2(r, 3, 12); const b = bt2(r, 3, 12); return item7(Rt(a * a + (r() < 0.5 ? 0 : 1)), Rt(b * b), Rt(a * a + b * b + (r() < 0.5 ? 0 : 3))) }),
   hardList(84, 15, (r) => { const m = bt2(r, 3, 30); const k = bt2(r, 2, 9); const c = Math.round(Math.sqrt(m + k * k)); return item7(Rt(m), K(k), K(bt2(r, 0, 2) ? c : c + 1)) }),
 ]
+const H13_8: Item[][] = [
+  hardList(91, 15, (r) => base('a', 10 * bt2(r, 14, 48))),
+  hardList(92, 15, (r) => base('b', 20 * bt2(r, 7, 24))),
+  hardList(93, 15, (r) => base('c', 10 * bt2(r, 14, 48), 10 * bt2(r, 3, 20))),
+]
 const rank13 = (it: Item) => it.steps.length
 export const EX_SQRT13H = [
   build(11, 'Rational or irrational?', rows(H13_1), mk, idOf, 'Rational or irrational (challenge)', 13111, '1.3', rank13),
@@ -242,4 +247,5 @@ export const EX_SQRT13H = [
   build(14, 'Choose the square root.', rows(H13_4), mk, idOf, 'One decimal place (challenge)', 13114, '1.3', rank13),
   build(15, 'Choose the square root.', rows(H13_5), mk, idOf, 'Heron\'s method (challenge)', 13115, '1.3', rank13),
   build(17, 'Is it a Pythagorean triple?', rows(H13_7), mk, idOf, 'Pythagorean triples (challenge)', 13117, '1.3', rank13),
+  build(18, 'Choose the distance.', rows(H13_8), mk, idOf, 'Baseball (challenge)', 13118, '1.3', rank13),
 ]
