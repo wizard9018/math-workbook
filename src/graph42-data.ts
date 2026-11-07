@@ -559,3 +559,12 @@ export const EX_GRAPH42H2 = [
   build(17, 'Choose the missing values.', H7_ROWS, mk7, e7id, 'Complete the table (challenge)', 7017),
   build(19, 'Choose the equation of the line.', H9_ROWS, mk9, e9id, 'Equation from a graph (challenge)', 9019),
 ]
+
+// ---- challenge 20: the value questions of exercise 10 with bigger numbers and four values asked ----
+const H10_ROWS: [string, E10, E10[]][] = [
+  ['a', { f: 0, r: -175, c: 3200, xs: [0, 3, 6, 8], single: false }, P10(0, [-120, -175, -225, -260, -310], [2800, 3200, 4000], [[0, 3, 6, 8], [1, 3, 5, 7], [2, 4, 6, 8], [0, 2, 5, 7]], false)],
+  ['b', { f: 1, r: 0.8, c: 24, xs: [12, 14, 16, 18], single: false }, P10(1, [0.7, 0.8, 0.9, 1.2, 1.5], [18, 24, 30, 35], [[12, 14, 16, 18], [13, 14, 15, 16], [14, 15, 17, 19], [12, 15, 17, 19]], false)],
+  ['c', { f: 2, r: 140, c: 325, xs: [2, 5, 8, 12], single: false }, P10(2, [110, 125, 140, 165, 190], [250, 325, 400, 475], [[2, 5, 8, 12], [1, 4, 9, 15], [3, 6, 10, 14], [2, 6, 11, 13]], false)],
+  ['d', { f: 3, r: -1.4, c: 32, xs: [5, 7, 9, 11], single: false }, P10(3, [-1.4, -1.8, -2.2, -2.6, -0.9], [28, 32, 36, 30], [[5, 7, 9, 11], [6, 8, 10, 11], [5, 6, 8, 10], [7, 9, 10, 11]], false)],
+]
+export const EX_GRAPH42H3 = [build(20, 'Choose the values.', H10_ROWS, mk10, r10, 'Linear model (challenge)', 10020)]
