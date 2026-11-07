@@ -68,6 +68,10 @@ function mk2(n: Num, key: string): It {
     answer: ans,
     wrong,
     steps: [
+      ...SETS.map((s, i) => {
+        const yes = idx.includes(i)
+        return { label: `Is it ${s.toLowerCase()}?`, noArrow: true, toks: [{ id: `q${i}a`, tex: `${pre}\\text{is it ${s.toLowerCase()}?}` }, { id: `q${i}b`, tex: yes ? '\\text{Yes}' : '\\text{No}' }], blanks: [blk(`q${i}b`, 's0', `$\\text{Is } ${n.tex} \\text{ ${s.toLowerCase()}?}$`, [yes ? '\\text{No}' : '\\text{Yes}'], `Look at the examples above. ${hint}`)] }
+      }),
       { label: 'All its sets.', noArrow: true, toks: [{ id: 'k2a', tex: `${pre}\\text{it belongs to}` }, { id: 'k2b', tex: ans }], blanks: [blk('k2b', 's0', `$\\text{Which sets contain } ${n.tex}\\text{?}$`, wrong, hint)] },
     ],
     reference: REFERENCE,
