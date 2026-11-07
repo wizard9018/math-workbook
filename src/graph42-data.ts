@@ -536,3 +536,26 @@ export const EX_GRAPH42H = [
   build(16, 'Choose the answer.', H6_ROWS, mk6, e6id, 'Is it a solution? (challenge)', 6016),
   build(18, 'Choose the y-intercept.', H8_ROWS, mk8, e8id, 'The y-intercept (challenge)', 8018),
 ]
+
+// ---- more challenge exercises (4.2): 17 complete the table with big slopes, 19 the equation of a steep or fractional line; own progress ----
+// the given y is b + p k so that the x it belongs to (q k) is a whole number
+const T7H = (pq: [number, number][], bs: number[], ks: number[]): E7[] => pq.flatMap(([p, q]) => bs.flatMap((b) => ks.map((k): E7 => ({ p, q, b, cols: [['x', 0], ['y', b + p * k], ['x', q * (k + 2 > 0 ? k + 2 : k - 2)]] }))))
+const BH = [-19, -17, -14, -13, -11, 11, 13, 14, 17, 19]
+const KH = [-4, -3, -2, 2, 3, 4]
+const H7_ROWS: [string, E7, E7[]][] = [
+  ['a', { p: 7, q: 1, b: 11, cols: [['x', 0], ['y', 32], ['x', 5]] }, T7H([[7, 1], [8, 1], [9, 1], [11, 1], [12, 1]], BH, KH)],
+  ['b', { p: -9, q: 1, b: -13, cols: [['x', 0], ['y', -40], ['x', 4]] }, T7H([[-7, 1], [-8, 1], [-9, 1], [-11, 1], [-12, 1]], BH, KH)],
+  ['c', { p: 7, q: 3, b: -11, cols: [['x', 0], ['y', -4], ['x', 9]] }, T7H([[5, 2], [7, 3], [9, 4], [7, 2], [8, 3]], BH, KH)],
+  ['d', { p: -9, q: 4, b: 13, cols: [['x', 0], ['y', 4], ['x', 12]] }, T7H([[-5, 2], [-7, 3], [-9, 4], [-7, 2], [-8, 3]], BH, KH)],
+]
+const B9H = [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]
+const H9_ROWS: [string, E9, E9[]][] = [
+  ['a', { p: 5, q: 2, b: -4 }, T9([[5, 2], [3, 2], [5, 3], [4, 3]], B9H)],
+  ['b', { p: -5, q: 2, b: 4 }, T9([[-5, 2], [-3, 2], [-5, 3], [-4, 3]], B9H)],
+  ['c', { p: 3, q: 4, b: 2 }, T9([[3, 4], [4, 5], [5, 4], [2, 5], [3, 5]], B9H)],
+  ['d', { p: -4, q: 5, b: -1 }, T9([[-3, 4], [-4, 5], [-5, 4], [-2, 5], [-3, 5]], B9H)],
+]
+export const EX_GRAPH42H2 = [
+  build(17, 'Choose the missing values.', H7_ROWS, mk7, e7id, 'Complete the table (challenge)', 7017),
+  build(19, 'Choose the equation of the line.', H9_ROWS, mk9, e9id, 'Equation from a graph (challenge)', 9019),
+]

@@ -306,6 +306,8 @@ export const NODES42: (Node & { show: number })[] = [
   { no: 1207, show: 7, name: 'Complete the table', parts: 6, how: 'Put the given value in the equation.', state: 'ready' },
   { no: 1208, show: 8, name: 'The y-intercept', parts: 8, how: 'Put x = 0.', state: 'ready' },
   { no: 1218, show: 18, name: 'Challenge: The y-intercept', parts: 3, how: 'Harder: bigger intercepts and slopes. Optional extra practice.', state: 'ready' },
+  { no: 1217, show: 17, name: 'Challenge: Complete the table', parts: 4, how: 'Harder: big and fractional slopes. Optional extra practice.', state: 'ready' },
+  { no: 1219, show: 19, name: 'Challenge: Equation from a graph', parts: 4, how: 'Harder: steep and fractional lines. Optional extra practice.', state: 'ready' },
   { no: 1209, show: 9, name: 'Equation from a graph', parts: 8, how: 'The y-intercept, the slope, the equation.', state: 'ready' },
   { no: 1210, show: 10, name: 'Word problems', parts: 8, how: 'Stereo, soft drinks, spa, temperature: a = the values, b = click two points on the grid and Submit.', state: 'ready' },
 ]
