@@ -232,7 +232,8 @@ const land = (s: number): Item => {
       ['The area of a square.', '\\text{area} =', 'l^2', '$\\text{area} = \\square$', ['2l', '4l', 'l + 2', '\\frac{l}{2}'], 'The area of a square is a side times a side. Call the side l.'],
       ['Put in the area, then take the square root.', `${N(A)} = l^2,\\ l =`, `\\sqrt{${N(A)}}`, `$${N(A)} = l^2 \\Rightarrow l = \\square$`, [`\\frac{${N(A)}}{2}`, `${N(A)}^2`, `\\frac{${N(A)}}{4}`], 'To undo the square, take the square root of the area.'],
       ['The side of the square.', '\\text{side} =', N(s), `$\\sqrt{${N(A)}} = \\square$`, numW(s), 'The side of a square is the square root of its area.'],
-      ['The perimeter.', '\\text{perimeter} =', N(4 * s), `$4 \\times ${N(s)} = \\square$`, numW(4 * s, [2 * s, s * s]), 'The perimeter is 4 sides.'],
+      ['The perimeter of a square.', '\\text{perimeter} =', '4l', '$\\text{perimeter} = \\square$', ['2l', 'l^2', 'l + 4', '\\frac{l}{4}'], 'The perimeter is all four sides added: l + l + l + l.'],
+      ['Put in the side.', `l = ${N(s)},\\ \\text{perimeter} =`, N(4 * s), `$4 \\times ${N(s)} = \\square$`, numW(4 * s, [2 * s, s * s]), 'The perimeter is 4 sides.'],
     ],
   }
 }
