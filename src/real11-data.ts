@@ -59,6 +59,7 @@ function mk2(n: Num, key: string): It {
     [...SETS.keys()].map((i) => setTex(idx.includes(i) ? idx.filter((j) => j !== i) : [...idx, i].sort((a, b) => a - b))).filter((s) => s !== ans),
     (s) => s,
   )
+  const pre = n.tex.includes('\\sqrt') && n.kind === 'int' ? `${n.tex} = ${n.v}\\text{: }` : ''
   const hint = n.kind === 'int' ? (n.v! >= 1 ? HINT2.pos : n.v === 0 ? HINT2.zero : HINT2.neg) : HINT2[n.kind]
   const w: Wp = {
     tex: `${text('State all the sets the number belongs to: ')}${n.tex}`,
@@ -67,7 +68,7 @@ function mk2(n: Num, key: string): It {
     answer: ans,
     wrong,
     steps: [
-      { label: 'All its sets.', noArrow: true, toks: [{ id: 'k2a', tex: '\\text{it belongs to}' }, { id: 'k2b', tex: ans }], blanks: [blk('k2b', 's0', `$\\text{Which sets contain } ${n.tex}\\text{?}$`, wrong, hint)] },
+      { label: 'All its sets.', noArrow: true, toks: [{ id: 'k2a', tex: `${pre}\\text{it belongs to}` }, { id: 'k2b', tex: ans }], blanks: [blk('k2b', 's0', `$\\text{Which sets contain } ${n.tex}\\text{?}$`, wrong, hint)] },
     ],
     reference: REFERENCE,
   }
