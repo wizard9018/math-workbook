@@ -444,3 +444,38 @@ export const EX_FRAC34H = [
   build(12, 'Choose the quotient.', rowsOf(H5, 1930, true), mkChain('Divide and simplify: ', false), idE, 'Divide and simplify (challenge)', 7012, '3.4', rank34),
   build(13, 'Choose the answer.', rowsOf(H6, 1940, true), mkChain('Multiply and/or divide and simplify. Leave the answer in mixed fraction form: ', true), idE, 'Mixed numbers (challenge)', 7013, '3.4', rank34),
 ]
+
+// ---- challenge exercises 14 (reciprocals), 15 (combined operations), 16 (word problems): bigger numbers, more operations ----
+const rows3H: [string, E3, E3[]][] = [['-g', '-23/12'], ['-m', '-7 5/9'], ['g', '29/8'], ['-i', '-15']].map(([k, b], i) => {
+  const r = rng(330 + i)
+  return [String.fromCharCode(97 + i), { f: parseF(b) }, range(0, 13).map(() => ({ f: parseF(rnum(r, k, true)) }))]
+})
+const T7H: [string, (l: N[]) => N, string][] = [
+  ['m m m m', (l) => B('+', B('×', l[0], l[1]), B('÷', l[2], l[3])), '2 1/2|1 1/3|3 3/4|1 1/2'],
+  ['m m m m', (l) => B('×', B('+', l[0], l[1], true), B('-', l[2], l[3], true)), '2 1/2|3 1/3|4 3/4|1 1/6'],
+  ['m m m', (l) => B('-', S(l[0]), B('×', l[1], l[2])), '2 1/2|1 1/3|3 3/4'],
+  ['m m m m', (l) => B('÷', B('-', S(l[0]), l[1], true), B('+', l[2], l[3], true)), '3 1/2|2 1/4|1 1/2|2 1/3'],
+]
+const rows7H: [string, E7, E7[]][] = T7H.map(([kinds, f, base], i) => {
+  const r = rng(770 + i)
+  const pool: E7[] = []
+  for (let tries = 0; pool.length < 14 && tries < 800; tries++) {
+    const tree = f(kinds.split(' ').map((k) => ln(rnum(r, k, false))))
+    if (treeVal(tree).ok) pool.push({ tree })
+  }
+  return [String.fromCharCode(97 + i), { tree: f(base.split('|').map(ln)) }, pool]
+})
+const pool8H = (): E8[] => { const r = rng(818); return range(0, 11).map((i) => ({ what: WHAT8[i % WHAT8.length], f: q(between(r, 5, 19), between(r, 12, 20)), batches: between(r, 7, 15) })).map((e) => ({ ...e, f: val(e.f) < 1 ? e.f : q(7, 12) })) }
+const pool10H = (): E10[] => {
+  const r = rng(1018)
+  return NAMES10.flatMap((names) => [0, 1].map((): E10 => ({ names, f1: q(between(r, 2, 7), 8 + between(r, 0, 4)), acres: mix(between(r, 8, 25), between(r, 1, 6), 7), f2: q(between(r, 1, 2), between(r, 3, 9)) }))).map((e) => ({ ...e, f1: val(e.f1) < 1 ? e.f1 : q(5, 8), f2: val(e.f2) < 1 ? e.f2 : q(1, 4) }))
+}
+const WORD_ROWSH: [string, W, W[]][] = [
+  ['a', pool8H().map((e): W => ({ k: 8, e }))[0], pool8H().map((e): W => ({ k: 8, e }))],
+  ['b', pool10H().map((e): W => ({ k: 10, e }))[0], pool10H().map((e): W => ({ k: 10, e }))],
+]
+export const EX_FRAC34H2 = [
+  build(14, 'Choose the reciprocal.', rows3H, ans(mk3), idE3, 'Reciprocals (challenge)', 7014, '3.4'),
+  build(15, 'Choose the answer.', rows7H, ans(mk7), idE7, 'Combined operations (challenge)', 7015, '3.4'),
+  build(16, 'Choose the answer.', WORD_ROWSH, ans(mkWord), idWord, 'Word problems (challenge)', 7016, '3.4'),
+]
