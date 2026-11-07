@@ -9,8 +9,9 @@ import type { It } from './graph42-data'
 import { blk, n4, text } from './seq41-data'
 
 // one question: the sentence, what the lesson starts from, the answer, wrong answers, and the steps [label, left side, answer, blank prompt, wrong answers, hint]
-type St = [string, string, string, string, string[], string]
+type St = [string, string, string, string, string[], string, string?] // the last one: the id of the token the arrow starts from (default: the step before)
 export interface Item {
+  start?: { id: string; tex: string }[] // the lesson starts from these pieces of the question instead of the whole short text
   plain?: string[] // the choices in this order (Yes / No)
   q: string
   short: string
@@ -32,16 +33,16 @@ export function mk(it: Item, key: string): It {
   // a minus in front of the root is not part of the first question: only the root is highlighted
   const split = it.short.startsWith('-\\sqrt') && it.steps[0][1].startsWith('\\sqrt')
   const w: Wp = {
-    ...(split ? { startToks: [{ id: 'sm', tex: '-' }, { id: 'sr', tex: it.short.slice(1) }] } : {}),
+    ...(it.start ? { startToks: it.start } : split ? { startToks: [{ id: 'sm', tex: '-' }, { id: 'sr', tex: it.short.slice(1) }] } : {}),
     tex: it.q,
     short: it.short,
     key,
     answer: it.ans,
     wrong: it.wrong,
-    steps: it.steps.map(([label, lhs, ans, prompt, wrongs, hint], i) => ({
+    steps: it.steps.map(([label, lhs, ans, prompt, wrongs, hint, from], i) => ({
       label,
       toks: [{ id: `c${i}a`, tex: lhs }, { id: `c${i}b`, tex: ans }],
-      blanks: [blk(`c${i}b`, i === 0 ? (split ? 'sr' : 's0') : `c${i - 1}b`, prompt, wrongs, hint)],
+      blanks: [blk(`c${i}b`, from ?? (it.start?.[i] ? it.start[i].id : i === 0 ? (split ? 'sr' : 's0') : `c${i - 1}b`), prompt, wrongs, hint)],
     })),
   }
   return { w, plain: it.plain }
@@ -268,6 +269,7 @@ const rect = (k: number, w: number): Item => {
   return {
     q: `${text(`A rectangle has a length ${WORD(k)} as long as it is wide, and an area of `)}${unitSq(String(A), 'm')}${text('. Determine the length and width of the rectangle.')}`,
     short: unitSq(String(A), 'm'),
+    start: [{ id: 'sl', tex: `\\text{length is ${WORD(k)} the width}` }, { id: 'sa', tex: `${text('area ')}${unitSq(String(A), 'm')}` }],
     ans: pair(k * w, w),
     wrong: pairW(k * w, w),
     steps: [
@@ -286,6 +288,7 @@ const rectP = (p: number, w: number): Item => {
   return {
     q: `${text(`A rectangle has a length ${p}% longer than the width, and an area of `)}${unitSq(N(A), 'cm')}${text('. Determine the length and width of the rectangle.')}`,
     short: unitSq(N(A), 'cm'),
+    start: [{ id: 'sl', tex: `\\text{length is ${p}\\% longer than the width}` }, { id: 'sa', tex: `${text('area ')}${unitSq(N(A), 'cm')}` }],
     ans: pair(f * w, w),
     wrong: pairW(f * w, w),
     steps: [
