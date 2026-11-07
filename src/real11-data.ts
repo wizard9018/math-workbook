@@ -124,6 +124,12 @@ function mk3(s: S3, key: string): It {
     answer: ans,
     wrong,
     steps: [
+      ...s.nums.map((n, i) => {
+        const yes = right.includes(i)
+        const one = name.toLowerCase().replace(/ numbers$/, '').replace(/s$/, '')
+        const shown = n.tex.includes('\\sqrt') && n.kind === 'int' ? `${n.tex} = ${n.v}` : n.tex
+        return { label: `Is ${n.tex} ${one}?`, noArrow: true, toks: [{ id: `n${i}a`, tex: `${shown}\\text{: is it ${one}?}` }, { id: `n${i}b`, tex: yes ? '\\text{Yes}' : '\\text{No}' }], blanks: [blk(`n${i}b`, 's0', `$\\text{Is } ${n.tex} \\text{ ${one}?}$`, [yes ? '\\text{No}' : '\\text{Yes}'], `Look at the examples above. ${hint}`)] }
+      }),
       { label: 'The numbers of the set.', noArrow: true, toks: [{ id: 'd2a', tex: `\\text{${name}:}` }, { id: 'd2b', tex: ans }], blanks: [blk('d2b', 's0', `$\\text{Which numbers of the set are ${name.toLowerCase()}?}$`, wrong, hint)] },
     ],
     reference: REFERENCE,
