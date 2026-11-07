@@ -271,7 +271,9 @@ const rect = (k: number, w: number): Item => {
     ans: pair(k * w, w),
     wrong: pairW(k * w, w),
     steps: [
+      ['Let the width be w. The length.', '\\text{width} = w,\\ l =', `${k}w`, '$l = \\square$', [`w + ${k}`, `\\frac{w}{${k}}`, 'w^2', `${k}`], `The length is ${WORD(k)} the width.`],
       ['The area of a rectangle.', '\\text{area} =', 'l \\times w', '$\\text{area} = \\square$', ['l + w', '2l + 2w', '\\frac{l \\times w}{2}', 'l^2'], 'The area is the length times the width.'],
+      ['Put in the length.', '\\text{area} = l \\times w =', `${k}w^2`, `$${k}w \\times w = \\square$`, [`${k}w`, `${k * k}w`, 'w^2'], `The length is ${k}w: ${k}w times w = ${k}w².`],
       ['The width squared.', 'w^2 =', N(w * w), `$${A} \\div ${k} = \\square$`, numW(w * w, [A * k, A - k]), `The area is length times width: ${k}w times w = ${k}w².`],
       ['The width.', 'w =', N(w), `$\\sqrt{${N(w * w)}} = \\square$`, numW(w), 'Take the square root.'],
       ['The length.', 'l =', N(k * w), `$${k} \\times ${w} = \\square$`, numW(k * w, [w * w]), `The length is ${k} times the width.`],
@@ -287,7 +289,9 @@ const rectP = (p: number, w: number): Item => {
     ans: pair(f * w, w),
     wrong: pairW(f * w, w),
     steps: [
+      ['Let the width be w. The length.', '\\text{width} = w,\\ l =', `${N(f)}w`, '$l = \\square$', [`${N(p / 100)}w`, `w + ${p}`, `\\frac{w}{${N(f)}}`], `${p}% longer: the length is the width plus ${p}% of the width.`],
       ['The area of a rectangle.', '\\text{area} =', 'l \\times w', '$\\text{area} = \\square$', ['l + w', '2l + 2w', '\\frac{l \\times w}{2}', 'l^2'], 'The area is the length times the width.'],
+      ['Put in the length.', '\\text{area} = l \\times w =', `${N(f)}w^2`, `$${N(f)}w \\times w = \\square$`, [`${N(f)}w`, `${N(f * f)}w^2`, 'w^2'], `The length is ${N(f)}w: ${N(f)}w times w = ${N(f)}w².`],
       ['The width squared.', 'w^2 =', N(w * w), `$${N(A)} \\div ${N(f)} = \\square$`, numW(w * w, [A * f, A / 1.1]), `The length is ${N(f)} times the width: the area is ${N(f)}w².`],
       ['The width.', 'w =', N(w), `$\\sqrt{${N(w * w)}} = \\square$`, numW(w), 'Take the square root.'],
       ['The length.', 'l =', N(f * w), `$${N(f)} \\times ${w} = \\square$`, numW(f * w, [w * w]), `The length is ${N(f)} times the width.`],
@@ -323,8 +327,10 @@ const tri = (fi: number, w: number): Item => {
     ans: pair(f * w, w),
     wrong: pairW(f * w, w),
     steps: [
+      ['Let the width be w. The length.', '\\text{width} = w,\\ l =', `${ft}w`, '$l = \\square$', [`${N(num)}w`, `w + ${pt}`, `\\frac{w}{${ft}}`], `The length is ${ft} times the width.`],
       ['The area of a rectangle.', '\\text{area} =', 'l \\times w', '$\\text{area} = \\square$', ['l + w', '2l + 2w', '\\frac{l \\times w}{2}', 'l^2'], 'The area is the length times the width.'],
       ['The area of the rectangle.', '\\text{rectangle} =', N(2 * T), `$2 \\times ${N(T)} = \\square$`, numW(2 * T, [T / 2]), 'The diagonal cuts the rectangle into 2 equal triangles.'],
+      ['Put in the length.', '\\text{rectangle} = l \\times w =', `${ft}w^2`, `$${ft}w \\times w = \\square$`, [`${ft}w`, `${N(num)}w^2`, 'w^2'], `The length is ${ft}w: ${ft}w times w = ${ft}w².`],
       ['The width squared.', 'w^2 =', N(w * w), `$${N(2 * T)} \\div ${ft} = \\square$`, numW(w * w, [2 * T * f]), `The length is ${ft} times the width: the area is ${ft}w².`],
       ['The width.', 'w =', N(w), `$\\sqrt{${N(w * w)}} = \\square$`, numW(w), 'Take the square root.'],
       ['The length.', 'l =', N(f * w), `$${ft} \\times ${w} = \\square$`, numW(f * w, [w * w]), `The length is ${ft} times the width.`],
