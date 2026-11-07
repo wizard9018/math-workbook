@@ -86,7 +86,19 @@ function item2(r: R2): Item {
     const den = r.t! * r.t! * r.b! * r.b!
     steps.push(['Reduce the fraction.', `\\frac{${num}}{${den}} =`, r.red, `$\\frac{${num}}{${den}} = \\square$`, [`\\frac{${r.a! * r.a!}}{${r.b! * r.b! + 1}}`, `\\frac{${r.b! * r.b!}}{${r.a! * r.a!}}`, `\\frac{1}{${r.b! * r.b!}}`], 'Divide the numerator and the denominator by the same number.'])
   }
-  steps.push([r.red ? 'Which number times itself gives it?' : 'Which number times itself gives the number under the root?', `\\sqrt{${r.red ?? r.rad}} =`, r.root, `$\\square \\times \\square = ${r.red ?? r.rad}$`, wrongRoot, r.kind === 'zero' ? '0 times 0 is 0.' : 'Find the number that multiplied by itself gives the number under the root. For a fraction or a decimal this is a fraction or a decimal.'])
+  // a decimal root: write it as a fraction, take the root of the fraction, write the result as a decimal again
+  const dec = r.a === undefined && r.root.includes('.')
+  if (dec) {
+    const d = r.root.split('.')[1].length
+    const a = Number(r.root.replace('.', ''))
+    const num = a * a
+    const den = 10 ** (2 * d)
+    const fr = (n: number, m: number) => `\\frac{${n}}{${m}}`
+    steps.push(['Write the decimal as a fraction.', `\\sqrt{${r.rad}} =`, `\\sqrt{${fr(num, den)}}`, `$\\sqrt{${r.rad}} = \\square$`, [`\\sqrt{${fr(num, den / 10)}}`, `\\sqrt{${fr(num, den * 10)}}`, `\\sqrt{${fr(a, den)}}`], 'Count the digits after the decimal point: that many zeros in the denominator.'])
+    steps.push(['Take the root of the top and of the bottom.', `\\sqrt{${fr(num, den)}} =`, fr(a, 10 ** d), `$\\sqrt{${fr(num, den)}} = \\square$`, [fr(a, den), fr(num, 10 ** d), fr(a * 2, 10 ** d)], 'Find the root of the numerator and of the denominator separately.'])
+    steps.push(['Write the fraction as a decimal.', `${fr(a, 10 ** d)} =`, r.root, `$${fr(a, 10 ** d)} = \\square$`, wrongRoot, 'Divide by 10, 100, ...: move the decimal point to the left.'])
+  }
+  if (!dec) steps.push([r.red ? 'Which number times itself gives it?' : 'Which number times itself gives the number under the root?', `\\sqrt{${r.red ?? r.rad}} =`, r.root, `$\\square \\times \\square = ${r.red ?? r.rad}$`, wrongRoot, r.kind === 'zero' ? '0 times 0 is 0.' : 'Find the number that multiplied by itself gives the number under the root. For a fraction or a decimal this is a fraction or a decimal.'])
   if (r.sign) steps.push(['The minus sign stays in front of the root.', `${tex} =`, ans, `$${tex} = \\square$`, uniq([r.root, ...wrongRoot.map((s) => `-${s}`)], (s) => s).filter((s) => s !== ans), 'The minus sign is in front of the root, so the answer is negative.'])
   return { q, short: tex, ans, wrong, steps }
 }
