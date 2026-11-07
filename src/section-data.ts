@@ -30,6 +30,8 @@ export const NODES52: (Node & { show: number })[] = [
   { no: 111, show: 11, name: 'Challenge: Add polynomials', parts: 4, how: 'Harder: three brackets, more terms, more letters. Optional extra practice.', state: 'ready' },
   { no: 114, show: 14, name: 'Challenge: Subtract polynomials', parts: 4, how: 'Harder: three brackets, more terms, more letters. Optional extra practice.', state: 'ready' },
   { no: 117, show: 17, name: 'Challenge: Combined operations', parts: 4, how: 'Harder: three brackets, more terms, more letters. Optional extra practice.', state: 'ready' },
+  { no: 112, show: 12, name: 'Challenge: Add (vertical)', parts: 4, how: 'Harder: three rows of four or five terms. Optional extra practice.', state: 'ready' },
+  { no: 115, show: 15, name: 'Challenge: Subtract (vertical)', parts: 4, how: 'Harder: four or five terms. Optional extra practice.', state: 'ready' },
 ]
 
 // Grade 9 5.3 exercises 1-3 and 6-11 (4 and 5 use algebra tiles). `no` is the key of the quiz page (200 + the exercise number); `show` is the number printed in the roadmap.
@@ -40,6 +42,7 @@ export const NODES53: (Node & { show: number })[] = [
   { no: 206, show: 6, name: 'Area', parts: 4, how: 'Formula, one half, then multiply every term of the bracket.', state: 'ready' },
   { no: 207, show: 7, name: 'Volume', parts: 4, how: 'Formula, multiply the monomials, then the bracket.', state: 'ready' },
   { no: 209, show: 9, name: 'Surface area', parts: 6, how: 'The area of every face, then the sum.', state: 'ready' },
+  { no: 211, show: 11, name: 'Challenge: Multiply monomials', parts: 4, how: 'Harder: bigger numbers and higher powers. Optional extra practice.', state: 'ready' },
   { no: 212, show: 12, name: 'Challenge: Monomial times polynomial', parts: 4, how: 'Harder: bigger numbers, two letters, up to four terms. Optional extra practice.', state: 'ready' },
 ]
 
@@ -50,7 +53,10 @@ export const NODES54: (Node & { show: number })[] = [
   { no: 305, show: 5, name: 'Find the height', parts: 4, how: 'Formula, then divide the area or the volume.', state: 'ready' },
   { no: 306, show: 6, name: 'Word problems', parts: 4, how: 'The formula, then divide: square, parallelogram, pool, pyramid.', state: 'ready' },
   { no: 310, show: 10, name: 'Combined operations', parts: 12, how: 'Work out each part, then collect like terms.', state: 'ready' },
+  { no: 311, show: 11, name: 'Challenge: Divide by a number', parts: 4, how: 'Harder: four terms, bigger numbers. Optional extra practice.', state: 'ready' },
+  { no: 312, show: 12, name: 'Challenge: Divide three terms', parts: 4, how: 'Harder: four terms, bigger numbers. Optional extra practice.', state: 'ready' },
   { no: 313, show: 13, name: 'Challenge: Divide by a monomial', parts: 4, how: 'Harder: up to four terms, two letters. Optional extra practice.', state: 'ready' },
+  { no: 314, show: 14, name: 'Challenge: Combined operations', parts: 4, how: 'Harder: three or four terms in each part. Optional extra practice.', state: 'ready' },
 ]
 
 export const NODES55: (Node & { show: number })[] = [
@@ -61,6 +67,12 @@ export const NODES55: (Node & { show: number })[] = [
   { no: 407, show: 7, name: 'Product', parts: 12, how: 'Multiply the monomial by every term in the bracket.', state: 'ready' },
   { no: 408, show: 8, name: 'Quotient', parts: 8, how: 'Divide every term on top by the bottom.', state: 'ready' },
   { no: 409, show: 9, name: 'Combined operations', parts: 6, how: 'Work out each part, then collect like terms.', state: 'ready' },
+  { no: 412, show: 12, name: 'Challenge: Simplify', parts: 4, how: 'Harder: 8 to 10 terms. Optional extra practice.', state: 'ready' },
+  { no: 414, show: 14, name: 'Challenge: Add', parts: 4, how: 'Harder: three brackets of four or five terms. Optional extra practice.', state: 'ready' },
+  { no: 416, show: 16, name: 'Challenge: Subtract', parts: 4, how: 'Harder: three brackets of four or five terms. Optional extra practice.', state: 'ready' },
+  { no: 417, show: 17, name: 'Challenge: Product', parts: 4, how: 'Harder: bigger numbers, more terms. Optional extra practice.', state: 'ready' },
+  { no: 418, show: 18, name: 'Challenge: Quotient', parts: 4, how: 'Harder: up to four terms. Optional extra practice.', state: 'ready' },
+  { no: 419, show: 19, name: 'Challenge: Combined operations', parts: 4, how: 'Harder: three or four terms in each part. Optional extra practice.', state: 'ready' },
 ]
 
 export const NODES61: (Node & { show: number })[] = [

@@ -130,9 +130,10 @@ export function choicesCombo(c: Combo, idx: number): [string[], number] {
 }
 
 const BOOK = (BOOK54 as Record<string, Record<string, string>>)['10']
-function build(): Exercise {
-  const generated = (part: string): unknown[] => (V54 as Record<string, Record<string, unknown[]>>)['10']?.[part] ?? []
-  const questions: Question[] = Object.entries(BOOK).map(([part, src], idx): Question => {
+type Custom = { shown: number; book: [string, string][]; gen: Record<string, string[]> } // the questions of a challenge exercise (hard5-data.ts)
+function build(custom?: Custom): Exercise {
+  const generated = (part: string): unknown[] => custom?.gen[part] ?? (V54 as Record<string, Record<string, unknown[]>>)['10']?.[part] ?? []
+  const questions: Question[] = (custom?.book ?? Object.entries(BOOK)).map(([part, src], idx): Question => {
     const book = parseCombo(src)!
     const bank = topTen(generated(part).map(parseCombo).filter((x): x is Combo => !!x), [], texCombo, book)
     const make = (c: Combo, key: string, k: number): Practice => {
@@ -141,7 +142,8 @@ function build(): Exercise {
     }
     return { part, ...make(book, part, 0), practice: bank.map((c, k) => make(c, `${part}${k + 1}`, k + 1)) }
   })
-  return { no: 10, sec: '5.4', prompt: 'Perform the combined operations.', mathChoices: true, questions }
+  return { no: custom?.shown ?? 10, sec: '5.4', prompt: 'Perform the combined operations.', mathChoices: true, questions }
 }
 
 export const EX_COMBO54 = [build()]
+export const buildCombo = build

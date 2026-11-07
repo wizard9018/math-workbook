@@ -249,7 +249,8 @@ function hpoly(r: () => number, monos: string[]): string {
   const k = 4 + Math.floor(r() * 2) // four or five terms
   const pool = [...monos]
   const chosen: string[] = []
-  while (chosen.length < Math.min(k, pool.length)) chosen.push(pool.splice(Math.floor(r() * pool.length), 1)[0])
+  const want = Math.min(k, pool.length)
+  while (chosen.length < want) chosen.push(pool.splice(Math.floor(r() * pool.length), 1)[0])
   chosen.sort((a, b) => monos.indexOf(a) - monos.indexOf(b))
   return chosen
     .map((m, i) => {
@@ -285,3 +286,19 @@ export const EX52H = [
   build(4, H52.sub.book, '5.2', 14, H52.sub.extra),
   build(7, H52.mix.book, '5.2', 17, H52.mix.extra),
 ]
+
+// ---- more challenge exercises (5.2): 12 add and 15 subtract written one under the other, with four or five terms (add: three rows, subtract: two rows); own progress ----
+function hsetV(seed: number, ops: string): { book: [string, string][]; extra: Record<string, string[]> } {
+  const r = hrng(seed)
+  const make = (monos: string[]) => ['', ...ops].map(() => `(${hpoly(r, monos)})`).reduce((s, g, i) => s + (i ? ops[i - 1] : '') + g, '')
+  const book: [string, string][] = []
+  const extra: Record<string, string[]> = {}
+  MONOS.forEach((monos, i) => {
+    const part = String.fromCharCode(97 + i)
+    book.push([part, make(monos)])
+    extra[part] = Array.from({ length: 14 }, () => make(monos))
+  })
+  return { book, extra }
+}
+const H52V = { add: hsetV(5212, '++'), sub: hsetV(5215, '-') }
+export const EX52H2 = [build(2, H52V.add.book, '5.2', 12, H52V.add.extra), build(5, H52V.sub.book, '5.2', 15, H52V.sub.extra)]

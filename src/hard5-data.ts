@@ -5,6 +5,7 @@ import type { Exercise } from './exercise'
 import { buildCollect } from './simplify-data'
 import { buildMult } from './mult-data'
 import { buildDiv } from './div-data'
+import { buildCombo } from './combo-data'
 
 const rng = (seed: number) => {
   let s = seed
@@ -86,12 +87,12 @@ const H53 = parts(DIST_B.map((b, i) => distSet(5300 + i, DIST_A[i], b)))
 // ---- 5.4: a polynomial of 3 or 4 terms divided by a monomial (every term divides exactly) ----
 const DEN: string[][] = [['x'], ['x', 'x^2'], ['xy', 'x^2'], ['x^2y', 'xy', 'x^2']]
 const QUO: string[][] = [['x^3', 'x^2', 'x', ''], ['x^3', 'x^2', 'x', ''], ['x^2', 'xy', 'y^2', 'x', 'y'], ['x^2', 'xy', 'y^2', 'x', 'y', 'xy^2']]
-const divSet = (seed: number, den: string[], quo: string[]) => {
+const divSet = (seed: number, den: string[], quo: string[], lo = 3, hi = 4) => {
   const r = rng(seed)
   return () => {
     const d = den[between(r, 0, den.length - 1)]
     const dc = coef(r, 2, 9)
-    const qm = pickSome(r, quo, between(r, 3, 4))
+    const qm = pickSome(r, quo, between(r, lo, hi))
     const nm = qm.map((m) => strM(mulM(parseM(m), parseM(d))))
     const num = poly(qm.map(() => coef(r) * dc), nm)
     return `(${num})/${term(dc, d)}`
@@ -99,6 +100,44 @@ const divSet = (seed: number, den: string[], quo: string[]) => {
 }
 const H54 = parts(QUO.map((q, i) => divSet(5400 + i, DEN[i], q)))
 
+// ---- 5.3 exercise 1 (monomial times monomial): bigger numbers, higher powers, up to two letters ----
+const MON_LETTERS: string[][] = [['x'], ['x', 'y'], ['x', 'y', 'z'], ['a', 'b']]
+const monoStr = (r: () => number, ls: string[], maxE: number) =>
+  pickSome(r, ls, between(r, 1, Math.min(ls.length, 2))).sort().map((l) => { const e = between(r, 1, maxE); return e === 1 ? l : `${l}^${e}` }).join('')
+const prodSet = (seed: number, ls: string[], maxE: number) => {
+  const r = rng(seed)
+  return () => `${term(coef(r, 2, 15), monoStr(r, ls, maxE))}*${term(coef(r, 2, 15), monoStr(r, ls, maxE))}`
+}
+const H53P = parts(MON_LETTERS.map((ls, i) => prodSet(5310 + i, ls, i === 0 ? 4 : 3)))
+
+// ---- 5.4 exercises 1 and 2 (a polynomial divided by a number): four or five terms, bigger numbers ----
+const NUMQ: string[][] = [['x^3', 'x^2', 'x', ''], ['x^3', 'x^2', 'x', '', 'x^4'], ['x^2', 'xy', 'y^2', 'x', 'y'], ['x^2', 'xy', 'y^2', 'z', 'x', 'y']]
+const H54N = parts(NUMQ.map((q, i) => divSet(5410 + i, [''], q, 4, 4)))
+const H54M = parts(NUMQ.map((q, i) => divSet(5420 + i, [''], q, 4, 4)))
+
+// ---- 5.4 exercise 10 (combined operations): a monomial times a bracket and a polynomial divided by a monomial, three or four terms each ----
+const COMBO_Q: string[][] = [['x^2', 'x', ''], ['x^3', 'x^2', 'x', ''], ['x^2', 'xy', 'y^2', 'x', 'y'], ['x^2', 'xy', 'y^2', 'x', 'y']]
+const comboSet = (seed: number, quo: string[], twoLetters: boolean, shape: 'A' | 'B') => {
+  const r = rng(seed)
+  return () => {
+    const lead = twoLetters ? (shape === 'B' ? ['x', 'xy', 'x^2'] : ['x', 'y', 'xy'])[between(r, 0, 2)] : 'x'
+    const m1 = term(coef(r, 2, 9), lead)
+    const qm = pickSome(r, quo, between(r, 3, 4))
+    const p1 = poly(qm.map(() => coef(r)), qm)
+    const dc = between(r, 2, 5)
+    const sg = r() < 0.5 ? '+' : '-'
+    if (shape === 'A') {
+      const qm2 = pickSome(r, quo, 3)
+      return `${m1}(${p1})${sg}(${poly(qm2.map(() => coef(r) * dc), qm2)})/${dc}`
+    }
+    // (m (poly)) / den: every product term is divisible by den = dc * x
+    const bigM = term(coef(r, 1, 4) * dc, lead)
+    const qm2 = pickSome(r, quo, 3)
+    return `(${bigM}(${p1}))/${term(dc, 'x')}${sg}${term(coef(r, 2, 9), lead)}(${poly(qm2.map(() => coef(r)), qm2)})`
+  }
+}
+const H54C = parts(COMBO_Q.map((q, i) => comboSet(5430 + i, q, i >= 2, i % 2 ? 'B' : 'A')), 30)
+
 export const EX51H: Exercise[] = [buildCollect(18, H51.book, 8, '5.1', H51.gen)]
-export const EX53H: Exercise[] = [buildMult('2', { shown: 12, book: H53.book, gen: H53.gen })]
-export const EX54H: Exercise[] = [buildDiv('3', { shown: 13, book: H54.book, gen: H54.gen })]
+export const EX53H: Exercise[] = [buildMult('1', { shown: 11, book: H53P.book, gen: H53P.gen }), buildMult('2', { shown: 12, book: H53.book, gen: H53.gen })]
+export const EX54H: Exercise[] = [buildDiv('1', { shown: 11, book: H54N.book, gen: H54N.gen }), buildDiv('2', { shown: 12, book: H54M.book, gen: H54M.gen }), buildDiv('3', { shown: 13, book: H54.book, gen: H54.gen }), buildCombo({ shown: 14, book: H54C.book, gen: H54C.gen })]

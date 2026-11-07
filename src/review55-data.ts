@@ -11,6 +11,8 @@ import { choicesCombo, lessonCombo, parseCombo, texCombo } from './combo-data'
 import { choicesDiv, lessonDiv, parseDiv, texDiv } from './div-data'
 import { choicesDist, lessonDist, parseDist, texDist } from './mult-data'
 import { build as simplify } from './simplify-data'
+import { EX51H, EX53H, EX54H } from './hard5-data'
+import { EX52H } from './bracket-data'
 
 // a stable shuffle, so a question keeps the same bank on every page load
 const shuffled = <T,>(a: T[], seed: number): T[] => {
@@ -101,4 +103,18 @@ export const EX55: Exercise[] = [
   parsed(7, 'Find the product.', PRODUCT, pool(V53['3' as keyof typeof V53]), parseDist, texDist, choicesDist, (d, key, idx) => lessonDist(d, key, 7, idx)),
   parsed(8, 'Find the quotient.', QUOTIENT, pool(V54['3' as keyof typeof V54]), parseDiv, texDiv, choicesDiv, (d, key, idx) => lessonDiv(d, key, 8, idx, undefined, '5.5')),
   parsed(9, 'Perform the combined operations.', COMBO, pool(V54['10' as keyof typeof V54]), parseCombo, texCombo, choicesCombo, (c, key, idx) => lessonCombo(c, key, idx)),
+]
+
+// challenge versions: the challenge exercises of 5.1 to 5.4 under the review (12 simplify, 14 add, 16 subtract, 17 product, 18 quotient, 19 combined operations); degree has none
+const chal = (list: Exercise[], from: number, no: number, prompt: string): Exercise => {
+  const ex = list.find((e) => e.no === from)!
+  return { ...ex, no, sec: '5.5', prompt, questions: ex.questions.map((q): Question => ({ ...q })) }
+}
+export const EX55H: Exercise[] = [
+  chal(EX51H, 18, 12, 'Simplify.'),
+  chal(EX52H, 11, 14, 'Add.'),
+  chal(EX52H, 14, 16, 'Subtract.'),
+  chal(EX53H, 12, 17, 'Find the product.'),
+  chal(EX54H, 13, 18, 'Find the quotient.'),
+  chal(EX54H, 14, 19, 'Perform the combined operations.'),
 ]
