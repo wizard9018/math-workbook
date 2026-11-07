@@ -296,6 +296,8 @@ export const NODES43: (Node & { show: number })[] = [
   { no: 1304, show: 4, name: 'Complete the table from the graph', parts: 4, how: 'Read the graph and type the missing numbers.', state: 'ready' },
   { no: 1305, show: 5, name: 'Draw a parallel line', parts: 4, how: 'The same slope, find b from the point, click two points.', state: 'ready' },
   { no: 1311, show: 11, name: 'Challenge: Is it a solution?', parts: 4, how: 'Harder: bigger and fractional coefficients. Optional extra practice.', state: 'ready' },
+  { no: 1312, show: 12, name: 'Challenge: Graph the equation', parts: 4, how: 'Harder: bigger and decimal coefficients. Optional extra practice.', state: 'ready' },
+  { no: 1315, show: 15, name: 'Challenge: Draw a parallel line', parts: 4, how: 'Harder: steeper lines. Optional extra practice.', state: 'ready' },
 ]
 
 export const NODES42: (Node & { show: number })[] = [

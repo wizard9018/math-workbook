@@ -359,3 +359,22 @@ const H1_ROWS: [string, E1, E1[]][] = [
 export const EX_GRAPH43H = [
   build(11, 'Choose the answer.', H1_ROWS, mk1, e1id, 'Is it a solution? (challenge)', 1011, '4.3'),
 ]
+
+// ================= challenge exercises 12 (graph the equation) and 15 (the parallel line): bigger coefficients, decimal and quarter coefficients; own progress =================
+const g2h = (as: number[], bs: number[], dec = false): E2[] => g2(as, bs, dec).map((e) => ({ ...e, c: +e.c.toFixed(4) }))
+const H2_ROWS: [string, E2, E2[]][] = [
+  ['a', { a: 4, b: 5, c: 20 }, g2h([3, 4, 5, -3, -4, -5], [2, 4, 5, -2, -4])],
+  ['b', { a: -5, b: 3, c: 6 }, g2h([5, 7, -5, -7, 3, -3, 6, -6], [3, 4, 6, -3, -6])],
+  ['c', { a: 0.6, b: -0.5, c: 3, dec: true }, g2h([0.6, 0.8, 1.5, -0.6, -0.8, 1.2, 2.5], [-0.5, 0.5, -1.5, 1.5, 0.4, -0.4], true)],
+  ['d', { a: 0.75, b: 1, c: 2.25, dec: true }, g2h([0.75, 0.25, -0.75, 1.25, -1.25], [1, -1, 2, -2], true)],
+]
+const H5_ROWS: [string, E5, E5[]][] = [
+  ['a', { ...slopeForm(4, -5), x0: 1, y0: 2 }, g5([3, 4, 5, -3, -4, -5], [-6, -5, 5, 6], PTS5)],
+  ['b', { ...slopeForm(-5, 6), x0: -2, y0: 1 }, g5([-3, -4, -5, 3, 4, 5], [-6, -5, 5, 6], PTS5)],
+  ['c', { std: true, m: 0, k: 0, a: 3, b: -2, c: 6, x0: 2, y0: -1 }, g5s([3, 4, 5, -3], [2, -2, 4, -4], [6, 8, 12, -8], PTS5)],
+  ['d', { std: true, m: 0, k: 0, a: 5, b: 4, c: 8, x0: -1, y0: 3 }, g5s([5, 3, -5, -3], [4, -4, 2, -2], [8, 12, 4, -12], PTS5)],
+]
+export const EX_GRAPH43H2 = [
+  build(12, 'Graph the equation.', H2_ROWS, mk2, e2id, 'Graph the equation (challenge)', 2012, '4.3'),
+  build(15, 'Draw the parallel line.', H5_ROWS, mk5, e5id, 'Parallel line (challenge)', 5015, '4.3'),
+]
