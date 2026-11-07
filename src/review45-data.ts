@@ -4,7 +4,11 @@
 // Every question uses the builders and lessons of the section it comes from (4.1 to 4.4) with the numbers of the review; the 10 similar questions are made the same way.
 // Exercise 9a is drawn on a coarse grid (a step of 20 dollars): a point within 10 dollars of the line counts.
 // Imported by: quiz.tsx, check45.ts. Shape: exercise.ts.
-import type { Draw, Exercise } from './exercise'
+import type { Draw, Exercise, Question } from './exercise'
+import { EX_SEQ41H } from './seq41-data'
+import { EX_GRAPH42H2 } from './graph42-data'
+import { EX_GRAPH43H2 } from './graph43-data'
+import { EX_GRAPH44H } from './graph44-data'
 import type { Wp } from './ineq64-data'
 import { build as buildSeq, ex3, ex5, ex6, grid, sq, sqKey } from './seq41-data'
 import type { Sq } from './seq41-data'
@@ -195,4 +199,19 @@ export const EX_REVIEW45: Exercise[] = [
   build(9, 'The lawn mower.', E9, mk9, e9id, 'Lawn mower rental', 4590, '4.5'),
   build(10, 'Graph the equation.', E10S, mk2, e2id, 'Graph the equation', 45100, '4.5'),
   build(11, 'Which graph?', E11S, mk1, e1id, 'Match the graph', 45110, '4.5'),
+]
+
+// challenge versions: the parts of the challenge exercises of 4.1 to 4.4 (12 common difference, 13 the 100th term, 14 equation of the pattern, 15 complete the table, 16 equation of a graph, 17 graph with fractions, 18 match); 7 and 9 have none
+const chal = (list: Exercise[], from: number, no: number, prompt: string): Exercise => {
+  const ex = list.find((e) => e.no === from)!
+  return { ...ex, no, sec: '4.5', prompt, questions: ex.questions.map((q): Question => ({ ...q })) }
+}
+export const EX_REVIEW45H: Exercise[] = [
+  chal(EX_SEQ41H, 13, 12, 'Choose the common difference.'),
+  chal(EX_SEQ41H, 16, 13, 'Choose the term.'),
+  chal(EX_SEQ41H, 15, 14, 'Choose the equation relating y to x.'),
+  chal(EX_GRAPH42H2, 17, 15, 'Complete the table.'),
+  chal(EX_GRAPH44H, 15, 16, 'Write the equation.'),
+  chal(EX_GRAPH43H2, 12, 17, 'Graph the equation.'),
+  chal(EX_GRAPH44H, 11, 18, 'Which graph?'),
 ]

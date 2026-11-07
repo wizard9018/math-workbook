@@ -278,6 +278,13 @@ export const NODES45: (Node & { show: number })[] = [
   { no: 1509, show: 9, name: 'Lawn mower rental', parts: 3, how: 'Graph C = F + rd, the cost of some days, the days for a value.', state: 'ready' },
   { no: 1510, show: 10, name: 'Graph with fractions', parts: 2, how: 'Isolate y, find two points, click them.', state: 'ready' },
   { no: 1511, show: 11, name: 'Match equations and graphs', parts: 9, how: 'b and m, then click the matching graph.', state: 'ready' },
+  { no: 1512, show: 12, name: 'Challenge: Common difference', parts: 4, how: 'Harder: bigger, negative and decimal differences. Optional extra practice.', state: 'ready' },
+  { no: 1513, show: 13, name: 'Challenge: The 100th term', parts: 4, how: 'Harder: bigger, negative and decimal differences. Optional extra practice.', state: 'ready' },
+  { no: 1514, show: 14, name: 'Challenge: Equation of the pattern', parts: 4, how: 'Harder: bigger, negative and decimal differences. Optional extra practice.', state: 'ready' },
+  { no: 1515, show: 15, name: 'Challenge: Complete the table', parts: 4, how: 'Harder: big and fractional slopes. Optional extra practice.', state: 'ready' },
+  { no: 1516, show: 16, name: 'Challenge: Equation of a graph', parts: 4, how: 'Harder: steep and fractional lines. Optional extra practice.', state: 'ready' },
+  { no: 1517, show: 17, name: 'Challenge: Graph with fractions', parts: 4, how: 'Harder: bigger and decimal coefficients. Optional extra practice.', state: 'ready' },
+  { no: 1518, show: 18, name: 'Challenge: Match equations and graphs', parts: 4, how: 'Harder: steep and fractional lines. Optional extra practice.', state: 'ready' },
 ]
 
 export const NODES44: (Node & { show: number })[] = [
