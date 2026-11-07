@@ -220,6 +220,7 @@ export const NODES33: (Node & { show: number })[] = [
   { no: 1819, show: 19, name: 'Challenge: Different denominators', parts: 4, how: 'Harder: more terms and bigger numbers. Optional extra practice.', state: 'ready' },
   { no: 1820, show: 20, name: 'Challenge: Add mixed numbers', parts: 4, how: 'Harder: more terms and bigger numbers. Optional extra practice.', state: 'ready' },
   { no: 1821, show: 21, name: 'Challenge: Subtract mixed numbers', parts: 4, how: 'Harder: more terms and bigger numbers. Optional extra practice.', state: 'ready' },
+  { no: 1822, show: 22, name: 'Challenge: Fraction word problems', parts: 4, how: 'Harder: more terms and bigger numbers. Optional extra practice.', state: 'ready' },
 ]
 
 export const NODES32: (Node & { show: number })[] = [

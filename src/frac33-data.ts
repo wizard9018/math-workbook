@@ -296,3 +296,17 @@ const parts = [
   build(11, 'Choose the answer.', H_ROWS, mkG, idG, 'Fraction word problems', 6018, '3.3'),
 ]
 export const EX_FRAC33 = [{ ...parts[0], questions: parts.flatMap((p) => p.questions) }]
+
+// ---- challenge (exercise 22): the same word problems with bigger numbers: a rectangle, packages, a walk and a hexagon (5 sides known) ----
+const HD = [3, 5, 6, 8, 12]
+const hA = (): A[] => { const r = rng(131); return THINGS.flatMap(([what, unit]) => [0, 1].map((): A => ({ what, unit, l: rmix(r, 25, 60, HD), w: rmix(r, 15, 24, HD) }))) }
+const hC = (): C[] => { const r = rng(133); return range(0, 11).map((i): C => { const p1 = rmix(r, 3, 8, HD); const p2 = rmix(r, 4, 9, HD); return { p1, p2, p3: sub(add(p1, p2), add(rmix(r, 1, 3, HD), q(1, 4))), unit: i % 2 ? 'kg' : 'pounds' } }) }
+const hE = (): E[] => { const r = rng(135); return WALKERS.flatMap((who) => [0, 1].map((j): E => { const a = rmix(r, 2, 6, HD); const b = rmix(r, 1, 4, HD); return { who, a, b, total: add(add(a, b), rmix(r, 2, 5, HD)), unit: j ? 'miles' : 'km' } })) }
+const hG = (): G[] => { const r = rng(138); return range(0, 11).map((): G => { const sides = range(1, 5).map(() => rmix(r, 4, 12, HD)); const tot = sides.reduce((s, x) => add(s, x), q(0, 1)); return { shape: 'hexagon', perimeter: Math.ceil(val(tot)) + between(r, 3, 9), sides } }) }
+const wh = [
+  build(22, 'Choose the answer.', [['a', hA()[0], hA()] as [string, A, A[]]], mkA, idA, 'Fraction word problems (challenge)', 6021, '3.3'),
+  build(22, 'Choose the answer.', [['b', hC()[0], hC()] as [string, C, C[]]], mkC, idC, 'Fraction word problems (challenge)', 6022, '3.3'),
+  build(22, 'Choose the answer.', [['c', hE()[0], hE()] as [string, E, E[]]], mkE, idE, 'Fraction word problems (challenge)', 6023, '3.3'),
+  build(22, 'Choose the answer.', [['d', hG()[0], hG()] as [string, G, G[]]], mkG, idG, 'Fraction word problems (challenge)', 6024, '3.3'),
+]
+export const EX_FRAC33WH = [{ ...wh[0], questions: wh.flatMap((p) => p.questions) }]
