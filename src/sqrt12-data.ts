@@ -271,6 +271,7 @@ const rect = (k: number, w: number): Item => {
     ans: pair(k * w, w),
     wrong: pairW(k * w, w),
     steps: [
+      ['The area of a rectangle.', '\\text{area} =', 'l \\times w', '$\\text{area} = \\square$', ['l + w', '2l + 2w', '\\frac{l \\times w}{2}', 'l^2'], 'The area is the length times the width.'],
       ['The width squared.', 'w^2 =', N(w * w), `$${A} \\div ${k} = \\square$`, numW(w * w, [A * k, A - k]), `The area is length times width: ${k}w times w = ${k}w².`],
       ['The width.', 'w =', N(w), `$\\sqrt{${N(w * w)}} = \\square$`, numW(w), 'Take the square root.'],
       ['The length.', 'l =', N(k * w), `$${k} \\times ${w} = \\square$`, numW(k * w, [w * w]), `The length is ${k} times the width.`],
@@ -286,6 +287,7 @@ const rectP = (p: number, w: number): Item => {
     ans: pair(f * w, w),
     wrong: pairW(f * w, w),
     steps: [
+      ['The area of a rectangle.', '\\text{area} =', 'l \\times w', '$\\text{area} = \\square$', ['l + w', '2l + 2w', '\\frac{l \\times w}{2}', 'l^2'], 'The area is the length times the width.'],
       ['The width squared.', 'w^2 =', N(w * w), `$${N(A)} \\div ${N(f)} = \\square$`, numW(w * w, [A * f, A / 1.1]), `The length is ${N(f)} times the width: the area is ${N(f)}w².`],
       ['The width.', 'w =', N(w), `$\\sqrt{${N(w * w)}} = \\square$`, numW(w), 'Take the square root.'],
       ['The length.', 'l =', N(f * w), `$${N(f)} \\times ${w} = \\square$`, numW(f * w, [w * w]), `The length is ${N(f)} times the width.`],
@@ -302,7 +304,9 @@ const diag = (s: number): Item => {
     wrong: numW(4 * s, [2 * s, s]),
     steps: [
       ['The area of the square.', '\\text{square} =', N(2 * T), `$2 \\times ${T} = \\square$`, numW(2 * T, [T / 2]), 'The diagonal cuts the square into 2 equal triangles.'],
+      ['The area of a square.', '\\text{area} =', 'l^2', '$\\text{area} = \\square$', ['2l', '4l', 'l + 2', '\\frac{l}{2}'], 'The area of a square is a side times a side.'],
       ['The side.', '\\text{side} =', N(s), `$\\sqrt{${2 * T}} = \\square$`, numW(s), 'The side is the square root of the area.'],
+      ['The perimeter of a square.', '\\text{perimeter} =', '4l', '$\\text{perimeter} = \\square$', ['2l', 'l^2', 'l + 4', '\\frac{l}{4}'], 'The perimeter is all four sides added.'],
       ['The perimeter.', '\\text{perimeter} =', N(4 * s), `$4 \\times ${s} = \\square$`, numW(4 * s, [s * s]), 'The perimeter is 4 sides.'],
     ],
   }
@@ -319,6 +323,7 @@ const tri = (fi: number, w: number): Item => {
     ans: pair(f * w, w),
     wrong: pairW(f * w, w),
     steps: [
+      ['The area of a rectangle.', '\\text{area} =', 'l \\times w', '$\\text{area} = \\square$', ['l + w', '2l + 2w', '\\frac{l \\times w}{2}', 'l^2'], 'The area is the length times the width.'],
       ['The area of the rectangle.', '\\text{rectangle} =', N(2 * T), `$2 \\times ${N(T)} = \\square$`, numW(2 * T, [T / 2]), 'The diagonal cuts the rectangle into 2 equal triangles.'],
       ['The width squared.', 'w^2 =', N(w * w), `$${N(2 * T)} \\div ${ft} = \\square$`, numW(w * w, [2 * T * f]), `The length is ${ft} times the width: the area is ${ft}w².`],
       ['The width.', 'w =', N(w), `$\\sqrt{${N(w * w)}} = \\square$`, numW(w), 'Take the square root.'],
@@ -333,6 +338,7 @@ const circ = (r: number): Item => ({
   ans: N(r),
   wrong: numW(r, [r * r]),
   steps: [
+    ['The area of a circle.', 'A =', '\\pi r^2', '$A = \\square$', ['2\\pi r', '\\pi r', '\\pi d', '\\frac{1}{2}\\pi r^2'], 'The area of a circle is π times the radius squared.'],
     ['The radius squared.', 'r^2 =', N(r * r), `$\\pi r^2 = ${r * r}\\pi \\Rightarrow r^2 = \\square$`, numW(r * r, [r * r * r]), 'Divide both sides by π.'],
     ['The radius.', 'r =', N(r), `$\\sqrt{${r * r}} = \\square$`, numW(r), 'Take the square root.'],
   ],
@@ -361,6 +367,7 @@ const solid = (s: number, h: number): Item => {
     ans: N(s),
     wrong: numW(s, [s * s]),
     steps: [
+      ['The volume.', 'V =', 's^2 h', '$V = \\square$', ['s h', 's^3', '2 s h', '4 s h'], 'The volume is the area of the base times the height.'],
       ['The area of the base.', '\\text{base} =', N(s * s), `$${V} \\div ${h} = \\square$`, numW(s * s, [V * h, V - h]), 'The volume is the area of the base times the height.'],
       ['The side of the base.', 's =', N(s), `$\\sqrt{${s * s}} = \\square$`, numW(s), 'The base is a square: its side is the square root of its area.'],
     ],
@@ -374,6 +381,7 @@ const solid2 = (w: number, h: number): Item => {
     ans: pair(2 * w, w),
     wrong: pairW(2 * w, w),
     steps: [
+      ['The volume.', 'V =', 'l \\times w \\times h', '$V = \\square$', ['l + w + h', 'l \\times w', '\\frac{l w h}{3}', '2(lw + lh + wh)'], 'The volume is the area of the base times the height.'],
       ['The area of the base.', '\\text{base} =', N(2 * w * w), `$${V} \\div ${h} = \\square$`, numW(2 * w * w, [V * h]), 'The volume is the area of the base times the height.'],
       ['The width squared.', 'w^2 =', N(w * w), `$${N(2 * w * w)} \\div 2 = \\square$`, numW(w * w, [4 * w * w]), 'The base is 2w times w = 2w².'],
       ['The width.', 'w =', N(w), `$\\sqrt{${w * w}} = \\square$`, numW(w), 'Take the square root.'],
