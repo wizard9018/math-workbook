@@ -345,6 +345,7 @@ const semi = (r: number): Item => {
     ans: N(2 * r),
     wrong: numW(2 * r, [r, r * r]),
     steps: [
+      ['The area of a semi-circle.', '\\text{area} =', '\\frac{1}{2}\\pi r^2', '$\\text{area} = \\square$', ['\\pi r^2', '2\\pi r', '\\pi r', '\\frac{1}{2}\\pi r'], 'A circle has area πr². A semi-circle is half of it.'],
       ['The radius squared.', 'r^2 =', N(r * r), `$\\text{circle} = 2 \\times ${k}\\pi \\Rightarrow r^2 = \\square$`, numW(r * r, [k]), 'The whole circle is 2 semi-circles: its area is double. Then divide by π.'],
       ['The radius.', 'r =', N(r), `$\\sqrt{${r * r}} = \\square$`, numW(r), 'Take the square root.'],
       ['The diameter.', 'd =', N(2 * r), `$2 \\times ${r} = \\square$`, numW(2 * r, [r * r]), 'The diameter is twice the radius.'],
