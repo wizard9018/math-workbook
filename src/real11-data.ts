@@ -33,19 +33,16 @@ const EXAMPLES = [
   '-3,\\ 0,\\ 5,\\ -\\frac{2}{3},\\ \\frac{10}{7},\\ 2.35,\\ -2.\\overline{35},\\ \\sqrt{4},\\ -\\sqrt{9},\\ \\sqrt{\\frac{9}{16}}',
   '\\sqrt{2},\\ \\pi,\\ 1.62789\\ldots',
 ]
-const NOT_REAL = '\\sqrt{-1},\\ \\sqrt{-2},\\ \\sqrt{-3}'
 const REFERENCE = [
   { label: 'Natural numbers', tex: `\\{${EXAMPLES[0]}\\}` },
   { label: 'Whole numbers', tex: `\\{${EXAMPLES[1]}\\}` },
   { label: 'Integers', tex: `\\{${EXAMPLES[2]}\\}` },
-  { label: 'Rational numbers: can be written as a fraction', tex: EXAMPLES[3] },
-  { label: 'Irrational numbers: cannot be written as a fraction', tex: EXAMPLES[4] },
-  { label: 'Real numbers: the rational and irrational numbers together' },
-  { label: 'Not real numbers (not irrational either)', tex: NOT_REAL },
+  { label: 'Rational numbers', tex: EXAMPLES[3] },
+  { label: 'Irrational numbers', tex: EXAMPLES[4] },
 ]
 // the list of examples a number looks like: the shortest list that holds a number of its kind
 const likeIdx = (n: Num): number => (n.kind === 'nonreal' ? 5 : n.kind === 'irr' ? 4 : n.kind === 'frac' ? 3 : n.v! >= 1 ? 0 : n.v === 0 ? 1 : 2)
-const listTex = (i: number) => (i === 5 ? NOT_REAL : i <= 2 ? `\\{${EXAMPLES[i]}\\}` : EXAMPLES[i])
+const listTex = (i: number) => (i === 5 ? '\\text{none of these}' : i <= 2 ? `\\{${EXAMPLES[i]}\\}` : EXAMPLES[i])
 const setTex = (idx: number[]) => (idx.length ? `\\text{${idx.map((i) => SETS[i]).join(', ')}}` : '\\text{none}')
 
 // ================= exercise 2: all the sets of one number =================
@@ -74,7 +71,7 @@ function mk2(n: Num, key: string): It {
     answer: ans,
     wrong,
     steps: [
-      { label: 'Which examples does it look like?', toks: [{ id: 'k1a', tex: `${pre}\\text{it looks like}` }, { id: 'k1b', tex: listTex(like) }], blanks: [blk('k1b', 's0', `$\\text{Which examples is } ${n.tex} \\text{ most like?}$`, [0, 1, 2, 3, 4, 5].filter((i) => i !== like).map(listTex), `Look at the examples above: find the shortest list that holds a number like it. ${hint}`)] },
+      { label: 'Which examples does it look like?', noArrow: true, toks: [{ id: 'k1a', tex: `${pre}\\text{it looks like}` }, { id: 'k1b', tex: listTex(like) }], blanks: [blk('k1b', 's0', `$\\text{Which examples is } ${n.tex} \\text{ most like?}$`, [0, 1, 2, 3, 4, 5].filter((i) => i !== like).map(listTex), `Look at the examples above: find the shortest list that holds a number like it. ${hint}`)] },
       { label: 'All its sets.', toks: [{ id: 'k2a', tex: '\\text{it belongs to}' }, { id: 'k2b', tex: ans }], blanks: [blk('k2b', 'k1b', `$\\text{Which sets contain } ${n.tex}\\text{?}$`, wrong, hint)] },
     ],
     reference: REFERENCE,
@@ -128,7 +125,7 @@ function mk3(s: S3, key: string): It {
     answer: ans,
     wrong,
     steps: [
-      { label: `Which examples are ${name.toLowerCase()}?`, toks: [{ id: 'd1a', tex: `\\text{${name}:}` }, { id: 'd1b', tex: listTex(s.k) }], blanks: [blk('d1b', 's0', `$\\text{Which examples are ${name.toLowerCase()}?}$`, others, `Look at the examples above. ${hint}`)] },
+      { label: `Which examples are ${name.toLowerCase()}?`, noArrow: true, toks: [{ id: 'd1a', tex: `\\text{${name}:}` }, { id: 'd1b', tex: listTex(s.k) }], blanks: [blk('d1b', 's0', `$\\text{Which examples are ${name.toLowerCase()}?}$`, others, `Look at the examples above. ${hint}`)] },
       { label: 'The numbers of the set.', toks: [{ id: 'd2a', tex: `\\text{${name}:}` }, { id: 'd2b', tex: ans }], blanks: [blk('d2b', 'd1b', `$\\text{Which numbers of the set are ${name.toLowerCase()}?}$`, wrong, hint)] },
     ],
     reference: REFERENCE,
