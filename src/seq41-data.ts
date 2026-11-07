@@ -351,3 +351,25 @@ export const EX_SEQ41H = [
   build(15, 'Choose the equation relating y to x.', hrows(), ex5, sqKey, 'Equation from a table (challenge)', 4515),
   build(16, 'Choose the term.', hrows([75, 100, 150, 200]), ex6, sqKey, 'The nth term (challenge)', 4616),
 ]
+
+// ================= challenge exercises 17, 18 (evaluate, harder: bigger numbers, negative values, brackets) and 19 (word problems with bigger numbers); own progress =================
+const ks12 = [-12, -11, -10, -9, -8, -7, -6, 6, 7, 8, 9, 10, 11, 12]
+const evRows = (cs: number[], as: number[], L: number): [string, Ev, Ev[]][] =>
+  [[range(25, 90), []], [range(-60, -12), []], [[], ks12], [range(100, 300), []]].map(([ns, ks], i): [string, Ev, Ev[]] => {
+    const pool = evPool(ns as number[], cs, as, ks as number[])
+    return [letter(i), pool[L % pool.length], pool]
+  })
+const EVH1 = evRows([0], [7, 8, 9, 11, 12, 13, 14, 15, 17, 19], 0)
+const EVH2 = evRows([-9, -8, -7, -6, -5, 5, 6, 7, 8, 9], [7, 8, 9, 11, 12, 13, 14, 15, 17, 19], 0)
+const cross = <A, B>(as: A[], bs: B[]): [A, B][] => as.flatMap((a) => bs.map((b): [A, B] => [a, b]))
+const WH: [string, Wd, Wd[]][] = [
+  ['a', null as unknown as Wd, T(cross(cross([750, 900, 1200, 1500, 1800, 2400], [7, 9, 12, 14, 17, 19]), [480, 750, 1250, 1800, 2400]), ([[F, r], N]) => ({ kind: 'bookVal', F, r, N }))],
+  ['b', null as unknown as Wd, T(cross(cross([85, 120, 150, 175, 240, 310], [35, 45, 65, 85, 95]), [650, 900, 1250, 1600, 2400]), ([[F, r], N]) => ({ kind: 'carVal', F, r, N }))],
+  ['c', null as unknown as Wd, T(cross(cross([75, 120, 180, 250, 400], [9, 13, 17, 23, 35]), [[12, 7], [16, 9], [20, 11], [25, 12]]), ([[F, r], [n1, dn]]) => ({ kind: 'fee', F: 0, r: 0, n1, p1: F + r * n1, n2: n1 + dn, p2: F + r * (n1 + dn) }))],
+  ['d', null as unknown as Wd, T(cross(cross([1985, 1990, 1992, 1994, 1996], [32, 41, 55, 62, 70]), [[-6, 3], [-4, 4], [-2, 5], [5, 3], [3, 4]]), ([[y1, p1], [diff, k]]) => ({ kind: 'gradVal', F: 0, r: 0, y1, p1, y2: y1 + 6, p2: p1 + diff, N: y1 + 6 + 6 * k })).filter((w) => w.p1! + ((w.p2! - w.p1!) * (w.N! - w.y1!)) / 6 > 5 && w.p1! + ((w.p2! - w.p1!) * (w.N! - w.y1!)) / 6 < 100)],
+].map(([p, , pool]) => [p, (pool as Wd[])[0], pool as Wd[]] as [string, Wd, Wd[]])
+export const EX_SEQ41H2 = [
+  build(17, 'Choose the value.', EVH1, wpEv, evTex, 'Evaluate (challenge)', 4117),
+  build(18, 'Choose the value.', EVH2, wpEv, evTex, 'Evaluate (challenge)', 4218),
+  build(19, 'Choose the answer.', WH, wpWd, wdKey, 'Linear model (challenge)', 4719),
+]

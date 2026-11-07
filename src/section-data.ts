@@ -135,6 +135,9 @@ export const NODES41: (Node & { show: number })[] = [
   { no: 1114, show: 14, name: 'Challenge: Next three numbers', parts: 4, how: 'Harder: bigger, negative and decimal differences. Optional extra practice.', state: 'ready' },
   { no: 1115, show: 15, name: 'Challenge: Equation from a table', parts: 4, how: 'Harder: bigger, negative and decimal differences. Optional extra practice.', state: 'ready' },
   { no: 1116, show: 16, name: 'Challenge: The 100th term', parts: 4, how: 'Harder: bigger, negative and decimal differences. Optional extra practice.', state: 'ready' },
+  { no: 1117, show: 17, name: 'Challenge: Evaluate A = 3p', parts: 4, how: 'Harder: bigger numbers, negative values and brackets. Optional extra practice.', state: 'ready' },
+  { no: 1118, show: 18, name: 'Challenge: Evaluate S = 4n - 2', parts: 4, how: 'Harder: bigger numbers, negative values and brackets. Optional extra practice.', state: 'ready' },
+  { no: 1119, show: 19, name: 'Challenge: Word problems', parts: 4, how: 'Harder: bigger numbers. Optional extra practice.', state: 'ready' },
 ]
 
 export const NODES11: (Node & { show: number })[] = [
