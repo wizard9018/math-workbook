@@ -287,6 +287,11 @@ export const NODES44: (Node & { show: number })[] = [
   { no: 1404, show: 4, name: 'Which graph?', parts: 7, how: 'Isolate y, find m and b, then click the matching graph.', state: 'ready' },
   { no: 1405, show: 5, name: 'Which equation?', parts: 6, how: 'b and m from the graph, then the equation.', state: 'ready' },
   { no: 1406, show: 6, name: 'Word problems', parts: 4, how: 'Salary, tournament, telephone and temperature scales: the equation.', state: 'ready' },
+  { no: 1411, show: 11, name: 'Challenge: Which graph?', parts: 4, how: 'Harder: steep and fractional lines. Optional extra practice.', state: 'ready' },
+  { no: 1412, show: 12, name: 'Challenge: Which equation?', parts: 4, how: 'Harder: bigger coefficients. Optional extra practice.', state: 'ready' },
+  { no: 1413, show: 13, name: 'Challenge: The y-intercept', parts: 4, how: 'Harder: steep and fractional lines. Optional extra practice.', state: 'ready' },
+  { no: 1414, show: 14, name: 'Challenge: The slope', parts: 4, how: 'Harder: steep and fractional lines. Optional extra practice.', state: 'ready' },
+  { no: 1415, show: 15, name: 'Challenge: Equation of a line', parts: 4, how: 'Harder: steep and fractional lines. Optional extra practice.', state: 'ready' },
 ]
 
 export const NODES43: (Node & { show: number })[] = [

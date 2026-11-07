@@ -414,3 +414,43 @@ export const EX_GRAPH44 = [
   build(5, 'Which equation?', E2_ROWS, mk2, e2id, 'Equation from the graph', 2000, '4.4'),
   build(6, 'Write the equation.', E6_ROWS, mk6, e6id, 'Word problems', 6000, '4.4'),
 ]
+
+// ================= challenge exercises (4.4 exercises 1 to 5, harder): steeper and fractional lines, bigger coefficients; optional extra practice, own progress (no 11 to 15) =================
+const CH = [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]
+const H1_ROWS: [string, E1, E1[]][] = [
+  ['a', { k: 'sl', m: 3, c: 2, s: 0 }, SL([3, 4, -3, -4], CH)],
+  ['b', { k: 'sl', m: -3 / 2, c: 1, s: 1 }, SL([3 / 2, -3 / 2, 2 / 3, -2 / 3, 3 / 4, -3 / 4], CH)],
+  ['c', { k: 'st', a: 3, b: -4, c: 8, s: 1 }, ST([3, 4, 5, -3, -4], [2, 4, 5, -2, -4], [-3, -2, -1, 1, 2, 3])],
+  ['d', { k: 'st', a: 5, b: 3, c: -9, s: 2 }, ST([5, 3, 4, -5, -3], [3, 2, -3, -2, 4], [-3, -2, -1, 1, 2, 3])],
+]
+const H2_ROWS: [string, E2, E2[]][] = [
+  ['a', { a: 3, b: -4, c: 8 }, T2([3, 4, 5, -3, -4], [2, 4, 5, -2, -4], [-3, -2, -1, 1, 2, 3])],
+  ['b', { a: 5, b: 3, c: -9 }, T2([5, 3, 4, -5, -3], [3, 2, -3, -2, 4], [-3, -2, -1, 1, 2, 3])],
+  ['c', { a: -4, b: 5, c: 10 }, T2([4, 6, 7, -4, -6], [5, 3, -5, -3, 6], [-3, -2, -1, 1, 2, 3])],
+  ['d', { a: 7, b: 2, c: 8 }, T2([7, 5, 9, -7, -5], [2, 4, -2, -4, 3], [-3, -2, -1, 1, 2, 3])],
+]
+const H3_ROWS: [string, E3, E3[]][] = [
+  ['a', { k: 'sl', m: 3, c: -2 }, S3([3, 4, 5, -3, -4, -5], CH)],
+  ['b', { k: 'sl', m: -3 / 2, c: 4 }, S3([3 / 2, -3 / 2, 2 / 3, -2 / 3, 3 / 4, -3 / 4], CH)],
+  ['c', { k: 'sl', m: 5 / 2, c: -3 }, S3([5 / 2, -5 / 2, 4 / 3, -4 / 3, 5 / 3, -5 / 3], CH)],
+  ['d', { k: 'sl', m: -4, c: 3 }, S3([-4, -5, -6, 4, 5, 6], CH)],
+]
+const H4_ROWS: [string, E4, E4[]][] = [
+  ['a', { k: 'sl', m: 5, c: -3 }, S4([3, 4, 5, 6], CH)],
+  ['b', { k: 'sl', m: -4, c: 2 }, S4([-3, -4, -5, -6], CH)],
+  ['c', { k: 'sl', m: 3 / 2, c: -1 }, S4([3 / 2, 5 / 2, 4 / 3, 5 / 3, 3 / 4], CH)],
+  ['d', { k: 'sl', m: -5 / 3, c: 2 }, S4([-3 / 2, -5 / 2, -4 / 3, -5 / 3, -3 / 4], CH)],
+]
+const H5_ROWS: [string, E5, E5[]][] = [
+  ['a', { p: 3, q: 1, b: -4 }, T5([[3, 1], [4, 1], [5, 1], [6, 1]], CH)],
+  ['b', { p: -4, q: 1, b: 5 }, T5([[-3, 1], [-4, 1], [-5, 1], [-6, 1]], CH)],
+  ['c', { p: 3, q: 2, b: -3 }, T5([[3, 2], [5, 2], [4, 3], [5, 3], [3, 4]], CH)],
+  ['d', { p: -5, q: 3, b: 4 }, T5([[-3, 2], [-5, 2], [-4, 3], [-5, 3], [-3, 4]], CH)],
+]
+export const EX_GRAPH44H = [
+  build(11, 'Which graph?', H1_ROWS, mk1, e1id, 'Graph from the equation (challenge)', 1011, '4.4'),
+  build(12, 'Which equation?', H2_ROWS, mk2, e2id, 'Equation from the graph (challenge)', 2012, '4.4'),
+  build(13, 'Find the y-intercept.', H3_ROWS, mk3, e3id, 'The y-intercept (challenge)', 3013, '4.4'),
+  build(14, 'Find the slope.', H4_ROWS, mk4, e4id, 'The slope (challenge)', 4014, '4.4'),
+  build(15, 'Write the equation.', H5_ROWS, mk5, e5id, 'Equation of a line (challenge)', 5015, '4.4'),
+]
