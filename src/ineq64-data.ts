@@ -320,6 +320,7 @@ export interface Wp {
   steps: WpStep[]
   key: string
   startToks?: Tok[] // the starting line in several tokens (so arrows can leave from single ones); default: one token `s0` showing `short`
+  reference?: { label: string; tex?: string }[] // a "look at these examples" panel above the lesson
 }
 export function lessonWp(w: Wp, src: string, title: string, idx: number): Lesson {
   const start: Tok[] = w.startToks ?? [{ id: 's0', tex: w.short }]
@@ -335,7 +336,7 @@ export function lessonWp(w: Wp, src: string, title: string, idx: number): Lesson
     })
   }
   const steps: Step[] = make(w.steps, start.map((t) => t.id), true)
-  return { key: `ineq64-${w.key}`, label: w.key, source: src, title, prompt: 'Answer:', answer: w.answer, start, steps, review: { heading: 'Inequalities', rows: [] } }
+  return { key: `ineq64-${w.key}`, label: w.key, source: src, title, prompt: 'Answer:', answer: w.answer, start, steps, ...(w.reference ? { reference: w.reference } : {}), review: { heading: 'Inequalities', rows: [] } }
 }
 export const sgBlank = (id: string, from: string, right: Sym, hint: string) => ({ id, from, prompt: '$\\text{Which sign?}$', wrongs: SYMS.filter((x) => x !== right).map((x) => SYM_TEX[x]), hint })
 

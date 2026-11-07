@@ -25,16 +25,30 @@ const membership = (n: Num): number[] => {
   return [...(v >= 1 ? [0] : []), ...(v >= 0 ? [1] : []), 2, 3, 5]
 }
 const root = (n: Num) => n.tex.includes('\\sqrt') && n.kind === 'int'
+// the examples of every kind of number (the lesson shows them above the working; the questions ask which examples a number looks like)
+const EXAMPLES = [
+  '1,\\ 2,\\ 3,\\ \\ldots',
+  '0,\\ 1,\\ 2,\\ 3,\\ \\ldots',
+  '\\ldots,\\ -3,\\ -2,\\ -1,\\ 0,\\ 1,\\ 2,\\ 3,\\ \\ldots',
+  '-3,\\ 0,\\ 5,\\ -\\frac{2}{3},\\ \\frac{10}{7},\\ 2.35,\\ -2.\\overline{35},\\ \\sqrt{4},\\ -\\sqrt{9},\\ \\sqrt{\\frac{9}{16}}',
+  '\\sqrt{2},\\ \\pi,\\ 1.62789\\ldots',
+]
+const NOT_REAL = '\\sqrt{-1},\\ \\sqrt{-2},\\ \\sqrt{-3}'
+const REFERENCE = [
+  { label: 'Natural numbers', tex: `\\{${EXAMPLES[0]}\\}` },
+  { label: 'Whole numbers', tex: `\\{${EXAMPLES[1]}\\}` },
+  { label: 'Integers', tex: `\\{${EXAMPLES[2]}\\}` },
+  { label: 'Rational numbers: can be written as a fraction', tex: EXAMPLES[3] },
+  { label: 'Irrational numbers: cannot be written as a fraction', tex: EXAMPLES[4] },
+  { label: 'Real numbers: the rational and irrational numbers together' },
+  { label: 'Not real numbers (not irrational either)', tex: NOT_REAL },
+]
+// the list of examples a number looks like: the shortest list that holds a number of its kind
+const likeIdx = (n: Num): number => (n.kind === 'nonreal' ? 5 : n.kind === 'irr' ? 4 : n.kind === 'frac' ? 3 : n.v! >= 1 ? 0 : n.v === 0 ? 1 : 2)
+const listTex = (i: number) => (i === 5 ? NOT_REAL : i <= 2 ? `\\{${EXAMPLES[i]}\\}` : EXAMPLES[i])
 const setTex = (idx: number[]) => (idx.length ? `\\text{${idx.map((i) => SETS[i]).join(', ')}}` : '\\text{none}')
 
 // ================= exercise 2: all the sets of one number =================
-const phrase = (n: Num): string => {
-  const pre = root(n) ? `${n.tex} = ${n.v}\\text{: }` : ''
-  if (n.kind === 'frac') return `${pre}\\text{a fraction (a decimal that stops or repeats)}`
-  if (n.kind === 'irr') return `${pre}\\text{a decimal that never stops or repeats}`
-  if (n.kind === 'nonreal') return `${pre}\\text{the root of a negative number}`
-  return `${pre}\\text{${n.v! >= 1 ? 'a counting number' : n.v === 0 ? 'zero' : 'a negative integer'}}`
-}
 const HINT2: Record<string, string> = {
   pos: 'A counting number is natural, whole, an integer, rational and real.',
   zero: 'Zero is whole, an integer, rational and real, but not natural.',
@@ -50,8 +64,8 @@ function mk2(n: Num, key: string): It {
     [...SETS.keys()].map((i) => setTex(idx.includes(i) ? idx.filter((j) => j !== i) : [...idx, i].sort((a, b) => a - b))).filter((s) => s !== ans),
     (s) => s,
   )
-  const kinds: Num[] = [N('5', 'int', 5), N('0', 'int', 0), N('-5', 'int', -5), N('\\frac{2}{3}', 'frac'), N('\\sqrt{5}', 'irr'), N('\\sqrt{-5}', 'nonreal')]
-  const wk = uniq(kinds.map((k) => (root(n) ? phrase({ ...k, tex: n.tex, v: n.v }) : phrase(k))).filter((s) => s !== phrase(n)), (s) => s)
+  const like = likeIdx(n)
+  const pre = root(n) ? `${n.tex} = ${n.v}\\text{: }` : ''
   const hint = n.kind === 'int' ? (n.v! >= 1 ? HINT2.pos : n.v === 0 ? HINT2.zero : HINT2.neg) : HINT2[n.kind]
   const w: Wp = {
     tex: `${text('State all the sets the number belongs to: ')}${n.tex}`,
@@ -60,9 +74,10 @@ function mk2(n: Num, key: string): It {
     answer: ans,
     wrong,
     steps: [
-      { label: 'What kind of number is it?', toks: [{ id: 'k1a', tex: '\\text{it is}' }, { id: 'k1b', tex: phrase(n) }], blanks: [blk('k1b', 's0', `$\\text{What kind of number is } ${n.tex}\\text{?}$`, wk.slice(0, 3), hint)] },
+      { label: 'Which examples does it look like?', toks: [{ id: 'k1a', tex: `${pre}\\text{it looks like}` }, { id: 'k1b', tex: listTex(like) }], blanks: [blk('k1b', 's0', `$\\text{Which examples is } ${n.tex} \\text{ most like?}$`, [0, 1, 2, 3, 4, 5].filter((i) => i !== like).map(listTex), `Look at the examples above: find the shortest list that holds a number like it. ${hint}`)] },
       { label: 'All its sets.', toks: [{ id: 'k2a', tex: '\\text{it belongs to}' }, { id: 'k2b', tex: ans }], blanks: [blk('k2b', 'k1b', `$\\text{Which sets contain } ${n.tex}\\text{?}$`, wrong, hint)] },
     ],
+    reference: REFERENCE,
   }
   return { w, multi: { options: SETS.map((s) => `\\text{${s}}`), right: idx } }
 }
@@ -96,7 +111,7 @@ const BANK3: Num[] = [
 ]
 const inKind = (n: Num, k: number) => membership(n).includes(k)
 function mk3(s: S3, key: string): It {
-  const [name, k, def, hint] = KINDS3[s.k]
+  const [name, k, , hint] = KINDS3[s.k]
   const right = s.nums.map((n, i) => (inKind(n, k) ? i : -1)).filter((i) => i >= 0)
   const list = (idx: number[]) => (idx.length ? idx.map((i) => s.nums[i].tex).join(',\\ ') : '\\text{none}')
   const ans = list(right)
@@ -105,7 +120,7 @@ function mk3(s: S3, key: string): It {
     (t) => t,
   )
   const setT = `\\left\\{${s.nums.map((n) => n.tex).join(',\\ ')}\\right\\}`
-  const defs = KINDS3.filter((_, i) => i !== s.k).map((d) => d[2])
+  const others = [0, 1, 2, 3, 4].filter((i) => i !== s.k).map(listTex)
   const w: Wp = {
     tex: `${text(`List the numbers in the set that are ${name.toLowerCase()}: `)}${setT}`,
     short: setT,
@@ -113,9 +128,10 @@ function mk3(s: S3, key: string): It {
     answer: ans,
     wrong,
     steps: [
-      { label: `What are the ${name.toLowerCase()}?`, toks: [{ id: 'd1a', tex: `\\text{${name}:}` }, { id: 'd1b', tex: def }], blanks: [blk('d1b', 's0', `$\\text{What are the ${name.toLowerCase()}?}$`, defs, hint)] },
+      { label: `Which examples are ${name.toLowerCase()}?`, toks: [{ id: 'd1a', tex: `\\text{${name}:}` }, { id: 'd1b', tex: listTex(s.k) }], blanks: [blk('d1b', 's0', `$\\text{Which examples are ${name.toLowerCase()}?}$`, others, `Look at the examples above. ${hint}`)] },
       { label: 'The numbers of the set.', toks: [{ id: 'd2a', tex: `\\text{${name}:}` }, { id: 'd2b', tex: ans }], blanks: [blk('d2b', 'd1b', `$\\text{Which numbers of the set are ${name.toLowerCase()}?}$`, wrong, hint)] },
     ],
+    reference: REFERENCE,
   }
   return { w, multi: { options: s.nums.map((n) => n.tex), right } }
 }
