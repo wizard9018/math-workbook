@@ -180,6 +180,12 @@ export const NODES35: (Node & { show: number })[] = [
   { no: 2109, show: 9, name: 'Multiply', parts: 6, how: 'Cancel common factors, then multiply.', state: 'ready' },
   { no: 2110, show: 10, name: 'Divide', parts: 6, how: 'Multiply by the reciprocal, cancel, then multiply.', state: 'ready' },
   { no: 2111, show: 11, name: 'Mixed numbers', parts: 6, how: 'Write the mixed numbers as fractions, multiply or divide, then write the answer as a mixed number.', state: 'ready' },
+  { no: 2112, show: 12, name: 'Challenge: Compare', parts: 4, how: 'Harder: numbers that are very close. Optional extra practice.', state: 'ready' },
+  { no: 2113, show: 13, name: 'Challenge: A number between', parts: 4, how: 'Harder: fractions and decimals. Optional extra practice.', state: 'ready' },
+  { no: 2114, show: 14, name: 'Challenge: Add and subtract decimals', parts: 4, how: 'Harder: more numbers and bigger numbers. Optional extra practice.', state: 'ready' },
+  { no: 2115, show: 15, name: 'Challenge: Multiply', parts: 4, how: 'Harder: more numbers and bigger numbers. Optional extra practice.', state: 'ready' },
+  { no: 2116, show: 16, name: 'Challenge: Divide', parts: 4, how: 'Harder: more numbers and bigger numbers. Optional extra practice.', state: 'ready' },
+  { no: 2117, show: 17, name: 'Challenge: Mixed numbers', parts: 4, how: 'Harder: more numbers and bigger numbers. Optional extra practice.', state: 'ready' },
 ]
 
 export const NODES34: (Node & { show: number })[] = [
