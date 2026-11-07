@@ -29,7 +29,10 @@ export const decStr = (n: number, scale: number) => {
   return `${s.slice(0, -scale)}.${s.slice(-scale)}`
 }
 export function mk(it: Item, key: string): It {
+  // a minus in front of the root is not part of the first question: only the root is highlighted
+  const split = it.short.startsWith('-\\sqrt') && it.steps[0][1].startsWith('\\sqrt')
   const w: Wp = {
+    ...(split ? { startToks: [{ id: 'sm', tex: '-' }, { id: 'sr', tex: it.short.slice(1) }] } : {}),
     tex: it.q,
     short: it.short,
     key,
@@ -38,7 +41,7 @@ export function mk(it: Item, key: string): It {
     steps: it.steps.map(([label, lhs, ans, prompt, wrongs, hint], i) => ({
       label,
       toks: [{ id: `c${i}a`, tex: lhs }, { id: `c${i}b`, tex: ans }],
-      blanks: [blk(`c${i}b`, i === 0 ? 's0' : `c${i - 1}b`, prompt, wrongs, hint)],
+      blanks: [blk(`c${i}b`, i === 0 ? (split ? 'sr' : 's0') : `c${i - 1}b`, prompt, wrongs, hint)],
     })),
   }
   return { w, plain: it.plain }
