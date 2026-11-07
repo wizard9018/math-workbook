@@ -176,6 +176,17 @@ function item5(n: number, e: number): Item {
     const root = k >= 0 ? String(s * 10 ** k) : decStr(s, -k)
     const v = s * 10 ** k
     const wr = numW(v).filter((x) => x !== root)
+    if (e < 0) {
+      // a decimal: write it as a fraction, root of the top and the bottom, back to a decimal
+      const k0 = -e
+      const fr = (a: number, b: number) => `\\frac{${a}}{${b}}`
+      const rf = fr(n, 10 ** k0)
+      return { q, short: tex, ans: root, wrong: uniq([...wr, '\\text{no rational root}'], (x) => x), steps: [
+        ['Write the decimal as a fraction.', `${tex} =`, `\\sqrt{${rf}}`, `$${tex} = \\square$`, [`\\sqrt{${fr(n, 10 ** (k0 - 1))}}`, `\\sqrt{${fr(n, 10 ** (k0 + 1))}}`, `\\sqrt{${fr(s, 10 ** k0)}}`], 'Count the digits after the decimal point: that many zeros in the denominator.'],
+        ['Take the root of the top and of the bottom.', `\\sqrt{${rf}} =`, fr(s, 10 ** (k0 / 2)), `$\\sqrt{${rf}} = \\square$`, [fr(s, 10 ** k0), fr(n, 10 ** (k0 / 2)), fr(s * 2, 10 ** (k0 / 2))], 'Find the root of the numerator and of the denominator separately.'],
+        ['Write the fraction as a decimal.', `${fr(s, 10 ** (k0 / 2))} =`, root, `$${fr(s, 10 ** (k0 / 2))} = \\square$`, wr, 'Divide by 10, 100, ...: move the decimal point to the left.'],
+      ] }
+    }
     return { q, short: tex, ans: root, wrong: uniq([...wr, '\\text{no rational root}'], (x) => x), steps: [['Which number times itself gives it?', `${tex} =`, root, `$\\square \\times \\square = ${rad}$`, wr, 'Think of a number that multiplied by itself gives the number. Every two zeros of the number are one zero of the root.']] }
   }
   const t = Math.ceil(Math.max(0, -e) / 2)
@@ -185,6 +196,16 @@ function item5(n: number, e: number): Item {
   const between = pr(lo, lo + 1)
   const wb = uniq([pr(lo + 1, lo + 2), pr(lo - 1, lo), pr(lo * 10, lo * 10 + 1), pr(lo + 2, lo + 3)].filter((x) => x !== between), (x) => x)
   const wrong = uniq([show(lo), show(lo + 1), show(lo * 5), N(D / 2)], (x) => x)
+  if (e < 0) {
+    // a decimal: as a fraction the bottom is 10, 1000, 100000, ...: not a perfect square, so there is no rational root
+    const den = 10 ** -e
+    const rf = `\\frac{${n}}{${den}}`
+    const fr = (a: number, b: number) => `\\frac{${a}}{${b}}`
+    return { q, short: tex, ans: '\\text{no rational root}', wrong, steps: [
+      ['Write the decimal as a fraction.', `${tex} =`, `\\sqrt{${rf}}`, `$${tex} = \\square$`, [`\\sqrt{${fr(n, den / 10)}}`, `\\sqrt{${fr(n, den * 10)}}`, `\\sqrt{${fr(Math.sqrt(n), den)}}`], 'Count the digits after the decimal point: that many zeros in the denominator.'],
+      ['Is there a rational root?', `\\sqrt{${rf}} =`, '\\text{no rational root}', `$\\sqrt{${rf}} = \\square$`, uniq([show(lo), show(lo + 1), N(D / 2)], (x) => x), `The bottom ${den} is not a perfect square (it has an odd number of zeros), so the root of the bottom is not a rational number.`],
+    ] }
+  }
   return { q, short: tex, ans: '\\text{no rational root}', wrong, steps: [['Between which two numbers is the root?', `${tex} \\text{ is between}`, between, `$\\square^2 < ${rad} < \\square^2$`, wb, 'Find two neighbouring numbers whose squares are just below and just above the number.'], ['Is there a rational root?', `${tex} =`, '\\text{no rational root}', `$${tex} = \\square$`, uniq([show(lo), show(lo + 1), N(D / 2)], (x) => x), 'No number multiplies by itself to give it, so the root is not rational.']] }
 }
 const SQN = [1, 4, 9, 16, 25, 36, 49, 64, 81]
