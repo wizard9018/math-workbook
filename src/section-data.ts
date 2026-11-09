@@ -81,6 +81,7 @@ export const NODES61: (Node & { show: number })[] = [
   { no: 503, show: 3, name: 'Fraction coefficient', parts: 10, how: 'Multiply both sides by the reciprocal.', state: 'ready' },
   { no: 504, show: 4, name: 'Variable in a fraction', parts: 10, how: 'Multiply both sides by the denominator.', state: 'ready' },
   { no: 505, show: 5, name: 'Several terms', parts: 18, how: 'Collect like terms, then solve.', state: 'ready' },
+  { no: 507, show: 7, name: 'Equivalent equations', parts: 4, how: 'Solve the equation, then choose the equation with the same solution.', state: 'ready' },
   { no: 508, show: 8, name: 'Solve for a letter', parts: 8, how: 'Do the opposite to both sides.', state: 'ready' },
   { no: 509, show: 9, name: 'Words to equations', parts: 6, how: 'Turn every phrase into math.', state: 'ready' },
   { no: 510, show: 10, name: 'Word problems', parts: 8, how: 'Choose x, write the equation, solve, answer.', state: 'ready' },

@@ -71,6 +71,7 @@ export interface VSpec {
 }
 export interface Lesson {
   vertical?: VSpec // set: the lesson is shown by VerticalLesson (start / steps are then empty)
+  solution?: string // HTML of a written solution (grades 8-12 question banks): shown instead of the step-by-step player
   figure?: string // a picture (SVG as a string) shown above the working: the figure of a perimeter / surface area question
   figureAt?: (step: number) => string // the same picture while step number `step` is being asked (the side or face that step is about is lit up)
   reference?: { label: string; tex?: string; cells?: string[] }[] // a "look at these examples" panel shown above the working
