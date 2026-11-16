@@ -17,4 +17,5 @@ jobs:
           echo "Supabase REST status: $code"; head -c 200 out.json; echo
           test "$code" = 200
       - name: Load the site
-        run: curl -fsS -o /dev/null -w 'site status: %{http_code}\n' https://wizard9018.github.io/math-workbook/
+        run: |
+          curl -fsS -o /dev/null -w 'site status: %{http_code}\n' https://wizard9018.github.io/math-workbook/
