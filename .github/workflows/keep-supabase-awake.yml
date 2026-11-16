@@ -1,0 +1,20 @@
+# Supabase pauses a free project after 7 days without activity. Every 3 days this makes one real query (the same URL and publishable key
+# the site ships in src/supabase.ts, both public by design) and loads the site once.
+name: Keep Supabase awake
+on:
+  schedule:
+    - cron: '17 6 */3 * *' # 06:17 UTC every 3rd day of the month (gaps never exceed 4 days)
+  workflow_dispatch: {}
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query the database
+        run: |
+          code=$(curl -s -o out.json -w '%{http_code}' \
+            -H 'apikey: sb_publishable_eZsyx0TkLHSp8uROpCpD4A_Ba1BjQzL' \
+            'https://dflsowyzpizrdvwqtroa.supabase.co/rest/v1/quiz_progress?select=*&limit=1')
+          echo "Supabase REST status: $code"; head -c 200 out.json; echo
+          test "$code" = 200
+      - name: Load the site
+        run: curl -fsS -o /dev/null -w 'site status: %{http_code}\n' https://wizard9018.github.io/math-workbook/
