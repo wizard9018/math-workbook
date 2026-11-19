@@ -3,7 +3,7 @@
 // Exercises 2 to 5. Left: roadmap of the section's exercises (click a built one to open it). Top: a ... j of the open exercise, click to jump.
 // Imported by: quiz.html only. Data: exercise.ts (shape), quiz-data.ts (EX2), degree-data.ts (EX3), coefficient-data.ts (EX4), order-data.ts (EX5), section-data.ts.
 import { createRoot } from 'react-dom/client'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { motion } from 'motion/react'
 import katex from 'katex'
 import 'katex/dist/katex.min.css'
@@ -35,7 +35,8 @@ import { EX_LIT61 } from './literal-data'
 import { EX_TRANS61 } from './translate-data'
 import { EX_WORD61 } from './word61-data'
 import { EX_EQUIV61 } from './equiv61-data'
-import { buildBankExercises, gradeOfKey, hashOfKey, keyOfHash, loadBank } from './bank-data'
+import { SearchBox, RoadmapPanel, type FCh } from './finder'
+import { buildBankExercises, gradeOfKey, hashOfKey, keyOfHash, loadBank, mix, rich } from './bank-data'
 import { EX62 } from './eq62-data'
 import { EX62H } from './hard62-data'
 import { EX_WORD62 } from './word62-data'
@@ -66,6 +67,10 @@ import { EX_FRAC33A, EX_FRAC33H } from './frac33b-data'
 import { GraphDraw } from './graph-draw'
 import { FillTable } from './fill-table'
 import { SortLine } from './sort-line'
+import { PlaceLine } from './place-line'
+import { IneqLine } from './ineq-line'
+import { MarkLine } from './mark-line'
+import { PlotPoints } from './plot-points'
 import { NODES, NODES52, NODES53, NODES54, NODES55, NODES61, NODES62, NODES63, NODES64, NODES65, NODES66, NODES41, NODES42, NODES43, NODES44, NODES45, NODES31, NODES32, NODES33, NODES34, NODES35, NODES11, NODES12, NODES13, NODES14, NODES15, NODES16, NODES17, NODES18, CHALLENGE_OF, REGULAR_OF } from './section-data'
 import { EX_SQRT13, EX_SQRT13H } from './sqrt13-data'
 import { EX_SQRT12, EX_SQRT12H } from './sqrt12-data'
@@ -123,10 +128,10 @@ const varied = (ex: Exercise): Exercise => ({
     if (q.ladder) {
       // ordered easy -> hard: the first question comes from the easy third, a redo (jump) takes the next harder one
       const m = Math.floor(Math.random() * Math.max(1, Math.ceil(q.practice.length / 3)))
-      return { ...q, ...q.practice[m], practice: [], bank: q.practice }
+      return mix(q, q.practice[m], { practice: [], bank: q.practice }) as Slot
     }
     const [main, ...rest] = shuffle(q.practice)
-    return { ...q, ...main, practice: rest.slice(0, main.draw ? 1 : PRACTICE), bank: rest } // `bank`: the other variants, for redoing the slot; a graph the student drew wrong is drawn once more after its lesson
+    return mix(q, main, { practice: rest.slice(0, main.draw ? 1 : PRACTICE), bank: rest }) as Slot // `bank`: the other variants, for redoing the slot; a graph the student drew wrong is drawn once more after its lesson
   }),
 })
 // key = the exercise number in 5.1; 5.2 exercise n has the key 100 + n
@@ -196,9 +201,8 @@ function Choices({ choices, math, onPick, right }: { choices: string[]; math?: b
   )
 }
 
-// left: the exercises of sections 5.1 and 5.2 (the built ones open on click)
-function Side({ current, onOpen, results, grade, loaded, resumeRef, bankChapters }: { bankChapters?: ReturnType<typeof buildBankExercises>['chapters']; current: number; onOpen: (no: number) => void; results: Record<number, (Result | undefined)[]>; grade: number; loaded: boolean; resumeRef: { current: () => void } }) {
-  const g9 = [
+// the Grade 9 chapters (the built-in lessons); the other grades come from the bank
+const G9_CHAPTERS = [
     { title: 'Chapter 1', sections: [{ title: '1.1 The real number system', nodes: NODES11 }, { title: '1.2 Square roots', nodes: NODES12 }, { title: '1.3 Non-perfect squares', nodes: NODES13 }, { title: '1.4 Exponents', nodes: NODES14 }, { title: '1.5 Order of operations', nodes: NODES15 }, { title: '1.6 Product and quotient rules', nodes: NODES16 }, { title: '1.7 Power rules', nodes: NODES17 }, { title: '1.8 Chapter review', nodes: NODES18 }] },
     { title: 'Chapter 3', sections: [{ title: '3.1 Rational numbers', nodes: NODES31 }, { title: '3.2 Adding and subtracting decimals', nodes: NODES32 }, { title: '3.3 Adding and subtracting fractions', nodes: NODES33 }, { title: '3.4 Multiplying and dividing fractions', nodes: NODES34 }, { title: '3.5 Chapter review', nodes: NODES35 }] },
     { title: 'Chapter 4', sections: [{ title: '4.1 Linear patterns', nodes: NODES41 }, { title: '4.2 Graphing linear equations', nodes: NODES42 }, { title: '4.3 Graphing in standard form', nodes: NODES43 }, { title: '4.4 Equations and graphs', nodes: NODES44 }, { title: '4.5 Chapter review', nodes: NODES45 }] },
@@ -210,7 +214,11 @@ function Side({ current, onOpen, results, grade, loaded, resumeRef, bankChapters
     { title: '5.5 Chapter review', nodes: NODES55 },
     ] },
     { title: 'Chapter 6', sections: [{ title: '6.1 Linear equations', nodes: NODES61 }, { title: '6.2 Fractions and decimals', nodes: NODES62 }, { title: '6.3 Inequalities', nodes: NODES63 }, { title: '6.4 Solving inequalities', nodes: NODES64 }, { title: '6.5 Solving inequalities (more)', nodes: NODES65 }, { title: '6.6 Linear relations', nodes: NODES66 }] },
-  ]
+]
+
+// left: the exercises of sections 5.1 and 5.2 (the built ones open on click)
+function Side({ current, onOpen, results, grade, loaded, resumeRef, bankChapters }: { bankChapters?: ReturnType<typeof buildBankExercises>['chapters']; current: number; onOpen: (no: number) => void; results: Record<number, (Result | undefined)[]>; grade: number; loaded: boolean; resumeRef: { current: () => void } }) {
+  const g9 = G9_CHAPTERS
   const chapters = grade === 9 ? g9 : bankChapters ?? []
   const sections = chapters.flatMap((c) => c.sections)
   const [closed, setClosed] = useState<Record<string, boolean>>(() => Object.fromEntries([...chapters, ...sections].map((s) => [s.title, !LAST_OPEN.includes(s.title)]))) // every section starts folded; click a section title to unfold its exercises
@@ -240,7 +248,7 @@ function Side({ current, onOpen, results, grade, loaded, resumeRef, bankChapters
     } else resume()
   }, [loaded]) // eslint-disable-line react-hooks/exhaustive-deps
   return (
-    <nav className="hidden w-60 shrink-0 space-y-1 border-r p-4 md:block">
+    <nav className="hidden w-60 shrink-0 space-y-1 overflow-y-auto border-r p-4 md:block">
       {grade !== 9 && !bankChapters && <p className="pt-2 text-sm text-slate-500">Loading Grade {grade}…</p>}
       {chapters.map((ch) => (
         <div key={ch.title} className="space-y-1">
@@ -311,7 +319,7 @@ function Road({ ex, i, result, onJump, compact }: { ex: Exercise; i: number; res
 }
 
 // top bar: the grade, how far along, back to the last exercise, and the account
-function Header({ grade, onGrade, done, total, email, onContinue }: { grade: number; onGrade: (g: number) => void; done: number; total: number; email: string; onContinue: () => void }) {
+function Header({ grade, onGrade, done, total, email, onContinue, slot, onRoadmap, roadmapOpen }: { grade: number; onGrade: (g: number) => void; done: number; total: number; email: string; onContinue: () => void; slot: ReactNode; onRoadmap: () => void; roadmapOpen: boolean }) {
   return (
     <header className="sticky top-0 z-40 flex h-12 items-center gap-3 border-b bg-white/90 px-4 backdrop-blur">
       <span className="font-serif text-lg font-bold text-slate-800">Math Workbook</span>
@@ -319,6 +327,8 @@ function Header({ grade, onGrade, done, total, email, onContinue }: { grade: num
         {[8, 9, 10, 11, 12].map((g) => <option key={g} value={g}>Grade {g}</option>)}
       </select>
       <button onClick={onContinue} className="hidden rounded-lg border px-2 py-1 text-sm text-slate-600 hover:bg-slate-50 sm:block">Latest exercise</button>
+      <button onClick={onRoadmap} className={'rounded-lg border px-2 py-1 text-sm hover:bg-slate-50 ' + (roadmapOpen ? 'border-sky-400 bg-sky-50 text-sky-800' : 'text-slate-600')}>Roadmap</button>
+      {slot}
       <span className="ml-auto hidden text-sm text-slate-500 sm:block">{done} / {total} exercises done</span>
       <span className="hidden max-w-48 truncate text-sm text-slate-500 md:block" title={email}>{email}</span>
       <button onClick={() => supabase.auth.signOut()} className="rounded-lg border px-2 py-1 text-sm text-slate-600 hover:bg-slate-50">Sign out</button>
@@ -348,6 +358,9 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
   const [px, setPx] = useState(0) // practice question 0..2
   const [results, setResults] = useState<Record<number, (Result | undefined)[]>>({})
   const resumeRef = useRef<() => void>(() => {})
+  const mainRef = useRef<HTMLDivElement>(null) // the scrolling right side: back to its top for every new question
+  const [roadmap, setRoadmap] = useState(false) // the roadmap panel under the header
+  const [sideNonce, setSideNonce] = useState(0) // bumped to make the left list unfold the exercise that was opened from the search or the roadmap
   const [loaded, setLoaded] = useState(false) // the saved progress has been read: only then is it written back
   useEffect(() => {
     supabase.from('quiz_progress').select('results').eq('user_id', userId).maybeSingle().then(({ data }) => {
@@ -394,6 +407,14 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
     setStage('ask')
     setPx(0)
   }
+  // search / roadmap: open an exercise of the open grade and unfold its section in the left list
+  const goTo = (n: number) => { open(n); setSideNonce((x) => x + 1); setRoadmap(false) }
+  const finderChapters = useMemo<FCh[]>(() => (grade === 9 ? G9_CHAPTERS : bank[grade] ?? []).map((c) => ({ title: c.title, sections: c.sections.map((sec) => ({ title: sec.title, nodes: sec.nodes.filter((n) => !REGULAR_OF[n.no] && EXERCISES[n.no]).map((n) => ({ no: n.no, name: n.name, show: n.show, parts: n.parts })) })) })), [grade, bank])
+  // the question texts of an exercise: the first of every part (the sample shown in the roadmap), then a few more for the search
+  const finderTexts = useCallback((n: number) => { const qs = EXERCISES[n]?.questions ?? []; return [...qs.map((q) => q.tex), ...qs.flatMap((q) => q.practice.slice(1, 3).map((p) => p.tex))].filter((t): t is string => typeof t === 'string') }, [])
+  const finderRender = useMemo(() => (grade === 9 ? (t: string) => html(t).__html : rich), [grade])
+  const finderProps = { chapters: finderChapters, texts: finderTexts, render: finderRender, onGo: goTo }
+  useEffect(() => { mainRef.current?.scrollTo({ top: 0 }) }, [no, i, stage, px])
   const next = () => (i + 1 < ex.questions.length ? jump(i + 1) : setStage('done'))
   const record = (r: Result) => setResults((cur) => ({ ...cur, [no]: Object.assign([...(cur[no] ?? [])], { [i]: r }) }))
 
@@ -528,11 +549,27 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
           <SortLine key={`${no}${q.part}-${px}-${inPractice}`} spec={(inPractice ? pr.sort : q.sort)!} disabled={!(stage === 'ask' || stage === 'practice')} onSubmit={(ok) => pick(ok ? 0 : 1)} />
         )}
 
+        {(inPractice ? pr.plot : q.plot) && (
+          <PlotPoints key={`${no}${q.part}-${px}-${inPractice}`} spec={(inPractice ? pr.plot : q.plot)!} disabled={!(stage === 'ask' || stage === 'practice')} onSubmit={(ok) => pick(ok ? 0 : 1)} />
+        )}
+
+        {(inPractice ? pr.mark : q.mark) && (
+          <MarkLine key={`${no}${q.part}-${px}-${inPractice}`} spec={(inPractice ? pr.mark : q.mark)!} disabled={!(stage === 'ask' || stage === 'practice')} onSubmit={(ok) => pick(ok ? 0 : 1)} />
+        )}
+
+        {(inPractice ? pr.ineq : q.ineq) && (
+          <IneqLine key={`${no}${q.part}-${px}-${inPractice}`} spec={(inPractice ? pr.ineq : q.ineq)!} disabled={!(stage === 'ask' || stage === 'practice')} onSubmit={(ok) => pick(ok ? 0 : 1)} />
+        )}
+
+        {(inPractice ? pr.place : q.place) && (
+          <PlaceLine key={`${no}${q.part}-${px}-${inPractice}`} spec={(inPractice ? pr.place : q.place)!} disabled={!(stage === 'ask' || stage === 'practice')} onSubmit={(ok) => pick(ok ? 0 : 1)} />
+        )}
+
         {(inPractice ? pr.multi : q.multi) && (
           <MultiPick key={`${no}${q.part}-${px}-${inPractice}`} spec={(inPractice ? pr.multi : q.multi)!} disabled={!(stage === 'ask' || stage === 'practice')} onSubmit={(ok) => pick(ok ? 0 : 1)} />
         )}
 
-        {(stage === 'ask' || stage === 'practice' || stage === 'right') && !(inPractice ? pr.onFigure || pr.draw || pr.fill || pr.sort || pr.multi : q.onFigure || q.draw || q.fill || q.sort || q.multi) && (
+        {(stage === 'ask' || stage === 'practice' || stage === 'right') && !(inPractice ? pr.onFigure || pr.draw || pr.fill || pr.sort || pr.place || pr.ineq || pr.mark || pr.plot || pr.multi : q.onFigure || q.draw || q.fill || q.sort || q.place || q.ineq || q.mark || q.plot || q.multi) && (
           <Choices key={`${no}${q.part}-${px}-${inPractice}`} choices={inPractice ? pr.choices : q.choices} math={ex.mathChoices} onPick={pick} right={stage === 'right' ? (inPractice ? pr.correct : q.correct) : undefined} />
         )}
 
@@ -547,10 +584,11 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
 
   return (
     <>
-    <Header grade={grade} onGrade={chooseGrade} done={doneCount} total={regularNos.length} email={email} onContinue={() => resumeRef.current()} />
-    <div className="flex min-h-[calc(100vh-3rem)]">
-      <Side key={`${grade}-${!!bank[grade]}`} current={no} onOpen={open} results={results} grade={grade} loaded={loaded} resumeRef={resumeRef} bankChapters={bank[grade]} />
-      <div className="min-w-0 flex-1">
+    <Header grade={grade} onGrade={chooseGrade} done={doneCount} total={regularNos.length} email={email} onContinue={() => resumeRef.current()} slot={<SearchBox {...finderProps} />} onRoadmap={() => setRoadmap((v) => !v)} roadmapOpen={roadmap} />
+    {roadmap && <RoadmapPanel {...finderProps} currentNo={no} onClose={() => setRoadmap(false)} />}
+    <div className="flex h-[calc(100dvh-3rem)] overflow-hidden"> {/* the list on the left and the exercise on the right scroll on their own */}
+      <Side key={`${grade}-${!!bank[grade]}-${sideNonce}`} current={no} onOpen={open} results={results} grade={grade} loaded={loaded} resumeRef={resumeRef} bankChapters={bank[grade]} />
+      <div ref={mainRef} className="min-w-0 flex-1 overflow-y-auto">
         {stage === 'lesson' || stage === 'plesson' ? (
           <div className="flex items-center gap-3 px-4 pt-3">
             <div id="lesson-controls" className="flex shrink-0 items-center gap-2" />

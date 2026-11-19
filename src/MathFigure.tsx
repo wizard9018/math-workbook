@@ -1,5 +1,6 @@
 // Pure-SVG figures for math questions (number line, coordinate plane). The figure spec lives in
 // math_questions.render_data.figure; render_data.alt is a plain-text description (also used for reports).
+import type { ReactNode } from 'react'
 
 export interface NumberLineFigure {
   type: 'number_line'
@@ -49,8 +50,8 @@ export type DrawingElement =
   | { t: 'segment'; p: Pt; q: Pt; label?: string; dashed?: boolean }
   | { t: 'line'; p: Pt; q: Pt }
   | { t: 'polygon'; pts: Pt[]; fill?: string | null; label?: string }
-  | { t: 'circle'; c: Pt; r: number }
-  | { t: 'ellipse'; c: Pt; rx: number; ry: number; a0?: number; a1?: number; dashed?: boolean }
+  | { t: 'circle'; c: Pt; r: number; fill?: string }
+  | { t: 'ellipse'; c: Pt; rx: number; ry: number; a0?: number; a1?: number; dashed?: boolean; fill?: string }
   | { t: 'angle'; at: Pt; from: Pt; to: Pt; label?: string }
   | { t: 'function'; expr: string; from: number; to: number; dashed?: boolean }
   | { t: 'text'; x: number; y: number; s: string }
@@ -253,6 +254,10 @@ function niceStep(span: number): number {
   return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10) * pow
 }
 
+// a shaded region must be easy to see: a very pale fill (Gemini often wrote #e8f0fe or #cfe3ff) is drawn as a clearer blue; white (a hole) stays white
+const lum = (c: string) => { const m = /^#([0-9a-f]{6})$/i.exec(c.trim()); if (!m) return 0; const n = parseInt(m[1], 16); return (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255 }
+const isWhite = (c?: string) => !!c && /^#(?:fff|ffffff)$/i.test(c.trim())
+const shadeOf = (c?: string) => (!c ? 'none' : isWhite(c) ? '#ffffff' : lum(c) > 0.8 ? '#8ec0fa' : c)
 function Drawing({ f }: { f: DrawingFigure }) {
   const [xmin, ymax, xmax, ymin] = f.bbox
   const dx = xmax - xmin
@@ -279,10 +284,26 @@ function Drawing({ f }: { f: DrawingFigure }) {
   const clipId = `clip-${xmin}-${xmax}-${ymin}-${ymax}`
   const dash = '5 4'
   const label = (x: number, y: number, text: string, key: string, anchor: 'start' | 'middle' | 'end' = 'middle') => (
-    <text key={key} x={sx(x)} y={sy(y)} textAnchor={anchor} fontSize={13} fontWeight={600} fill={INK} dominantBaseline="middle">
+    // a white halo behind the text (paintOrder stroke): a label on a line or an edge does not run into the line
+    <text key={key} x={sx(x)} y={sy(y)} textAnchor={anchor} fontSize={13} fontWeight={600} fill={INK} stroke="white" strokeWidth={7} strokeLinejoin="round" paintOrder="stroke" dominantBaseline="middle">
       {text}
     </text>
   )
+  const late: ReactNode[] = [] // labels of edges, polygons and angles: drawn after every line, so no later line runs through them
+  // an edge label sits beside its edge (on the side away from the middle of the picture), not on it
+  const edgeLabel = (p: number[], q: number[], text: string, key: string) => {
+    const mx = (p[0] + q[0]) / 2, my = (p[1] + q[1]) / 2
+    const ex = (q[0] - p[0]) * scale, ey = -(q[1] - p[1]) * scale // screen direction of the edge
+    const len = Math.hypot(ex, ey) || 1
+    let nx = -ey / len, ny = ex / len
+    if ((sx(mx) - W / 2) * nx + (sy(my) - H / 2) * ny < 0) { nx = -nx; ny = -ny }
+    const off = 10
+    return (
+      <text key={key} x={sx(mx) + nx * off} y={sy(my) + ny * off} textAnchor="middle" fontSize={13} fontWeight={600} fill={INK} stroke="white" strokeWidth={7} strokeLinejoin="round" paintOrder="stroke" dominantBaseline="middle">
+        {text}
+      </text>
+    )
+  }
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" fontFamily="inherit">
       <defs>
@@ -319,7 +340,7 @@ function Drawing({ f }: { f: DrawingFigure }) {
             return (
               <g key={k}>
                 <line x1={sx(e.p[0])} y1={sy(e.p[1])} x2={sx(e.q[0])} y2={sy(e.q[1])} stroke={INK} strokeWidth={2} strokeDasharray={e.dashed ? dash : undefined} />
-                {e.label && label((e.p[0] + e.q[0]) / 2, (e.p[1] + e.q[1]) / 2, e.label, `${k}l`)}
+                {e.label && late.push(edgeLabel(e.p, e.q, e.label, `${k}l`)) && null}
               </g>
             )
           if (e.t === 'line') {
@@ -335,12 +356,12 @@ function Drawing({ f }: { f: DrawingFigure }) {
             const cy = e.pts.reduce((a, p) => a + p[1], 0) / e.pts.length
             return (
               <g key={k}>
-                <polygon points={e.pts.map((p) => `${sx(p[0])},${sy(p[1])}`).join(' ')} fill={e.fill ?? 'none'} fillOpacity={e.fill ? 0.65 : 0} stroke={INK} strokeWidth={2} strokeLinejoin="round" />
-                {e.label && label(cx, cy, e.label, `${k}l`)}
+                <polygon points={e.pts.map((p) => `${sx(p[0])},${sy(p[1])}`).join(' ')} fill={shadeOf(e.fill)} fillOpacity={e.fill ? (isWhite(e.fill) ? 1 : 0.85) : 0} stroke={INK} strokeWidth={2} strokeLinejoin="round" />
+                {e.label && late.push(label(cx, cy, e.label, `${k}l`)) && null}
               </g>
             )
           }
-          if (e.t === 'circle') return <circle key={k} cx={sx(e.c[0])} cy={sy(e.c[1])} r={e.r * scale} fill="none" stroke={INK} strokeWidth={2} />
+          if (e.t === 'circle') return <circle key={k} cx={sx(e.c[0])} cy={sy(e.c[1])} r={e.r * scale} fill={e.fill ?? 'none'} stroke={INK} strokeWidth={2} />
           if (e.t === 'ellipse') {
             const a0 = ((e.a0 ?? 0) * Math.PI) / 180
             const a1 = ((e.a1 ?? 360) * Math.PI) / 180
@@ -349,7 +370,7 @@ function Drawing({ f }: { f: DrawingFigure }) {
               const a = a0 + ((a1 - a0) * s) / 60
               pts.push(`${sx(e.c[0] + e.rx * Math.cos(a))},${sy(e.c[1] + e.ry * Math.sin(a))}`)
             }
-            return <polyline key={k} points={pts.join(' ')} fill="none" stroke={INK} strokeWidth={2} strokeDasharray={e.dashed ? dash : undefined} />
+            return <polyline key={k} points={pts.join(' ')} fill={shadeOf(e.fill)} fillOpacity={e.fill ? (isWhite(e.fill) ? 1 : 0.85) : 0} stroke={INK} strokeWidth={2} strokeDasharray={e.dashed ? dash : undefined} />
           }
           if (e.t === 'angle') {
             const r = 0.12 * Math.min(dx, dy)
@@ -362,7 +383,7 @@ function Drawing({ f }: { f: DrawingFigure }) {
             return (
               <g key={k}>
                 <path d={`M ${sx(e.at[0])} ${sy(e.at[1])} L ${sx(p1[0])} ${sy(p1[1])} A ${r * scale} ${r * scale} 0 ${a2 - a1 > Math.PI ? 1 : 0} 0 ${sx(p2[0])} ${sy(p2[1])} Z`} fill="#fbbf24" fillOpacity={0.45} stroke={INK} strokeWidth={1.2} />
-                {e.label && label(e.at[0] + 1.9 * r * Math.cos(mid), e.at[1] + 1.9 * r * Math.sin(mid), e.label, `${k}l`)}
+                {e.label && late.push(label(e.at[0] + 1.9 * r * Math.cos(mid), e.at[1] + 1.9 * r * Math.sin(mid), e.label, `${k}l`)) && null}
               </g>
             )
           }
@@ -391,20 +412,30 @@ function Drawing({ f }: { f: DrawingFigure }) {
               </g>
             )
           }
-          if (e.t === 'point')
+          if (e.t === 'point') {
+            // a vertex letter sits outside the shape: pushed away from the centre of all the points, larger than the other labels
+            const pts = f.elements.filter((o): o is Extract<typeof e, { t: 'point' }> => o.t === 'point')
+            const gx = pts.reduce((a, p) => a + p.x, 0) / pts.length
+            const gy = pts.reduce((a, p) => a + p.y, 0) / pts.length
+            let ux = (e.x - gx) * scale, uy = -(e.y - gy) * scale
+            const ul = Math.hypot(ux, uy) || 1
+            ux /= ul; uy /= ul
             return (
               <g key={k}>
                 <circle cx={sx(e.x)} cy={sy(e.y)} r={4.5} fill={ACCENT} stroke="white" strokeWidth={1.2} />
                 {e.label && (
-                  <text x={sx(e.x) + 8} y={sy(e.y) - 8} fontSize={13} fontWeight={700} fill={INK}>
+                  <text x={sx(e.x) + ux * 17} y={sy(e.y) + uy * 17} textAnchor="middle" dominantBaseline="middle" fontSize={19} fontWeight={700} fill={INK}>
                     {e.label}
                   </text>
                 )}
               </g>
             )
+          }
+
           if (e.t === 'text') return label(e.x, e.y, e.s, k)
           return null
         })}
+        {late}
       </g>
     </svg>
   )
