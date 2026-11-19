@@ -46,14 +46,14 @@ export interface DotPlotFigure {
 // （坐标系题），axes:false是纯几何图（棱柱、三角形、图形规律）。
 export type Pt = [number, number]
 export type DrawingElement =
-  | { t: 'point'; x: number; y: number; label?: string }
-  | { t: 'segment'; p: Pt; q: Pt; label?: string; dashed?: boolean }
+  | { t: 'point'; x: number; y: number; label?: string; open?: boolean }
+  | { t: 'segment'; p: Pt; q: Pt; label?: string; dashed?: boolean; arrow?: 'start' | 'end' | 'both' }
   | { t: 'line'; p: Pt; q: Pt }
   | { t: 'polygon'; pts: Pt[]; fill?: string | null; label?: string }
   | { t: 'circle'; c: Pt; r: number; fill?: string }
   | { t: 'ellipse'; c: Pt; rx: number; ry: number; a0?: number; a1?: number; dashed?: boolean; fill?: string }
   | { t: 'angle'; at: Pt; from: Pt; to: Pt; label?: string }
-  | { t: 'function'; expr: string; from: number; to: number; dashed?: boolean }
+  | { t: 'function'; expr: string; from: number; to: number; dashed?: boolean; arrow?: 'start' | 'end' | 'both'; swap?: boolean }
   | { t: 'text'; x: number; y: number; s: string }
 export interface DrawingFigure {
   type: 'drawing'
@@ -258,12 +258,18 @@ function niceStep(span: number): number {
 const lum = (c: string) => { const m = /^#([0-9a-f]{6})$/i.exec(c.trim()); if (!m) return 0; const n = parseInt(m[1], 16); return (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255 }
 const isWhite = (c?: string) => !!c && /^#(?:fff|ffffff)$/i.test(c.trim())
 const shadeOf = (c?: string) => (!c ? 'none' : isWhite(c) ? '#ffffff' : lum(c) > 0.8 ? '#8ec0fa' : c)
+// an arrowhead at (x2, y2) pointing along the direction (x1, y1) -> (x2, y2), for a graph that goes on for ever
+const arrowHead = (x1: number, y1: number, x2: number, y2: number, key: string) => {
+  const a = Math.atan2(y2 - y1, x2 - x1), L = 11, W = 5
+  const bx = x2 - L * Math.cos(a), by = y2 - L * Math.sin(a)
+  return <polygon key={key} points={`${x2},${y2} ${bx - W * Math.sin(a)},${by + W * Math.cos(a)} ${bx + W * Math.sin(a)},${by - W * Math.cos(a)}`} fill={INK} />
+}
 function Drawing({ f }: { f: DrawingFigure }) {
   const [xmin, ymax, xmax, ymin] = f.bbox
   const dx = xmax - xmin
   const dy = ymax - ymin
-  const MAXW = 420
-  const MAXH = 420
+  const MAXW = 200 // the drawing area is about half of what it was (the labels keep their size, so they stay readable)
+  const MAXH = 200
   const scale = Math.min(MAXW / dx, MAXH / dy)
   const pad = 24
   const W = dx * scale + 2 * pad
@@ -340,6 +346,8 @@ function Drawing({ f }: { f: DrawingFigure }) {
             return (
               <g key={k}>
                 <line x1={sx(e.p[0])} y1={sy(e.p[1])} x2={sx(e.q[0])} y2={sy(e.q[1])} stroke={INK} strokeWidth={2} strokeDasharray={e.dashed ? dash : undefined} />
+                {(e.arrow === 'end' || e.arrow === 'both') && arrowHead(sx(e.p[0]), sy(e.p[1]), sx(e.q[0]), sy(e.q[1]), `${k}ae`)}
+                {(e.arrow === 'start' || e.arrow === 'both') && arrowHead(sx(e.q[0]), sy(e.q[1]), sx(e.p[0]), sy(e.p[1]), `${k}as`)}
                 {e.label && late.push(edgeLabel(e.p, e.q, e.label, `${k}l`)) && null}
               </g>
             )
@@ -402,13 +410,21 @@ function Drawing({ f }: { f: DrawingFigure }) {
               }
               if (!Number.isFinite(y) || Math.abs(y) > lim) {
                 if (segs[segs.length - 1].length) segs.push([])
-              } else segs[segs.length - 1].push(`${sx(x)},${sy(y)}`)
+              } else segs[segs.length - 1].push(e.swap ? `${sx(y)},${sy(x)}` : `${sx(x)},${sy(y)}`) // swap: the curve x = f(y)
             }
             return (
               <g key={k}>
                 {segs.filter((p) => p.length > 1).map((p, j) => (
                   <polyline key={j} points={p.join(' ')} fill="none" stroke={ACCENT} strokeWidth={2.5} strokeDasharray={e.dashed ? dash : undefined} />
                 ))}
+                {e.arrow && (() => {
+                  const ok = segs.filter((p) => p.length > 1)
+                  const xy = (s: string) => s.split(',').map(Number)
+                  const out: ReactNode[] = []
+                  if ((e.arrow === 'start' || e.arrow === 'both') && ok.length) { const [a, b] = [xy(ok[0][1]), xy(ok[0][0])]; out.push(arrowHead(a[0], a[1], b[0], b[1], `${k}as`)) }
+                  if ((e.arrow === 'end' || e.arrow === 'both') && ok.length) { const l = ok[ok.length - 1]; const [a, b] = [xy(l[l.length - 2]), xy(l[l.length - 1])]; out.push(arrowHead(a[0], a[1], b[0], b[1], `${k}ae`)) }
+                  return out
+                })()}
               </g>
             )
           }
@@ -422,7 +438,7 @@ function Drawing({ f }: { f: DrawingFigure }) {
             ux /= ul; uy /= ul
             return (
               <g key={k}>
-                <circle cx={sx(e.x)} cy={sy(e.y)} r={4.5} fill={ACCENT} stroke="white" strokeWidth={1.2} />
+                {e.open ? <circle cx={sx(e.x)} cy={sy(e.y)} r={5.5} fill="white" stroke={INK} strokeWidth={2} /> : <circle cx={sx(e.x)} cy={sy(e.y)} r={4.5} fill={ACCENT} stroke="white" strokeWidth={1.2} />}
                 {e.label && (
                   <text x={sx(e.x) + ux * 17} y={sy(e.y) + uy * 17} textAnchor="middle" dominantBaseline="middle" fontSize={19} fontWeight={700} fill={INK}>
                     {e.label}

@@ -248,7 +248,7 @@ function Side({ current, onOpen, results, grade, loaded, resumeRef, bankChapters
     } else resume()
   }, [loaded]) // eslint-disable-line react-hooks/exhaustive-deps
   return (
-    <nav className="hidden w-60 shrink-0 space-y-1 overflow-y-auto border-r p-4 md:block">
+    <nav className="hidden w-60 shrink-0 space-y-1 overflow-y-auto overscroll-contain border-r p-4 md:block">
       {grade !== 9 && !bankChapters && <p className="pt-2 text-sm text-slate-500">Loading Grade {grade}…</p>}
       {chapters.map((ch) => (
         <div key={ch.title} className="space-y-1">
@@ -588,7 +588,7 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
     {roadmap && <RoadmapPanel {...finderProps} currentNo={no} onClose={() => setRoadmap(false)} />}
     <div className="flex h-[calc(100dvh-3rem)] overflow-hidden"> {/* the list on the left and the exercise on the right scroll on their own */}
       <Side key={`${grade}-${!!bank[grade]}-${sideNonce}`} current={no} onOpen={open} results={results} grade={grade} loaded={loaded} resumeRef={resumeRef} bankChapters={bank[grade]} />
-      <div ref={mainRef} className="min-w-0 flex-1 overflow-y-auto">
+      <div ref={mainRef} className="min-w-0 flex-1 overflow-y-auto overscroll-contain">
         {stage === 'lesson' || stage === 'plesson' ? (
           <div className="flex items-center gap-3 px-4 pt-3">
             <div id="lesson-controls" className="flex shrink-0 items-center gap-2" />

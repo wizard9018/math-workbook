@@ -10,7 +10,7 @@ import type { Lesson } from './lessons'
 import { MathFigure } from './MathFigure'
 import type { FigureSpec } from './MathFigure'
 
-interface BankQ { q: string; a: string; d: string[]; s: string; l: number; f?: Record<string, unknown>; o?: { items: string[]; order: number[] }; p?: { lo: number; hi: number; chips: string[]; at: number[] }; dr?: Draw; iq?: number; fl?: Fill; mk?: Mark; pp?: Plot } // o: numbers to drag into order
+interface BankQ { q: string; a: string; d: string[]; s: string; l: number; f?: Record<string, unknown>; o?: { items: string[]; order: number[] }; p?: { lo: number; hi: number; chips: string[]; at: number[] }; dr?: Draw; iq?: number; fl?: Fill; mk?: Mark; pp?: Plot; sv?: string } // o: numbers to drag into order
 interface BankPart { p: string; qs: BankQ[] }
 interface BankEx { no: number; name?: string; parts: BankPart[] }
 interface BankSec { no: number; title: string; exercises: BankEx[] }
@@ -30,10 +30,70 @@ export const gradeOfKey = (key: number) => (key >= 1_000_000 ? Math.floor(key / 
 
 const esc = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 // text with \( ... \) formulas -> HTML (KaTeX for the formulas)
-export const rich = (s: string) => {
+// a table written in markdown (| x | 1 | 2 |, a separator line |---|---|, more rows) -> an html table; the rest of the text is written as before
+const ROW = /^\s*\|.*\|\s*$/
+const SEP = /^\s*\|[\s:|-]+\|\s*$/
+function withTables(s: string): string | null {
+  const lines = s.split('\n')
+  if (!lines.some((l, i) => ROW.test(l) && i + 1 < lines.length && SEP.test(lines[i + 1]))) return null
+  let out = ''
+  let text: string[] = []
+  const flush = () => {
+    if (text.length) out += rich(text.join('\n').replace(/^\n+|\n+$/g, ''))
+    text = []
+  }
+  for (let i = 0; i < lines.length; ) {
+    if (ROW.test(lines[i]) && i + 1 < lines.length && SEP.test(lines[i + 1])) {
+      flush()
+      const rows: string[][] = []
+      let j = i
+      while (j < lines.length && ROW.test(lines[j])) {
+        if (!SEP.test(lines[j])) rows.push(lines[j].trim().replace(/^\||\|$/g, '').split('|').map((c) => c.trim()))
+        j++
+      }
+      const cell = (c: string, ri: number, ci: number) => {
+        const tag = ci === 0 ? 'th' : 'td'
+        return `<${tag} class="border border-slate-300 px-3 py-1 text-center ${ci === 0 || ri === 0 ? 'bg-slate-50 font-semibold' : ''}">${rich(c)}</${tag}>`
+      }
+      out += `<table class="mx-auto my-2 border-collapse text-lg"><tbody>${rows.map((r, ri) => `<tr>${r.map((c, ci) => cell(c, ri, ci)).join('')}</tr>`).join('')}</tbody></table>`
+      i = j
+    } else {
+      text.push(lines[i])
+      i++
+    }
+  }
+  flush()
+  return out
+}
+// text that has words and LaTeX written without \( \) ("... gives \frac{175}{100}, then 8 = 2^3 ..."): the LaTeX parts (a run of numbers, letters, \commands, powers and
+// operators that contains a \command or a power) are wrapped as formulas, the words stay text
+const GROUP = String.raw`\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\}`
+const LR = String.raw`\\left[(\[|.][\s\S]*?\\right[)\]|.]`
+const CMD = String.raw`\\[a-zA-Z]+(?:\[[^\]]*\])?(?:${GROUP})*`
+const POW = String.raw`(?:\^(?:${GROUP}|\\[a-zA-Z]+|-?\d+|[a-zA-Z])|_(?:${GROUP}|\d|[a-zA-Z]))`
+const ATOM = String.raw`(?:(?:${LR}|${CMD}|[A-Za-z0-9.]+|\([^()]*\))${POW}*)`
+const OP = String.raw`\s*(?:[=+\-×÷·*/<>≤≥]|\\(?:times|div|cdot|le|ge|approx|neq|pm)\b)\s*`
+const RUN = new RegExp(`${ATOM}(?:${OP}${ATOM})*`, 'g')
+const hasLatex = (t: string) => /\\[a-zA-Z]+|\^/.test(t)
+const wordCount = (t: string) => (t.replace(/\\[a-zA-Z]+/g, '').match(/[A-Za-z]{4,}/g) ?? []).length
+function wrapBare(s: string): string {
+  return s.replace(RUN, (m) => {
+    if (!hasLatex(m)) return m // plain words and numbers stay text
+    const body = m.replace(/[.,;:]+$/, '') // a full stop after the formula is not part of it
+    if (/^[A-Za-z]{4,}$/.test(body)) return m
+    return `\\(${body}\\)${m.slice(body.length)}`
+  })
+}
+
+export const rich = (s: string): string => {
   if (s.startsWith('<svg')) return s // a picture (number line) written by the exporter
+  const tab = withTables(s)
+  if (tab !== null) return tab
   // an answer written as bare LaTeX (\frac{3}{5}) without \( \): the whole text is a formula
-  if (!s.includes('\\(') && /\\[a-zA-Z]+|\^/.test(s)) return katex.renderToString(s, { throwOnError: false })
+  if (!s.includes('\\(') && /\\[a-zA-Z]+|\^/.test(s)) {
+    if (wordCount(s) < 2) return katex.renderToString(s, { throwOnError: false })
+    s = wrapBare(s) // words and LaTeX without \( \) mixed: the LaTeX parts become formulas, the words stay text
+  }
   let out = ''
   let last = 0
   for (const m of s.matchAll(/\\\(([\s\S]+?)\\\)/g)) {
@@ -57,12 +117,21 @@ function pointLine(f: Record<string, unknown>): string {
 }
 const figureHtml = (f: Record<string, unknown>) => pointLine(f) ||renderToStaticMarkup(createElement(MathFigure, { figure: { type: 'drawing', ...f } as unknown as FigureSpec }))
 // "Evaluate for a = -4, b = -6: ab" -> the instruction, then the expression alone on its own line (same size)
+// a question that ends with a formula (an equation or inequality) after a sentence, "Which line represents the linear equation \(2x - 3y = -6\)?": the formula goes on its own line
+const endFormula = (q: string): string | null => {
+  const m = /^([\s\S]*[^\s(])\s+\\\(((?:(?!\\\()[\s\S])+?)\\\)\s*([.?!]?)$/.exec(q)
+  if (!m) return null
+  const [, head, f, end] = m
+  if (head.length < 25 || !/[=<>]|\\le|\\ge|\\neq/.test(f)) return null
+  if ((head.match(/\\\(/g) ?? []).length !== (head.match(/\\\)/g) ?? []).length) return null
+  return `<div>${rich(head)}</div><div class="mt-2 max-w-full overflow-x-auto overflow-y-hidden py-1">${rich(`\\(${f}${end === '?' ? '\\ \\text{?}' : ''}\\)`)}</div>`
+}
 const stem = (q: string) => {
   // the last "colon + space" that is not the colon of a "Note:" (a note stays inside its line)
   let at = -1
   // (a colon after a short label at the start of a later line, "Option 2: 6 notebooks for $7.50", is a list item, not the end of the instruction)
   for (const m of q.matchAll(/:[ \n]/g)) if (!/note$/i.test(q.slice(0, m.index)) && !/\n[^\n:]{1,20}$/.test(q.slice(0, m.index))) at = m.index!
-  if (at < 0) return rich(q)
+  if (at < 0) return endFormula(q) ?? rich(q)
   const head = q.slice(0, at + 1)
   let tail = q.slice(at + 1).trim().replace(/[.?]$/, '')
   if ((head.match(/\\\(/g) ?? []).length !== (head.match(/\\\)/g) ?? []).length) return rich(q) // the colon is inside a formula
@@ -71,7 +140,13 @@ const stem = (q: string) => {
   else return `<div>${rich(head)}</div><div class="mt-1">${rich(q.slice(at + 1).trim())}</div>` // words after the colon: the same, as text
   return `<div>${rich(head)}</div><div class="mt-2 max-w-full overflow-x-auto overflow-y-hidden py-1">${rich(`\\(${tail}\\)`)}</div>`
 }
-const card = (b: BankQ) => `<div class="px-2 py-3 text-center text-xl leading-relaxed">${stem(b.q)}</div>${b.f ? `<div class="mx-auto mt-3 max-w-md">${figureHtml(b.f)}</div>` : ''}`
+// the question; a question with a picture shows the picture on the left and the text on the right (one above the other on a narrow screen), so nothing needs scrolling
+const card = (b: BankQ) => {
+  const text = `<div class="px-2 py-3 text-center text-xl leading-relaxed">${stem(b.q)}</div>`
+  const pic = b.sv ? `<div class="w-full max-w-xs">${b.sv}</div>` : b.f ? `<div class="w-full max-w-[15.5rem]">${figureHtml(b.f)}</div>` : ''
+  if (!pic) return text
+  return `<div class="flex flex-col items-center gap-3 md:flex-row md:items-center md:gap-6"><div class="flex shrink-0 justify-center md:w-[16rem]">${pic}</div><div class="min-w-0 flex-1">${text}</div></div>`
+}
 const span = (s: string) => `<span>${rich(s)}</span>`
 
 // deterministic shuffle of the four options (the right one is not always first)

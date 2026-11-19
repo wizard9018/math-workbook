@@ -48,6 +48,7 @@ export interface Plot {
   xlabel: string
   ylabel: string
   items: { label: string; x: number; y: number }[]
+  hide?: boolean // the chips show only the names, not the coordinates (the student works the coordinates out)
 }
 // a number marked on a number line from lo to hi (mark-line.tsx): `at` is its true position, a mark within `tol` of it is right
 export interface Mark {

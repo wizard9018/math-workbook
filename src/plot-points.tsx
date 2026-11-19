@@ -60,7 +60,7 @@ export function PlotPoints({ spec, disabled, onSubmit }: { spec: Plot; disabled:
             onClick={() => setSel(i)}
             className={'rounded-lg border-2 px-3 py-1 text-base font-semibold ' + (i === sel ? 'border-orange-400 bg-orange-50' : pos[i] ? 'border-sky-300 bg-sky-50' : 'border-slate-300 bg-white')}
           >
-            {it.label}({it.x}, {it.y})
+            {spec.hide ? it.label : `${it.label}(${it.x}, ${it.y})`}
           </button>
         ))}
       </div>

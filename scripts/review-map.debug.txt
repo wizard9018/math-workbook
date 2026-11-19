@@ -94,44 +94,44 @@
 9  <- 6.9 (6 parts) "Factoring complex expressions completely"  sim 0.45 | Factor.  a) $6 x ^ { 3 } - 6 x$  b) $a ^ { 2 } b - 2 a b ^ { 2 } + b ^
 == Math 10|3
 1  <- 1.7 (1 parts) "Domain and Range from Ordered Pairs"  sim 0.9 | Determine the domain and range of the relation.  a) (−1, 4), (−2, 4), 
-2  <- 1.7 (2 parts) "Domain and Range from Ordered Pairs"  sim 0.22 | Write the mapping diagram in ordered pair notation.  a)  ![](images/3d
-3  <- 1.7 (2 parts) "Domain and Range from Ordered Pairs"  sim 0.25 | Draw a mapping diagram for the ordered pair.  a) (1, 2) , (1, − 2), (1
+2  <- 1.7 (2 parts) "Domain and Range from Ordered Pairs"  sim 0.21 | Write the mapping diagram in ordered pair notation.  a)  ![](images/3d
+3  <- 1.7 (2 parts) "Domain and Range from Ordered Pairs"  sim 0.28 | Draw a mapping diagram for the ordered pair.  a) (1, 2) , (1, − 2), (1
 4  <- 1.7 (2 parts) "Domain and Range from Ordered Pairs"  sim 0.49 | Determine the domain and range.  a)  ![](images/8fca34e8d1a060257cad96
-5  <- 2.14 (2 parts) "Represent Function as Table"  sim 0.5 | Are the sets of ordered pairs functions? a) (2, 4), (2, 3), (2, 2) b) 
-6  <- 2.6 (2 parts) "Vertical Line Test"  sim 0.26 | Apply the vertical line test to determine if the relation is a functio
-7  <- 2.14 (1 parts) "Represent Function as Table"  sim 0.25 | The table below defines a function.  <table><tr><td rowspan=1 colspan=
-8  <- 3.4 (2 parts) "Graphing linear equations"  sim 0.19 | Graph the linear equations, and determine which are functions.  a) $3 
-9  <- 3.8 (1 parts) "Estimating values from linear models"  sim 0.23 | A tool rental store charges \$20.00, plus \$5.00 per hour, to rent a r
-10  <- 2.8 (2 parts) "Represent Function as Mapping Diagram"  sim 0.28 | Graph the non-linear equation, and determine if the relation is also a
-11  <- 2.15 (2 parts) "Represent Function as Table"  sim 0.31 | Graph each system using a graphing calculator  $$ \mathbf { a } ) \qua
+5  <- 2.14 (1 parts) "Represent a function given by ordered pa"  sim 0.57 | Are the sets of ordered pairs functions? a) (2, 4), (2, 3), (2, 2) b) 
+6  <- 2.6 (2 parts) "Vertical line test"  sim 0.25 | Apply the vertical line test to determine if the relation is a functio
+7  <- 2.14 (3 parts) "Represent a function given by ordered pa"  sim 0.3 | The table below defines a function.  <table><tr><td rowspan=1 colspan=
+8  <- 3.3 (2 parts) "Checking solutions to linear equations"  sim 0.2 | Graph the linear equations, and determine which are functions.  a) $3 
+9  <- 3.8 (2 parts) "Graph and estimate: temperature"  sim 0.18 | A tool rental store charges \$20.00, plus \$5.00 per hour, to rent a r
+10  <- 2.8 (2 parts) "Represent a function given by a table"  sim 0.29 | Graph the non-linear equation, and determine if the relation is also a
+11  <- 1.2 (1 parts) "Plot points on a coordinate grid"  sim 0.32 | Graph each system using a graphing calculator  $$ \mathbf { a } ) \qua
 == Math 10|4
-1  <- 1.5 (4 parts) "Find slope from two points"  sim 0.64 | Find the slope of the line containing each pair of points.  a) $( - 2 
+1  <- 1.5 (4 parts) "Find slope from two points"  sim 0.65 | Find the slope of the line containing each pair of points.  a) $( - 2 
 2  <- 1.5 (2 parts) "Find slope from two points"  sim 0.06 | Determine the slope.  a) ![](images/334c79bed381dee97b265c410ebc5971e6
 3  <- 2.4 (2 parts) "Rate of change from a graph"  sim 0.11 | Determine the rate of change.  ![](images/40af6aff5543f61f75c88193a2e5
-4  <- 2.4 (3 parts) "Rate of change from a graph"  sim 0.18 | George rents a motor scooter for three hours to travel around Crescent
-5  <- 2.3 (3 parts) "Matching motion description to graph"  sim 0.09 | Marelee rented a stall at a craft market for four hours at a cost of \
-6  <- 3.6 (6 parts) "Determine slope from intercepts"  sim 0.11 | Determine the slope.  a) ![](images/f6d35832dce341989850980e05daaecedb
-7  <- 3.1 (2 parts) "Graph line given point and slope"  sim 0.62 | Find the number n, so that the line passing through the point (− 3, 5)
-8  <- 4.5 (1 parts) "Find parameter for parallel or perpendic"  sim 0.5 | The line through the point (8, y) and (2, – 3) has a slope parallel to
+4  <- 2.17 (2 parts) "Rates of change: Rental rates"  sim 0.36 | George rents a motor scooter for three hours to travel around Crescent
+5  <- 2.18 (3 parts) "Rates of change: Typing rates"  sim 0.19 | Marelee rented a stall at a craft market for four hours at a cost of \
+6  <- 3.7 (2 parts) "Compare percentage slopes"  sim 0.12 | Determine the slope.  a) ![](images/f6d35832dce341989850980e05daaecedb
+7  <- 3.7 (2 parts) "Compare percentage slopes"  sim 0.75 | Find the number n, so that the line passing through the point (− 3, 5)
+8  <- 4.4 (3 parts) "Find parameter for parallel or perpendic"  sim 0.64 | The line through the point (8, y) and (2, – 3) has a slope parallel to
 == Math 10|5
-1  <- 1.2 (2 parts) "Finding slope and y-intercept from stand"  sim 0.6 | Find the slope and y-intercept.  a) $2 x - 5 y = 7$  $$ 5 x + y = - 2 
-2  <- 1.3 (1 parts) "Converting standard form to slope-interc"  sim 0.74 | Write the standard form equation in slope-intercept form.  a) $6 x - y
-3  <- 1.9 (2 parts) "Writing slope-intercept equations from s"  sim 0.66 | Write the slope-intercept equation in standard form. a) $y = - \frac {
-4  <- 1.5 (1 parts) "Converting point-slope form to slope-int"  sim 0.74 | Write the point-slope equation in slope-intercept form.  $$ y + 1 = - 
-5  <- 1.6 (1 parts) "Converting point-slope form to standard "  sim 0.67 | Write the point-slope equation in standard form.  a) $y + 1 = - \frac 
-6  <- 1.10 (2 parts) "Graphing linear equations"  sim 0.42 | Write the equation of each line in standard form. a) $( 0 , - 3 ) , m 
+1  <- 1.9 (2 parts) "Writing slope-intercept equations from s"  sim 0.63 | Find the slope and y-intercept.  a) $2 x - 5 y = 7$  $$ 5 x + y = - 2 
+2  <- 1.3 (1 parts) "Converting standard form to slope-interc"  sim 0.78 | Write the standard form equation in slope-intercept form.  a) $6 x - y
+3  <- 1.9 (1 parts) "Writing slope-intercept equations from s"  sim 0.69 | Write the slope-intercept equation in standard form. a) $y = - \frac {
+4  <- 1.5 (1 parts) "Converting point-slope form to slope-int"  sim 0.77 | Write the point-slope equation in slope-intercept form.  $$ y + 1 = - 
+5  <- 1.6 (1 parts) "Converting point-slope form to standard "  sim 0.69 | Write the point-slope equation in standard form.  a) $y + 1 = - \frac 
+6  <- 1.11 (3 parts) "Writing linear equations from a graph in"  sim 0.43 | Write the equation of each line in standard form. a) $( 0 , - 3 ) , m 
 == Math 10|6
 1  <- 1.12 (1 parts) "Conceptual Analysis of Systems"  sim 0.08 | Label the system as either consistent or inconsistent.  a) Parallel li
-2  <- 1.6 (4 parts) "Solving Systems by Graphing"  sim 0.27 | Solve by graphing.  a) $3 x - 2 y = 1 9$ −x + 4y = − 13  ![](images/7e
-3  <- 1.4 (2 parts) "Testing Ordered Pairs as Solutions"  sim 0.29 | The solution of the system $\left\{ { \begin{array} { c } { A x - 5 y 
-4  <- 2.2 (3 parts) "Solve linear systems by addition"  sim 0.43 | Solve by the addition method.  a) $3 x + y = 6$  $$ 3 x + 2 y = 3 $$  
-5  <- 3.1 (1 parts) "Solve linear system by substitution"  sim 0.48 | Solve by the substitution method  a) $y = 2 x + 7$  $$ x + 2 y = - 6 $
-6  <- 4.2 (2 parts) "Number, Geometry, and Age Word Problems"  sim 0.17 | Jerry has 150 m of fencing to enclose a rectangular chicken pen. If th
-7  <- 4.2 (2 parts) "Number, Geometry, and Age Word Problems"  sim 0.26 | Trudene invests part of her savings of \$150 000 in mutual funds that 
+2  <- 1.6 (4 parts) "Solving Systems by Graphing"  sim 0.29 | Solve by graphing.  a) $3 x - 2 y = 1 9$ −x + 4y = − 13  ![](images/7e
+3  <- 1.4 (2 parts) "Testing Ordered Pairs as Solutions"  sim 0.31 | The solution of the system $\left\{ { \begin{array} { c } { A x - 5 y 
+4  <- 2.2 (3 parts) "Solve linear systems by addition"  sim 0.44 | Solve by the addition method.  a) $3 x + y = 6$  $$ 3 x + 2 y = 3 $$  
+5  <- 3.1 (1 parts) "Solve linear system by substitution"  sim 0.49 | Solve by the substitution method  a) $y = 2 x + 7$  $$ x + 2 y = - 6 $
+6  <- 4.13 (1 parts) "Cost and Value Word Problems"  sim 0.21 | Jerry has 150 m of fencing to enclose a rectangular chicken pen. If th
+7  <- 4.1 (2 parts) "Systems of Linear Equations"  sim 0.27 | Trudene invests part of her savings of \$150 000 in mutual funds that 
 == Math 10|8
-1  <- 1.1 (2 parts) "Evaluate trigonometric ratios"  sim 0.48 | Find each ratio to four decimal places using a calculator.  a) $\sin 6
+1  <- 1.1 (2 parts) "Evaluate trigonometric ratios"  sim 0.47 | Find each ratio to four decimal places using a calculator.  a) $\sin 6
 2  <- 1.2 (2 parts) "Find angle from trigonometric ratio"  sim 0.45 | Find the measure of the acute angle θ to one decimal place.  a) $\sin 
-3  <- 1.2 (6 parts) "Find angle from trigonometric ratio"  sim 0.28 | Solve.  a) $\sin 2 0 ^ { \circ } = \cos$ o  c) $\frac { \sin 2 0 ^ { \
+3  <- 1.2 (6 parts) "Find angle from trigonometric ratio"  sim 0.29 | Solve.  a) $\sin 2 0 ^ { \circ } = \cos$ o  c) $\frac { \sin 2 0 ^ { \
 == Precal-11|1
 1  <- 1.12 (1 parts) "Factor expressions with common binomial "  sim 0.56 | Factor completely  a) $x ^ { 2 } - 1 0 x + 2 4$ b) $x ^ { 2 } - 4 x - 
 2  <- 1.12 (2 parts) "Factor expressions with common binomial "  sim 0.29 | Find all integer values of k such that the trinomial factors. a) $x ^ 
@@ -145,24 +145,24 @@
 == Precal-11|5
 1  <- 1.3 (6 parts) "Solving monomial power equations with ra"  sim 0.38 | Solve for x.  a) $x ^ { 2 } = 1 6$ b) $x ^ { 3 } = 2 7$  c) $x ^ { 2 }
 2  <- 1.6 (6 parts) "Simplifying algebraic radicals with real"  sim 0.3 | Simplify. State the restrictions, if any, on the variable.  a) $\sqrt 
-3  <- 2.8 (4 parts) "Multiplying and dividing radical express"  sim 0.51 | Simplify. All variables represent non-negative real numbers.  a) $\sqr
-4  <- 2.7 (6 parts) "Converting algebraic radicals to entire "  sim 0.67 | Write as an entire radical. All variables represent non-negative real 
-5  <- 3.7 (5 parts) "Simplify higher-index and mixed radical "  sim 0.56 | Simplify. All variables represent positive numbers.  a) ${ \sqrt { 2 8
-6  <- 4.5 (6 parts) "Operations with different radical indice"  sim 0.48 | Perform the indicated operation and simplify. All variables represent 
+3  <- 2.8 (4 parts) "Multiplying and dividing radical express"  sim 0.52 | Simplify. All variables represent non-negative real numbers.  a) $\sqr
+4  <- 2.7 (6 parts) "Converting algebraic radicals to entire "  sim 0.66 | Write as an entire radical. All variables represent non-negative real 
+5  <- 3.7 (5 parts) "Simplify higher-index and mixed radical "  sim 0.57 | Simplify. All variables represent positive numbers.  a) ${ \sqrt { 2 8
+6  <- 4.3 (6 parts) "Expand numerical radical expressions"  sim 0.48 | Perform the indicated operation and simplify. All variables represent 
 7  <- 4.9 (5 parts) "Rationalize the denominator"  sim 0.43 | Rationalize the denominator.  a) $\frac { 1 } { \sqrt { 5 } }$  b) $\f
-8  <- 5.3 (3 parts) "Solve radical equations"  sim 0.47 | Solve the radical equation.  a) ${ \sqrt { x + 1 } } = x + 1$  b) ${ \
+8  <- 5.3 (3 parts) "Solve radical equations"  sim 0.48 | Solve the radical equation.  a) ${ \sqrt { x + 1 } } = x + 1$  b) ${ \
 == Precal-11|6
-1  <- 1.7 (1 parts) "Simplifying advanced rational expression"  sim 0.67 | Simplify the rational expressions. State the restrictions.  a) $\frac 
-2  <- 2.3 (4 parts) "Dividing Rational Expressions"  sim 0.42 | Multiply. Simplify answer if possible.  a) $\displaystyle { \left( \fr
-3  <- 2.3 (2 parts) "Dividing Rational Expressions"  sim 0.45 | Divide. Simplify answer if possible.  $$ \mathbf { a } ) \frac { 2 x ^
+1  <- 1.7 (1 parts) "Simplifying advanced rational expression"  sim 0.69 | Simplify the rational expressions. State the restrictions.  a) $\frac 
+2  <- 2.3 (4 parts) "Dividing Rational Expressions"  sim 0.43 | Multiply. Simplify answer if possible.  a) $\displaystyle { \left( \fr
+3  <- 2.3 (2 parts) "Dividing Rational Expressions"  sim 0.46 | Divide. Simplify answer if possible.  $$ \mathbf { a } ) \frac { 2 x ^
 4  <- 3.4 (3 parts) "Adding and subtracting with unlike denom"  sim 0.44 | Perform the indicated operation. Simplify if possible.  $$ \mathbf { a
-5  <- 3.1 (3 parts) "True or false statements"  sim 0.42 | Simplify.  x + 6 4 22 -4 a) x + 2 x x{2 -16  $$ \mathbf { b } ) \left(
-6  <- 5.5 (4 parts) "Solving rational equations"  sim 0.59 | Solve.  a) ${ \frac { x } { 4 } } - { \frac { x + 3 } { 6 } } = { \fra
+5  <- 3.1 (3 parts) "True or false statements"  sim 0.43 | Simplify.  x + 6 4 22 -4 a) x + 2 x x{2 -16  $$ \mathbf { b } ) \left(
+6  <- 5.5 (4 parts) "Solving rational equations"  sim 0.6 | Solve.  a) ${ \frac { x } { 4 } } - { \frac { x + 3 } { 6 } } = { \fra
 7  <- 5.5 (2 parts) "Solving rational equations"  sim 0.75 | Solve for x.  a) $y = \frac { 3 x - 4 } { 2 x - 3 }$  $$ \mathbf { b }
-8  <- 6.7 (2 parts) "Sketch rational functions"  sim 0.17 | a) $f ( x ) = { \frac { ( x + 2 ) ( x - 1 ) } { x - 1 } }$ is a linear
+8  <- 6.7 (2 parts) "Sketch rational functions"  sim 0.18 | a) $f ( x ) = { \frac { ( x + 2 ) ( x - 1 ) } { x - 1 } }$ is a linear
 9  <- 6.7 (2 parts) "Sketch rational functions"  sim 0.14 | Sketch the graph of the function. Label the asymptotes.  a) $f ( x ) =
 10  <- 7.1 (2 parts) "Unknown number problems"  sim 0.32 | The sum of two numbers is 38. If the larger number is divided by the s
-11  <- 7.2 (2 parts) "Work problems"  sim 0.33 | Jane works 3 times as fast as Eleanor. If they work together, they can
+11  <- 7.2 (2 parts) "Work problems"  sim 0.32 | Jane works 3 times as fast as Eleanor. If they work together, they can
 == Precal-11|8
 1  <- 1.2 (2 parts) "Calculate future value with simple inter"  sim 0.47 | Find the future value of a \$4800 investment at 6.5% over three years 
 2  <- 1.2 (2 parts) "Calculate future value with simple inter"  sim 0.51 | Ann receives a two year \$9000 discount loan at 6% simple interest. Fi
@@ -174,59 +174,59 @@
 8  <- 2.2 (2 parts) "Mortgage calculations"  sim 0.29 | Penelope needs \$750 to cover the cost of books for the coming semeste
 9  <- 3.20 (1 parts) "Calculating Bond Purchase Price with Acc"  sim 0.34 | The stock information for Apple Inc. over 52 weeks is given.  <table><
 == Precal-12|1
-1  <- 3.2 (2 parts) "Writing terms of a geometric sequence"  sim 0.38 | Which is a geometric sequence? a) $8 , - 7 , 6 , \ldots$ b) $0 , - 4 ,
-2  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.54 | Determine the 25th term of the arithmetic sequence $- 2 , - 8 , - 1 4 
+1  <- 3.2 (2 parts) "Writing terms of a geometric sequence"  sim 0.39 | Which is a geometric sequence? a) $8 , - 7 , 6 , \ldots$ b) $0 , - 4 ,
+2  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.57 | Determine the 25th term of the arithmetic sequence $- 2 , - 8 , - 1 4 
 3  <- 3.1 (2 parts) "Identifying geometric sequences and comm"  sim 0.48 | Determine the common ratio r, of the geometric sequence $\begin{array}
-4  <- 3.3 (1 parts) "Finding possible common ratios from two "  sim 0.3 | Which sequence is arithmetic for all values of x? a) $x ^ { 8 } , x ^ 
-5  <- 3.5 (1 parts) "Inserting geometric means"  sim 0.66 | When inserting two geometric means between a and b, what is the common
-6  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.35 | Determine the number of terms in the arithmetic sequence 5, 1, $^ { - 
+4  <- 3.3 (1 parts) "Finding possible common ratios from two "  sim 0.31 | Which sequence is arithmetic for all values of x? a) $x ^ { 8 } , x ^ 
+5  <- 3.5 (1 parts) "Inserting geometric means"  sim 0.65 | When inserting two geometric means between a and b, what is the common
+6  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.38 | Determine the number of terms in the arithmetic sequence 5, 1, $^ { - 
 7  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.36 | Determine the sum of the first 15 terms of the geometric series $1 6 +
 8  <- 3.1 (2 parts) "Identifying geometric sequences and comm"  sim 0.43 | Determine the number of terms in the geometric sequence ${ \frac { a ^
-9  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.55 | Determine the sum of the arithmetic series $5 + 1 + ( - 3 ) + \dots + 
-10  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.34 | Which is equivalent to $S _ { n } - S _ { n - 1 } ?$ a) $t _ { n - 1 }
-11  <- 3.2 (2 parts) "Writing terms of a geometric sequence"  sim 0.35 | Determine the sum of $\begin{array} { r } { S = 0 . 3 + \frac { 2 } { 
+9  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.57 | Determine the sum of the arithmetic series $5 + 1 + ( - 3 ) + \dots + 
+10  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.39 | Which is equivalent to $S _ { n } - S _ { n - 1 } ?$ a) $t _ { n - 1 }
+11  <- 3.2 (2 parts) "Writing terms of a geometric sequence"  sim 0.36 | Determine the sum of $\begin{array} { r } { S = 0 . 3 + \frac { 2 } { 
 12  <- 3.1 (1 parts) "Identifying geometric sequences and comm"  sim 0.28 | Determine the fourth term in the expansion of $\sum _ { n = 2 } ^ { 2 
 13  <- 3.1 (2 parts) "Identifying geometric sequences and comm"  sim 0.52 | The sum of the first 8 terms of a geometric series is 6560, with a com
-14  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.54 | Determine the fifth term of an infinite geometric series with $S _ { \
-15  <- 2.1 (2 parts) "Sum of arithmetic series in terms of n"  sim 0.22 | $\sum _ { k = n + 3 } ^ { 5 n - 1 } 2 ^ { k }$ has 45 terms. What is t
+14  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.56 | Determine the fifth term of an infinite geometric series with $S _ { \
+15  <- 2.1 (2 parts) "Sum of arithmetic series in terms of n"  sim 0.23 | $\sum _ { k = n + 3 } ^ { 5 n - 1 } 2 ^ { k }$ has 45 terms. What is t
 16  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.35 | The general term of a geometric series is $t _ { n } = 1 6 \Big ( - \f
-17  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.57 | Determine the fourth term of the geometric sequence x, ${ \frac { x + 
-18  <- 5.2 (2 parts) "Sum of infinite geometric series in expa"  sim 0.19 | Find $f ( 1 ) + f ( 2 ) + \cdots + f ( 9 ) { \mathrm { i f ~ } } f ( x
-19  <- 5.5 (1 parts) "Solve equations with infinite geometric "  sim 0.25 | $\mathrm { E v a l u a t e } \sum _ { j = 1 } ^ { 3 0 } { \frac { 2 } 
-20  <- 4.16 (1 parts) "Solve equations with geometric sequences"  sim 0.29 | Given a geometric series with a first term of 12 and a common ratio of
-21  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.55 | For what value will the infinite geometric series, $1 + ( 1 - x ) + ( 
-22  <- 5.3 (2 parts) "Sum of infinite geometric series in sigm"  sim 0.53 | Determine the value of x, $x \neq 0$ , such that the infinite geometri
-23  <- 3.2 (2 parts) "Writing terms of a geometric sequence"  sim 0.38 | If x and $2 \sqrt { 2 } x ^ { 4 }$ are the first and fourth terms of a
-24  <- 4.7 (2 parts) "Real-world applications of geometric ser"  sim 0.27 | If a student receives a 4% salary increase at the end of each year of 
-25  <- 3.1 (2 parts) "Identifying geometric sequences and comm"  sim 0.43 | If y – 3, y, and 3y + 4 are consecutive terms in a geometric sequence,
-26  <- 5.5 (2 parts) "Solve equations with infinite geometric "  sim 0.57 | Solve for x: $\sum _ { k = 1 } ^ { 3 } x ^ { k - 1 } = 7$ a) $- 2 , - 
+17  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.59 | Determine the fourth term of the geometric sequence x, ${ \frac { x + 
+18  <- 5.2 (2 parts) "Sum of infinite geometric series in expa"  sim 0.23 | Find $f ( 1 ) + f ( 2 ) + \cdots + f ( 9 ) { \mathrm { i f ~ } } f ( x
+19  <- 5.5 (1 parts) "Solve equations with infinite geometric "  sim 0.27 | $\mathrm { E v a l u a t e } \sum _ { j = 1 } ^ { 3 0 } { \frac { 2 } 
+20  <- 4.16 (1 parts) "Solve equations with geometric sequences"  sim 0.3 | Given a geometric series with a first term of 12 and a common ratio of
+21  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.58 | For what value will the infinite geometric series, $1 + ( 1 - x ) + ( 
+22  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.56 | Determine the value of x, $x \neq 0$ , such that the infinite geometri
+23  <- 3.2 (2 parts) "Writing terms of a geometric sequence"  sim 0.37 | If x and $2 \sqrt { 2 } x ^ { 4 }$ are the first and fourth terms of a
+24  <- 4.12 (1 parts) "Real-world applications of geometric ser"  sim 0.43 | If a student receives a 4% salary increase at the end of each year of 
+25  <- 3.1 (2 parts) "Identifying geometric sequences and comm"  sim 0.44 | If y – 3, y, and 3y + 4 are consecutive terms in a geometric sequence,
+26  <- 5.5 (2 parts) "Solve equations with infinite geometric "  sim 0.58 | Solve for x: $\sum _ { k = 1 } ^ { 3 } x ^ { k - 1 } = 7$ a) $- 2 , - 
 27  <- 2.7 (1 parts) "Row pattern in triangular array"  sim 0.31 | An auditorium has 8 seats in the first row. Each subsequent row has 4 
-28  <- 3.2 (2 parts) "Writing terms of a geometric sequence"  sim 0.48 | Evaluate: $\sum _ { k = 3 } ^ { \infty } 1 0 { \Big ( } { - } { \frac 
+28  <- 3.2 (2 parts) "Writing terms of a geometric sequence"  sim 0.5 | Evaluate: $\sum _ { k = 3 } ^ { \infty } 1 0 { \Big ( } { - } { \frac 
 29  <- 3.9 (1 parts) "Solving for an unknown in consecutive ge"  sim 0.41 | What number must be added to each of 11, 15, 21 so that the resulting 
-30  <- 5.3 (2 parts) "Sum of infinite geometric series in sigm"  sim 0.57 | If the sum of an infinite geometric series is 1, and the common ratio 
-31  <- 2.1 (2 parts) "Sum of arithmetic series in terms of n"  sim 0.15 | Evaluate: $\sum _ { k = 3 } ^ { 7 } 2 ( - 3 ) ^ { k - }$ a) 41 b) 122 
-32  <- 4.7 (2 parts) "Real-world applications of geometric ser"  sim 0.19 | A new car costs \$42 000 and depreciates 20% the first year, then 15% 
-33  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.61 | Determine S of the series $3 + 7 + 1 1 + 1 5 + \cdots + ( 4 n - 1 )$ a
-34  <- 3.1 (2 parts) "Identifying geometric sequences and comm"  sim 0.38 | Determine the 1st term in a geometric progression whose common ratio i
-35  <- 5.5 (2 parts) "Solve equations with infinite geometric "  sim 0.46 | Solve for x: $\sum _ { k = 2 } ^ { 4 } ( 1 0 - k ) x = 1 6 8$ a) 8 b) 
-36  <- 2.9 (2 parts) "Arithmetic sequence word problem"  sim 0.29 | A jogger wants to run 100 km in six days. The first day she runs 10 km
+30  <- 5.2 (2 parts) "Sum of infinite geometric series in expa"  sim 0.57 | If the sum of an infinite geometric series is 1, and the common ratio 
+31  <- 2.1 (2 parts) "Sum of arithmetic series in terms of n"  sim 0.17 | Evaluate: $\sum _ { k = 3 } ^ { 7 } 2 ( - 3 ) ^ { k - }$ a) 41 b) 122 
+32  <- 4.11 (1 parts) "Real-world applications of geometric ser"  sim 0.19 | A new car costs \$42 000 and depreciates 20% the first year, then 15% 
+33  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.63 | Determine S of the series $3 + 7 + 1 1 + 1 5 + \cdots + ( 4 n - 1 )$ a
+34  <- 3.1 (2 parts) "Identifying geometric sequences and comm"  sim 0.39 | Determine the 1st term in a geometric progression whose common ratio i
+35  <- 5.5 (2 parts) "Solve equations with infinite geometric "  sim 0.48 | Solve for x: $\sum _ { k = 2 } ^ { 4 } ( 1 0 - k ) x = 1 6 8$ a) 8 b) 
+36  <- 2.10 (1 parts) "Arithmetic series word problem"  sim 0.26 | A jogger wants to run 100 km in six days. The first day she runs 10 km
 37  <- 3.7 (1 parts) "Solving for an unknown in consecutive ge"  sim 0.5 | $\operatorname { I f } - 2 x , - 4 , \ x ^ { 2 }$ are three consecutiv
-38  <- 5.2 (2 parts) "Sum of infinite geometric series in expa"  sim 0.37 | If $t _ { 1 } = 2 7$ and $t _ { 4 } = - 8$ , determine the sum of the 
-39  <- 3.1 (2 parts) "Identifying geometric sequences and comm"  sim 0.44 | The sum of terms in a geometric series is –910. If the first term is 5
-40  <- 2.1 (2 parts) "Sum of arithmetic series in terms of n"  sim 0.4 | The first three terms of an arithmetic sequence are $x + 4 , x ^ { 2 }
+38  <- 5.2 (2 parts) "Sum of infinite geometric series in expa"  sim 0.39 | If $t _ { 1 } = 2 7$ and $t _ { 4 } = - 8$ , determine the sum of the 
+39  <- 3.1 (2 parts) "Identifying geometric sequences and comm"  sim 0.43 | The sum of terms in a geometric series is –910. If the first term is 5
+40  <- 3.1 (2 parts) "Identifying geometric sequences and comm"  sim 0.4 | The first three terms of an arithmetic sequence are $x + 4 , x ^ { 2 }
 41  <- 3.2 (2 parts) "Writing terms of a geometric sequence"  sim 0.4 | If the 6th term of a geometric progression is – 160 and the 9th term i
 42  <- 3.2 (2 parts) "Writing terms of a geometric sequence"  sim 0.55 | In a geometric sequence, $t _ { 4 } = 4 0 . 5$ , and $t _ { 7 } = 1 3 
-43  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.46 | Determine an expression which represents: $\sum _ { k = 1 } ^ { n } 6 
-44  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.57 | Which expression represents the sum of the series given by: $\sum _ { 
-45  <- 3.1 (2 parts) "Identifying geometric sequences and comm"  sim 0.21 | For a certain geometric series, $S _ { n } = 2 - 2 ( - 3 ) ^ { n }$ . 
-46  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.27 | If the sum of n terms of a geometric series is $S _ { n } = 2 { \left(
-47  <- 3.2 (2 parts) "Writing terms of a geometric sequence"  sim 0.22 | Evaluate: $\sum _ { n = 0 } ^ { 9 9 } \sin ( 9 0 ^ { \circ } \cdot n )
+43  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.5 | Determine an expression which represents: $\sum _ { k = 1 } ^ { n } 6 
+44  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.6 | Which expression represents the sum of the series given by: $\sum _ { 
+45  <- 3.1 (2 parts) "Identifying geometric sequences and comm"  sim 0.22 | For a certain geometric series, $S _ { n } = 2 - 2 ( - 3 ) ^ { n }$ . 
+46  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.26 | If the sum of n terms of a geometric series is $S _ { n } = 2 { \left(
+47  <- 3.2 (2 parts) "Writing terms of a geometric sequence"  sim 0.23 | Evaluate: $\sum _ { n = 0 } ^ { 9 9 } \sin ( 9 0 ^ { \circ } \cdot n )
 48  <- 3.1 (2 parts) "Identifying geometric sequences and comm"  sim 0.45 | The sum of the first n terms of an arithmetic sequence is given by $S 
 49  <- 4.8 (1 parts) "Find parameters of a geometric series"  sim 0.35 | The 5th term of a geometric series is 2, and the 10th term is $- \frac
 50  <- 3.10 (1 parts) "Finding an indicated value of a geometri"  sim 0.27 | If – 64, a, b, 27 are four consecutive terms in a geometric sequence, 
-51  <- 3.1 (2 parts) "Identifying geometric sequences and comm"  sim 0.54 | If a geometric sequence has $t _ { 5 } = 3 x + 2$ and $t _ { 7 } = 7 x
+51  <- 3.1 (2 parts) "Identifying geometric sequences and comm"  sim 0.55 | If a geometric sequence has $t _ { 5 } = 3 x + 2$ and $t _ { 7 } = 7 x
 52  <- 3.1 (2 parts) "Identifying geometric sequences and comm"  sim 0.47 | Determine the second term of a geometric sequence if $t _ { 4 } + t _ 
-53  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.58 | The sum of the 1st and 2nd term of a geometric progression is 4, and t
+53  <- 4.3 (2 parts) "Evaluate geometric series in sigma notat"  sim 0.6 | The sum of the 1st and 2nd term of a geometric progression is 4, and t
 == Precal-12|2
 1  <- 2.1 (2 parts) "Evaluate combination of functions at a n"  sim 0.73 | Given $f ( x ) = x ^ { 2 } + 3 x - 1$ and $g ( x ) = 2 x + 3$ , find $
 2  <- 4.1 (4 parts) "Equation from verbal description"  sim 0.22 | The graph of $y = ( x + 1 ) ^ { 2 } + 2$ compared to the graph of $y =
@@ -235,7 +235,7 @@
 5  <- 5.6 (2 parts) "Graph inverse of a function"  sim 0.21 | The graph of $y = - a ^ { x }$ compared to the graph of $y = a ^ { x }
 6  <- 6.4 (1 parts) "Transforming an implicit relation"  sim 0.53 | Given the function $y = f ( x )$ , the graph of $y = f ( { \frac { 1 }
 7  <- 6.4 (3 parts) "Transforming an implicit relation"  sim 0.31 | The graph of $y = 2 f ( 3 x )$ compared to the graph of $y = f ( x )$ 
-8  <- 3.3 (2 parts) "Evaluating composite functions from tabl"  sim 0.37 | If the graph of $y = f ( x )$ has a domain $- 3 \leq x \leq 2$ , then 
+8  <- 3.3 (2 parts) "Evaluating composite functions from tabl"  sim 0.38 | If the graph of $y = f ( x )$ has a domain $- 3 \leq x \leq 2$ , then 
 9  <- 3.3 (4 parts) "Evaluating composite functions from tabl"  sim 0.39 | If the graph of $y = f ( x )$ has a range $- 3 \leq f ( x ) \leq 2$ , 
 10  <- 2.3 (1 parts) "Simplify algebraic combination of functi"  sim 0.58 | Which equation represents a reflection of the graph $3 - x = 2 y ^ { 3
 11  <- 5.7 (2 parts) "Transform points on inverse functions"  sim 0.62 | If the point, (−1, 2) , is on the graph $y = f ( x )$ , what point is 
@@ -259,7 +259,7 @@
 29  <- 2.3 (2 parts) "Simplify algebraic combination of functi"  sim 0.46 | Which equation represents the graph of $y = f ( - x )$ translated 2 un
 30  <- 4.10 (2 parts) "Transformed point coordinates"  sim 0.56 | If the point, (-2, –6) , is on the graph of $y = f ( x )$ , what point
 31  <- 6.7 (1 parts) "Sketching transformations of a given gra"  sim 0.19 | The graph of the function $y = f ( x )$ is shown at left, what transfo
-32  <- 6.3 (1 parts) "Transforming a polynomial function"  sim 0.44 | If $f ( x ) = 4 x ^ { 2 } + 8$ , determine the new equation g (x) afte
+32  <- 6.3 (1 parts) "Transforming a polynomial function"  sim 0.43 | If $f ( x ) = 4 x ^ { 2 } + 8$ , determine the new equation g (x) afte
 33  <- 5.7 (2 parts) "Transform points on inverse functions"  sim 0.64 | If the point, (−1, − 2) , is on the graph $y = f ( x )$ , what point i
 34  <- 6.2 (1 parts) "Finding coordinates of transformed point"  sim 0.72 | If the point, (-2, 4) , is on the graph of $y = f ( x )$ , what point 
 35  <- 6.2 (3 parts) "Finding coordinates of transformed point"  sim 0.68 | If the point, (-2, 4) , is on the graph of $y = f ( x )$ , what point 
@@ -275,7 +275,7 @@
 45  <- 3.3 (2 parts) "Evaluating composite functions from tabl"  sim 0.38 | In which line would the graph of $f ( x ) = 2 x ^ { 2 } - 3 x$ be refl
 46  <- 6.4 (3 parts) "Transforming an implicit relation"  sim 0.33 | If the point (8, –6) is on the graph of $y = f ( x )$ , what point is 
 47  <- 2.1 (4 parts) "Evaluate combination of functions at a n"  sim 0.51 | Which equation represents the graph of $y = x ^ { 3 } - x ^ { 2 } + x 
-48  <- 6.3 (4 parts) "Transforming a polynomial function"  sim 0.4 | Which equation represents the graph of $y = f ( x )$ after it is refle
+48  <- 6.3 (4 parts) "Transforming a polynomial function"  sim 0.39 | Which equation represents the graph of $y = f ( x )$ after it is refle
 49  <- 4.1 (4 parts) "Equation from verbal description"  sim 0.31 | The graph of $y = \sqrt { a - x } \ , a > 0$ compared to the graph of 
 50  <- 5.5 (4 parts) "Compose functions involving inverses"  sim 0.55 | Given $f ( x ) = { \frac { x } { 3 x - 1 } }$ , determine $f ^ { - 1 }
 51  <- 5.5 (4 parts) "Compose functions involving inverses"  sim 0.65 | ${ \mathrm { G i v e n ~ } } f ( x ) = { \frac { 2 x } { 1 - x } }$ , 
@@ -395,41 +395,41 @@
 == Precal-12|6
 1  <- 4.3 (2 parts) "Properties of trigonometric functions"  sim 0.57 | Determine the amplitude and period of $y = - 2 \cos \left( \frac { \pi
 2  <- 4.1 (2 parts) "Matching function to properties"  sim 0.5 | Determine the phase shift and vertical displacement of $y = - 2 \cos \
-3  <- 4.3 (2 parts) "Properties of trigonometric functions"  sim 0.45 | Determine the period of $y = \tan { \frac { \pi } { 3 } } x$ a) $\frac
+3  <- 4.3 (2 parts) "Properties of trigonometric functions"  sim 0.46 | Determine the period of $y = \tan { \frac { \pi } { 3 } } x$ a) $\frac
 4  <- 1.10 (1 parts) "Circle Arc Length, Radius, and Angle Cal"  sim 0.55 | Given a circle with radius 6 cm and length of arc 12 cm, determine the
 5  <- 3.11 (2 parts) "Solve basic trigonometric equations on a"  sim 0.44 | If $\csc x = - { \frac { 2 } { \sqrt { 3 } } }$ and $\tan x < 0$ , det
-6  <- 4.3 (1 parts) "Properties of trigonometric functions"  sim 0.41 | If (2, – 3) is on the terminal side of standard position angle θ , wha
-7  <- 3.8 (3 parts) "Find another angle with the same trigono"  sim 0.36 | Determine the smallest positive angle θ, in radians, such that csc $\t
+6  <- 4.3 (1 parts) "Properties of trigonometric functions"  sim 0.4 | If (2, – 3) is on the terminal side of standard position angle θ , wha
+7  <- 3.8 (3 parts) "Find another angle with the same trigono"  sim 0.35 | Determine the smallest positive angle θ, in radians, such that csc $\t
 8  <- 1.7 (4 parts) "Convert Exact Radians to Degrees"  sim 0.32 | Convert 10 radians to a degree value between $0 ^ { \circ }$ and $3 6 
 9  <- 3.13 (1 parts) "Evaluate multiple and fractional angle t"  sim 0.47 | Determine the exact value of $\csc { \frac { 5 \pi } { 3 } }$  a) $- \
 10  <- 4.3 (4 parts) "Properties of trigonometric functions"  sim 0.32 | Determine the value of $\cot { \frac { 1 7 \pi } { 6 } }$  a) $- { \sq
 11  <- 2.2 (4 parts) "Determine quadrant from trigonometric si"  sim 0.49 | Determine the quadrant in which the terminal arm of θ lies for sec $\t
 12  <- 3.1 (2 parts) "Find reference angle"  sim 0.35 | Determine the reference angle for $- \frac { 7 \pi } { 6 }$ a) $- { \f
-13  <- 2.5 (1 parts) "Trigonometric functions from a terminal "  sim 0.38 | Determine secθ if the terminal arm of angle θ in standard position int
-14  <- 2.6 (2 parts) "Trigonometric functions from one ratio a"  sim 0.3 | Determine the maximum value of y = −a sin x – b , $a , \ b > 0$ a) $- 
+13  <- 2.5 (1 parts) "Trigonometric functions from a terminal "  sim 0.37 | Determine secθ if the terminal arm of angle θ in standard position int
+14  <- 2.6 (2 parts) "Trigonometric functions from one ratio a"  sim 0.31 | Determine the maximum value of y = −a sin x – b , $a , \ b > 0$ a) $- 
 15  <- 3.2 (2 parts) "Evaluate trigonometric function of an an"  sim 0.44 | Determine the minimum value of the function $y = a \sin x - b ,$ $a \ 
 16  <- 4.3 (2 parts) "Properties of trigonometric functions"  sim 0.4 | What is the value of tan B if cos $B = - \frac { 3 } { 5 }$ and $\pi \
 17  <- 4.3 (2 parts) "Properties of trigonometric functions"  sim 0.31 | Solve: $\sec x = { \frac { - 2 { \sqrt { 3 } } } { 3 } }$ $0 \leq x < 
-18  <- 5.12 (2 parts) "Determining periodic parameters and extr"  sim 0.32 | The height, h, in metres, of a certain Ferris wheel seat above the gro
-19  <- 3.11 (2 parts) "Solve basic trigonometric equations on a"  sim 0.5 | For $f { \big ( } x { \big ) } = \cos b x , \ b > 0 .$ find the smalle
+18  <- 5.12 (2 parts) "Determining periodic parameters and extr"  sim 0.31 | The height, h, in metres, of a certain Ferris wheel seat above the gro
+19  <- 3.5 (2 parts) "Find smallest positive angle for given t"  sim 0.5 | For $f { \big ( } x { \big ) } = \cos b x , \ b > 0 .$ find the smalle
 20  <- 4.3 (2 parts) "Properties of trigonometric functions"  sim 0.29 | Determine the values of x if csc x = -1.325 , $\ 0 \leq x < 2 \pi$ a) 
 21  <- 3.11 (2 parts) "Solve basic trigonometric equations on a"  sim 0.44 | Determine the value of csc x if tan x = −a , where $a > 0$ $\cos x < 0
-22  <- 3.11 (2 parts) "Solve basic trigonometric equations on a"  sim 0.5 | Determine the value of cosθ if $\csc \theta = { \frac { a } { b } }$ ,
-23  <- 3.11 (1 parts) "Solve basic trigonometric equations on a"  sim 0.38 | Determine the value of secθif cot $\theta = - a$ , where $a > 0$ and s
+22  <- 3.11 (2 parts) "Solve basic trigonometric equations on a"  sim 0.49 | Determine the value of cosθ if $\csc \theta = { \frac { a } { b } }$ ,
+23  <- 3.11 (2 parts) "Solve basic trigonometric equations on a"  sim 0.37 | Determine the value of secθif cot $\theta = - a$ , where $a > 0$ and s
 24  <- 4.3 (2 parts) "Properties of trigonometric functions"  sim 0.33 | A cosine curve has a maximum point at (2, 16) and the nearest minimum 
-25  <- 2.13 (1 parts) "Evaluating trigonometric function from a"  sim 0.24 | Determine an equation for the function below  $$ y = - \sin \frac { \p
+25  <- 2.13 (1 parts) "Evaluating trigonometric function from a"  sim 0.23 | Determine an equation for the function below  $$ y = - \sin \frac { \p
 26  <- 3.12 (1 parts) "Evaluate multiple and fractional angle t"  sim 0.18 | Evaluate $\cot { \frac { 2 \pi } { 5 } }$ a) 0.203 b) 0.325 c) 1.021 d
-27  <- 3.11 (2 parts) "Solve basic trigonometric equations on a"  sim 0.41 | Find θ , to the nearest degree, if θ terminates in quadrant II and sec
+27  <- 3.11 (1 parts) "Solve basic trigonometric equations on a"  sim 0.41 | Find θ , to the nearest degree, if θ terminates in quadrant II and sec
 28  <- 4.3 (2 parts) "Properties of trigonometric functions"  sim 0.45 | The graph of the function $f ( x ) = \cos x$ is translated 3 units lef
 29  <- 1.10 (1 parts) "Circle Arc Length, Radius, and Angle Cal"  sim 0.37 | A circle has a radius 10 cm. Determine the area of a sector (pre-shade
-30  <- 4.3 (2 parts) "Properties of trigonometric functions"  sim 0.21 | Solve $\sec x = 3 . 4 5 , 0 \leq x < 2 \pi$ a) 0.29, 2.85b) 0.29, 5.99
+30  <- 4.3 (2 parts) "Properties of trigonometric functions"  sim 0.2 | Solve $\sec x = 3 . 4 5 , 0 \leq x < 2 \pi$ a) 0.29, 2.85b) 0.29, 5.99
 31  <- 2.11 (1 parts) "Trigonometric ratios from curve intersec"  sim 0.45 | The point $( a , b )$ is the point of intersection of the terminal arm
-32  <- 3.11 (2 parts) "Solve basic trigonometric equations on a"  sim 0.53 | Determine the minimum value of the function $f ( x ) = a \cos x + d$ ,
-33  <- 4.3 (4 parts) "Properties of trigonometric functions"  sim 0.17 | Determine the equations of the asymptotes of the function $y = \tan b 
-34  <- 5.8 (2 parts) "Determining periodic parameters and extr"  sim 0.4 | A wheel of radius 20 cm has its centre 25 cm above the ground. It rota
-35  <- 5.12 (2 parts) "Determining periodic parameters and extr"  sim 0.43 | The function h(t) = 3.9 sin 0.16 π (t – 3) + 6.5 gives the depth of wa
+32  <- 3.11 (2 parts) "Solve basic trigonometric equations on a"  sim 0.54 | Determine the minimum value of the function $f ( x ) = a \cos x + d$ ,
+33  <- 4.3 (4 parts) "Properties of trigonometric functions"  sim 0.16 | Determine the equations of the asymptotes of the function $y = \tan b 
+34  <- 5.8 (2 parts) "Determining periodic parameters and extr"  sim 0.39 | A wheel of radius 20 cm has its centre 25 cm above the ground. It rota
+35  <- 5.12 (2 parts) "Determining periodic parameters and extr"  sim 0.41 | The function h(t) = 3.9 sin 0.16 π (t – 3) + 6.5 gives the depth of wa
 36  <- 4.3 (4 parts) "Properties of trigonometric functions"  sim 0.43 | Determine a sinusoidal function that gives the height h, after t secon
-37  <- 4.3 (2 parts) "Properties of trigonometric functions"  sim 0.12 | At what time does the rider first reach a height of 35 m? a) 4.1 sec. 
+37  <- 4.3 (2 parts) "Properties of trigonometric functions"  sim 0.11 | At what time does the rider first reach a height of 35 m? a) 4.1 sec. 
 38  <- 4.3 (2 parts) "Properties of trigonometric functions"  sim 0.31 | At White Rock pier, the maximum depth of 8 meters occurred at 4:00 a.m
-39  <- 5.5 (2 parts) "Modeling periodic phenomena with sinusoi"  sim 0.21 | What was the depth of water at White Rock pier at 12 noon on July 1? a
+39  <- 5.6 (1 parts) "Modeling periodic phenomena with sinusoi"  sim 0.23 | What was the depth of water at White Rock pier at 12 noon on July 1? a
 40  <- 5.12 (2 parts) "Determining periodic parameters and extr"  sim 0.2 | Determine the first time on July 1 that the water reached a depth of 7
