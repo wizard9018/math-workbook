@@ -9,7 +9,7 @@ import katex from 'katex'
 import 'katex/dist/katex.min.css'
 import './demo.css'
 import { supabase } from './supabase'
-import { AuthGate } from './auth'
+import { AuthGate, GUEST_ID, leaveGuest } from './auth'
 
 import { LessonPlayer } from './main'
 import { VerticalLesson } from './vertical'
@@ -331,7 +331,7 @@ function Header({ grade, onGrade, done, total, email, onContinue, slot, onRoadma
       {slot}
       <span className="ml-auto hidden text-sm text-slate-500 sm:block">{done} / {total} exercises done</span>
       <span className="hidden max-w-48 truncate text-sm text-slate-500 md:block" title={email}>{email}</span>
-      <button onClick={() => supabase.auth.signOut()} className="rounded-lg border px-2 py-1 text-sm text-slate-600 hover:bg-slate-50">Sign out</button>
+      <button onClick={() => { leaveGuest(); supabase.auth.signOut().finally(() => window.location.reload()) }} className="rounded-lg border px-2 py-1 text-sm text-slate-600 hover:bg-slate-50">{email === 'Guest' ? 'Leave guest mode' : 'Sign out'}</button>
     </header>
   )
 }
@@ -363,6 +363,11 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
   const [sideNonce, setSideNonce] = useState(0) // bumped to make the left list unfold the exercise that was opened from the search or the roadmap
   const [loaded, setLoaded] = useState(false) // the saved progress has been read: only then is it written back
   useEffect(() => {
+    if (userId === GUEST_ID) { // a guest: the progress is kept in this browser only
+      try { const s = localStorage.getItem('mw-guest-progress'); if (s) setResults(JSON.parse(s)) } catch { /* nothing saved yet */ }
+      setLoaded(true)
+      return
+    }
     supabase.from('quiz_progress').select('results').eq('user_id', userId).maybeSingle().then(({ data }) => {
       if (data?.results) setResults(data.results)
       setLoaded(true)
@@ -370,6 +375,7 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
   }, [userId])
   useEffect(() => {
     if (!loaded) return
+    if (userId === GUEST_ID) { try { localStorage.setItem('mw-guest-progress', JSON.stringify(results)) } catch { /* private window */ } return }
     const t = setTimeout(() => { supabase.from('quiz_progress').upsert({ user_id: userId, results, updated_at: new Date().toISOString() }).then(({ error }) => { if (error) console.error('save progress', error) }) }, 800) // the request is only sent once .then is attached
     return () => clearTimeout(t)
   }, [results, loaded, userId])
