@@ -17,6 +17,7 @@ export interface Draw {
   c: number
   vx?: number // a vertical line x = vx instead of y = m x + c
   xl?: number // a label on every xl-th x line only (a half step: 2)
+  sys?: { m2: number; c2: number; vx2?: number; ix: number; iy: number } // a system by graphing (system-draw.tsx): the second line and the point where the lines meet
   tol?: number // how far (in y) a clicked point may be from the line and still count (a coarse grid: the lawn mower graph)
 }
 // a table the student fills in by typing (fill-table.tsx): rows of cells (TeX, or null = a box to fill), the numbers that go in the boxes (left to right, top to bottom)

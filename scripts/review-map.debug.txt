@@ -115,33 +115,33 @@
 8  <- 4.4 (3 parts) "Find parameter for parallel or perpendic"  sim 0.64 | The line through the point (8, y) and (2, – 3) has a slope parallel to
 == Math 10|5
 1  <- 1.9 (2 parts) "Writing slope-intercept equations from s"  sim 0.63 | Find the slope and y-intercept.  a) $2 x - 5 y = 7$  $$ 5 x + y = - 2 
-2  <- 1.3 (1 parts) "Converting standard form to slope-interc"  sim 0.78 | Write the standard form equation in slope-intercept form.  a) $6 x - y
-3  <- 1.9 (1 parts) "Writing slope-intercept equations from s"  sim 0.69 | Write the slope-intercept equation in standard form. a) $y = - \frac {
-4  <- 1.5 (1 parts) "Converting point-slope form to slope-int"  sim 0.77 | Write the point-slope equation in slope-intercept form.  $$ y + 1 = - 
-5  <- 1.6 (1 parts) "Converting point-slope form to standard "  sim 0.69 | Write the point-slope equation in standard form.  a) $y + 1 = - \frac 
-6  <- 1.11 (3 parts) "Writing linear equations from a graph in"  sim 0.43 | Write the equation of each line in standard form. a) $( 0 , - 3 ) , m 
+2  <- 1.3 (1 parts) "Converting standard form to slope-interc"  sim 0.76 | Write the standard form equation in slope-intercept form.  a) $6 x - y
+3  <- 1.9 (1 parts) "Writing slope-intercept equations from s"  sim 0.7 | Write the slope-intercept equation in standard form. a) $y = - \frac {
+4  <- 1.5 (1 parts) "Converting point-slope form to slope-int"  sim 0.76 | Write the point-slope equation in slope-intercept form.  $$ y + 1 = - 
+5  <- 1.6 (1 parts) "Converting point-slope form to standard "  sim 0.68 | Write the point-slope equation in standard form.  a) $y + 1 = - \frac 
+6  <- 1.11 (3 parts) "Writing linear equations from a graph in"  sim 0.42 | Write the equation of each line in standard form. a) $( 0 , - 3 ) , m 
 == Math 10|6
-1  <- 1.12 (1 parts) "Conceptual Analysis of Systems"  sim 0.08 | Label the system as either consistent or inconsistent.  a) Parallel li
-2  <- 1.6 (4 parts) "Solving Systems by Graphing"  sim 0.29 | Solve by graphing.  a) $3 x - 2 y = 1 9$ −x + 4y = − 13  ![](images/7e
-3  <- 1.4 (2 parts) "Testing Ordered Pairs as Solutions"  sim 0.31 | The solution of the system $\left\{ { \begin{array} { c } { A x - 5 y 
-4  <- 2.2 (3 parts) "Solve linear systems by addition"  sim 0.44 | Solve by the addition method.  a) $3 x + y = 6$  $$ 3 x + 2 y = 3 $$  
-5  <- 3.1 (1 parts) "Solve linear system by substitution"  sim 0.49 | Solve by the substitution method  a) $y = 2 x + 7$  $$ x + 2 y = - 6 $
-6  <- 4.13 (1 parts) "Cost and Value Word Problems"  sim 0.21 | Jerry has 150 m of fencing to enclose a rectangular chicken pen. If th
-7  <- 4.1 (2 parts) "Systems of Linear Equations"  sim 0.27 | Trudene invests part of her savings of \$150 000 in mutual funds that 
+1  <- 1.6 (2 parts) "Solve a system by graphing"  sim 0.23 | Label the system as either consistent or inconsistent.  a) Parallel li
+2  <- 1.4 (2 parts) "Testing Ordered Pairs as Solutions"  sim 0.2 | Solve by graphing.  a) $3 x - 2 y = 1 9$ −x + 4y = − 13  ![](images/7e
+3  <- 1.4 (2 parts) "Testing Ordered Pairs as Solutions"  sim 0.25 | The solution of the system $\left\{ { \begin{array} { c } { A x - 5 y 
+4  <- 2.2 (3 parts) "Solve linear systems by addition"  sim 0.42 | Solve by the addition method.  a) $3 x + y = 6$  $$ 3 x + 2 y = 3 $$  
+5  <- 3.1 (1 parts) "Solve linear system by substitution"  sim 0.47 | Solve by the substitution method  a) $y = 2 x + 7$  $$ x + 2 y = - 6 $
+6  <- 4.3 (1 parts) "Number, Geometry, and Age Word Problems"  sim 0.21 | Jerry has 150 m of fencing to enclose a rectangular chicken pen. If th
+7  <- 4.1 (2 parts) "Systems of Linear Equations"  sim 0.23 | Trudene invests part of her savings of \$150 000 in mutual funds that 
 == Math 10|8
-1  <- 1.1 (2 parts) "Evaluate trigonometric ratios"  sim 0.47 | Find each ratio to four decimal places using a calculator.  a) $\sin 6
+1  <- 1.1 (2 parts) "Evaluate trigonometric ratios"  sim 0.48 | Find each ratio to four decimal places using a calculator.  a) $\sin 6
 2  <- 1.2 (2 parts) "Find angle from trigonometric ratio"  sim 0.45 | Find the measure of the acute angle θ to one decimal place.  a) $\sin 
-3  <- 1.2 (6 parts) "Find angle from trigonometric ratio"  sim 0.29 | Solve.  a) $\sin 2 0 ^ { \circ } = \cos$ o  c) $\frac { \sin 2 0 ^ { \
+3  <- 1.2 (6 parts) "Find angle from trigonometric ratio"  sim 0.28 | Solve.  a) $\sin 2 0 ^ { \circ } = \cos$ o  c) $\frac { \sin 2 0 ^ { \
 == Precal-11|1
-1  <- 1.12 (1 parts) "Factor expressions with common binomial "  sim 0.56 | Factor completely  a) $x ^ { 2 } - 1 0 x + 2 4$ b) $x ^ { 2 } - 4 x - 
-2  <- 1.12 (2 parts) "Factor expressions with common binomial "  sim 0.29 | Find all integer values of k such that the trinomial factors. a) $x ^ 
+1  <- 1.12 (2 parts) "Factor expressions with common binomial "  sim 0.57 | Factor completely  a) $x ^ { 2 } - 1 0 x + 2 4$ b) $x ^ { 2 } - 4 x - 
+2  <- 1.12 (2 parts) "Factor expressions with common binomial "  sim 0.28 | Find all integer values of k such that the trinomial factors. a) $x ^ 
 3  <- 2.4 (6 parts) "Factor polynomial with common binomial f"  sim 0.52 | Factor completely.  a) $2 x ^ { 2 } + 1 1 x + 1 2$  c) $8 x ^ { 2 } + 
-4  <- 2.4 (1 parts) "Factor polynomial with common binomial f"  sim 0.43 | Find all integer values of k such that the trinomial factors.  a) $2 x
+4  <- 2.4 (1 parts) "Factor polynomial with common binomial f"  sim 0.42 | Find all integer values of k such that the trinomial factors.  a) $2 x
 5  <- 3.3 (4 parts) "Finding intercepts and axis of symmetry "  sim 0.19 | Graph and state the vertex, axis of symmetry, x-intercept(s), y-interc
 6  <- 3.6 (4 parts) "Finding a symmetric point on a parabola"  sim 0.69 | Find another point on the quadratic function, if the vertex and a poin
 7  <- 4.2 (4 parts) "Graph quadratic function and determine k"  sim 0.21 | Determine the direction and distance g(x) is shifted in relation to f(
-8  <- 4.2 (2 parts) "Graph quadratic function and determine k"  sim 0.51 | For the graph of each function, state the vertex, axis of symmetry, x-
-9  <- 4.5 (4 parts) "Write parabola equation from shape and m"  sim 0.74 | Write an equation of a parabola that has the shape $f ( x ) = \pm { \f
+8  <- 4.2 (2 parts) "Graph quadratic function and determine k"  sim 0.52 | For the graph of each function, state the vertex, axis of symmetry, x-
+9  <- 4.5 (4 parts) "Write parabola equation from shape and m"  sim 0.75 | Write an equation of a parabola that has the shape $f ( x ) = \pm { \f
 == Precal-11|5
 1  <- 1.3 (6 parts) "Solving monomial power equations with ra"  sim 0.38 | Solve for x.  a) $x ^ { 2 } = 1 6$ b) $x ^ { 3 } = 2 7$  c) $x ^ { 2 }
 2  <- 1.6 (6 parts) "Simplifying algebraic radicals with real"  sim 0.3 | Simplify. State the restrictions, if any, on the variable.  a) $\sqrt 

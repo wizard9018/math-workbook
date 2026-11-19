@@ -117,6 +117,15 @@ function pointLine(f: Record<string, unknown>): string {
 }
 const figureHtml = (f: Record<string, unknown>) => pointLine(f) ||renderToStaticMarkup(createElement(MathFigure, { figure: { type: 'drawing', ...f } as unknown as FigureSpec }))
 // "Evaluate for a = -4, b = -6: ab" -> the instruction, then the expression alone on its own line (same size)
+// "Determine the linear function \(f(x) = mx + b\) if \(f(0) = -1\) and \(f(3) = 8\).": what comes after "if" (only formulas, joined by and / or / commas) goes on its own line
+const ifSplit = (q: string): string | null => {
+  const m = /^([\s\S]*?\sif)\s+(\\\([\s\S]+\\\)[.?]?)$/.exec(q)
+  if (!m) return null
+  const [, head, rest] = m
+  if (rest.replace(/\\\([\s\S]*?\\\)/g, '').replace(/\b(?:and|or)\b|[,.;?\s]/g, '') !== '') return null
+  if ((head.match(/\\\(/g) ?? []).length !== (head.match(/\\\)/g) ?? []).length) return null
+  return `<div>${rich(head)}</div><div class="mt-2 max-w-full overflow-x-auto overflow-y-hidden py-1">${rich(rest.replace(/[.?]$/, ''))}</div>`
+}
 // a question that ends with a formula (an equation or inequality) after a sentence, "Which line represents the linear equation \(2x - 3y = -6\)?": the formula goes on its own line
 const endFormula = (q: string): string | null => {
   const m = /^([\s\S]*[^\s(])\s+\\\(((?:(?!\\\()[\s\S])+?)\\\)\s*([.?!]?)$/.exec(q)
@@ -131,7 +140,7 @@ const stem = (q: string) => {
   let at = -1
   // (a colon after a short label at the start of a later line, "Option 2: 6 notebooks for $7.50", is a list item, not the end of the instruction)
   for (const m of q.matchAll(/:[ \n]/g)) if (!/note$/i.test(q.slice(0, m.index)) && !/\n[^\n:]{1,20}$/.test(q.slice(0, m.index))) at = m.index!
-  if (at < 0) return endFormula(q) ?? rich(q)
+  if (at < 0) return ifSplit(q) ?? endFormula(q) ?? rich(q)
   const head = q.slice(0, at + 1)
   let tail = q.slice(at + 1).trim().replace(/[.?]$/, '')
   if ((head.match(/\\\(/g) ?? []).length !== (head.match(/\\\)/g) ?? []).length) return rich(q) // the colon is inside a formula
