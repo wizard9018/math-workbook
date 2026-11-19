@@ -133,15 +133,15 @@
 2  <- 1.2 (2 parts) "Find angle from trigonometric ratio"  sim 0.45 | Find the measure of the acute angle θ to one decimal place.  a) $\sin 
 3  <- 1.2 (6 parts) "Find angle from trigonometric ratio"  sim 0.28 | Solve.  a) $\sin 2 0 ^ { \circ } = \cos$ o  c) $\frac { \sin 2 0 ^ { \
 == Precal-11|1
-1  <- 1.12 (2 parts) "Factor expressions with common binomial "  sim 0.57 | Factor completely  a) $x ^ { 2 } - 1 0 x + 2 4$ b) $x ^ { 2 } - 4 x - 
-2  <- 1.12 (2 parts) "Factor expressions with common binomial "  sim 0.28 | Find all integer values of k such that the trinomial factors. a) $x ^ 
-3  <- 2.4 (6 parts) "Factor polynomial with common binomial f"  sim 0.52 | Factor completely.  a) $2 x ^ { 2 } + 1 1 x + 1 2$  c) $8 x ^ { 2 } + 
-4  <- 2.4 (1 parts) "Factor polynomial with common binomial f"  sim 0.42 | Find all integer values of k such that the trinomial factors.  a) $2 x
-5  <- 3.3 (4 parts) "Finding intercepts and axis of symmetry "  sim 0.19 | Graph and state the vertex, axis of symmetry, x-intercept(s), y-interc
-6  <- 3.6 (4 parts) "Finding a symmetric point on a parabola"  sim 0.69 | Find another point on the quadratic function, if the vertex and a poin
-7  <- 4.2 (4 parts) "Graph quadratic function and determine k"  sim 0.21 | Determine the direction and distance g(x) is shifted in relation to f(
-8  <- 4.2 (2 parts) "Graph quadratic function and determine k"  sim 0.52 | For the graph of each function, state the vertex, axis of symmetry, x-
-9  <- 4.5 (4 parts) "Write parabola equation from shape and m"  sim 0.75 | Write an equation of a parabola that has the shape $f ( x ) = \pm { \f
+1  <- 1.12 (2 parts) "Factor expressions with common binomial "  sim 0.58 | Factor completely  a) $x ^ { 2 } - 1 0 x + 2 4$ b) $x ^ { 2 } - 4 x - 
+2  <- 1.12 (2 parts) "Factor expressions with common binomial "  sim 0.31 | Find all integer values of k such that the trinomial factors. a) $x ^ 
+3  <- 2.4 (6 parts) "Factor polynomial with common binomial f"  sim 0.53 | Factor completely.  a) $2 x ^ { 2 } + 1 1 x + 1 2$  c) $8 x ^ { 2 } + 
+4  <- 2.4 (1 parts) "Factor polynomial with common binomial f"  sim 0.46 | Find all integer values of k such that the trinomial factors.  a) $2 x
+5  <- 3.4 (2 parts) "Graph a quadratic function from a table "  sim 0.21 | Graph and state the vertex, axis of symmetry, x-intercept(s), y-interc
+6  <- 3.6 (3 parts) "Finding a symmetric point on a parabola"  sim 0.72 | Find another point on the quadratic function, if the vertex and a poin
+7  <- 4.2 (1 parts) "Graph a quadratic function and find its "  sim 0.17 | Determine the direction and distance g(x) is shifted in relation to f(
+8  <- 4.2 (4 parts) "Graph a quadratic function and find its "  sim 0.38 | For the graph of each function, state the vertex, axis of symmetry, x-
+9  <- 4.5 (4 parts) "Write parabola equation from shape and m"  sim 0.76 | Write an equation of a parabola that has the shape $f ( x ) = \pm { \f
 == Precal-11|5
 1  <- 1.3 (6 parts) "Solving monomial power equations with ra"  sim 0.38 | Solve for x.  a) $x ^ { 2 } = 1 6$ b) $x ^ { 3 } = 2 7$  c) $x ^ { 2 }
 2  <- 1.6 (6 parts) "Simplifying algebraic radicals with real"  sim 0.3 | Simplify. State the restrictions, if any, on the variable.  a) $\sqrt 
