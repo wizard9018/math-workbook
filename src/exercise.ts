@@ -17,6 +17,10 @@ export interface Draw {
   c: number
   vx?: number // a vertical line x = vx instead of y = m x + c
   xl?: number // a label on every xl-th x line only (a half step: 2)
+  ineq?: { dashed: boolean; above: boolean } // a linear inequality graphed on the plane (ineq-draw.tsx): dashed or solid boundary, the solution above the line (right of a vertical line) or below
+  ang?: number // an angle sketched in standard position (angle-sketch.tsx): its measure in degrees (negative = clockwise)
+  reg?: { m: number; c: number; vx?: number; a?: number; h?: number; k?: number; dashed: boolean; above: boolean }[] // the boundary lines of a system of inequalities (region-pick.tsx): click the solution region
+  par?: { c1: { m?: number; c?: number; a?: number; h?: number; k?: number }; c2: { m?: number; c?: number; a?: number; h?: number; k?: number }; ints: number[][] } // a parabola-line / two-parabola system by graphing (parab-system.tsx)
   sys?: { m2: number; c2: number; vx2?: number; ix: number; iy: number } // a system by graphing (system-draw.tsx): the second line and the point where the lines meet
   tol?: number // how far (in y) a clicked point may be from the line and still count (a coarse grid: the lawn mower graph)
 }

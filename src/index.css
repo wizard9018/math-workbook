@@ -130,3 +130,6 @@ body {
   transform: rotate(8deg) translateY(3px);
   filter: grayscale(0.55) brightness(0.92);
 }
+
+/* a formula (an expression, a bracket such as (b > 0)) stays on one line: KaTeX would break it after a relation or an operator */
+.katex { white-space: nowrap; }

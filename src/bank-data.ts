@@ -87,6 +87,7 @@ function wrapBare(s: string): string {
 
 export const rich = (s: string): string => {
   if (s.startsWith('<svg')) return s // a picture (number line) written by the exporter
+  s = s.replace(/\\begin\{align\*?\}([\s\S]+?)\\end\{align\*?\}/g, (_, b) => `\\(\\displaystyle\\begin{aligned}${b}\\end{aligned}\\)`) // an align environment outside \( \) is a display formula
   const tab = withTables(s)
   if (tab !== null) return tab
   // an answer written as bare LaTeX (\frac{3}{5}) without \( \): the whole text is a formula
@@ -96,11 +97,19 @@ export const rich = (s: string): string => {
   }
   let out = ''
   let last = 0
-  for (const m of s.matchAll(/\\\(([\s\S]+?)\\\)/g)) {
-    out += esc(s.slice(last, m.index)).replace(/\n/g, '<br>')
-    out += katex.renderToString(m[1].replace(/\\text\{\s*(?:\\_)+\s*\}/g, '\\underline{\\quad}'), { throwOnError: false }) // a blank written \text{\_\_\_}: a visible line
-    last = m.index! + m[0].length
-  }
+  // a formula keeps the bracket and the punctuation next to it on its line: "(" + formula + ")" or "." never starts a new line alone
+  const matches = [...s.matchAll(/\\\(([\s\S]+?)\\\)/g)]
+  matches.forEach((m, i) => {
+    let before = s.slice(last, m.index)
+    const open = /[(\[]$/.exec(before)?.[0] ?? ''
+    if (open) before = before.slice(0, -1)
+    out += esc(before).replace(/\n/g, '<br>')
+    const end = m.index! + m[0].length
+    const next = i + 1 < matches.length ? matches[i + 1].index! : s.length
+    const close = /^[)\].,;:?!]+/.exec(s.slice(end, next))?.[0] ?? ''
+    out += '<span style="white-space:nowrap">' + esc(open) + katex.renderToString(m[1].replace(/\\text\{\s*(?:\\_)+\s*\}/g, '\\underline{\\quad}'), { throwOnError: false }) + esc(close) + '</span>' // a blank written \text{\_\_\_}: a visible line
+    last = end + close.length
+  })
   return out + esc(s.slice(last)).replace(/\n/g, '<br>')
 }
 // a figure that is only labelled points on the x axis (compare integers on a number line): a number line, not a coordinate grid

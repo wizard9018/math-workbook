@@ -297,12 +297,33 @@ function Drawing({ f }: { f: DrawingFigure }) {
   )
   const late: ReactNode[] = [] // labels of edges, polygons and angles: drawn after every line, so no later line runs through them
   // an edge label sits beside its edge (on the side away from the middle of the picture), not on it
+  // where the label of an angle goes: along the bisector, farther out for a narrow angle; two angle labels that would run into each other both move in toward their own vertex
+  const angGeom = (o: Extract<DrawingElement, { t: 'angle' }>) => {
+    const a1 = Math.atan2(o.from[1] - o.at[1], o.from[0] - o.at[0])
+    let a2 = Math.atan2(o.to[1] - o.at[1], o.to[0] - o.at[0])
+    while (a2 <= a1) a2 += 2 * Math.PI
+    return { a1, a2, mid: (a1 + a2) / 2, narrow: a2 - a1 < 0.8 }
+  }
+  const angPos = (o: Extract<DrawingElement, { t: 'angle' }>, k: number): [number, number] => {
+    const g = angGeom(o), rr = 0.12 * Math.min(dx, dy)
+    return [sx(o.at[0] + k * rr * Math.cos(g.mid)), sy(o.at[1] + k * rr * Math.sin(g.mid))]
+  }
+  const angles = f.elements.filter((o): o is Extract<DrawingElement, { t: 'angle' }> => o.t === 'angle' && !!o.label)
+  const crowded = new Set<DrawingElement>()
+  for (let i = 0; i < angles.length; i++) for (let j = i + 1; j < angles.length; j++) {
+    const p = angPos(angles[i], angGeom(angles[i]).narrow ? 2.8 : 1.9), q = angPos(angles[j], angGeom(angles[j]).narrow ? 2.8 : 1.9)
+    if (Math.abs(p[0] - q[0]) < 46 && Math.abs(p[1] - q[1]) < 18) { crowded.add(angles[i]); crowded.add(angles[j]) }
+  }
+  const polyPts = f.elements.flatMap((o) => (o.t === 'polygon' ? o.pts : []))
+  const shapePts = polyPts.length ? polyPts : f.elements.flatMap((o) => (o.t === 'point' ? [[o.x, o.y] as Pt] : [])) // a triangle drawn with points and segments has no polygon: its vertices give the middle
+  const refX = shapePts.length ? sx(shapePts.reduce((t, p) => t + p[0], 0) / shapePts.length) : W / 2 // the middle of the shapes (of the picture when there is no polygon)
+  const refY = shapePts.length ? sy(shapePts.reduce((t, p) => t + p[1], 0) / shapePts.length) : H / 2
   const edgeLabel = (p: number[], q: number[], text: string, key: string) => {
     const mx = (p[0] + q[0]) / 2, my = (p[1] + q[1]) / 2
     const ex = (q[0] - p[0]) * scale, ey = -(q[1] - p[1]) * scale // screen direction of the edge
     const len = Math.hypot(ex, ey) || 1
     let nx = -ey / len, ny = ex / len
-    if ((sx(mx) - W / 2) * nx + (sy(my) - H / 2) * ny < 0) { nx = -nx; ny = -ny }
+    if ((sx(mx) - refX) * nx + (sy(my) - refY) * ny < 0) { nx = -nx; ny = -ny }
     const off = 10
     return (
       <text key={key} x={sx(mx) + nx * off} y={sy(my) + ny * off} textAnchor="middle" fontSize={13} fontWeight={600} fill={INK} stroke="white" strokeWidth={7} strokeLinejoin="round" paintOrder="stroke" dominantBaseline="middle">
@@ -391,7 +412,7 @@ function Drawing({ f }: { f: DrawingFigure }) {
             return (
               <g key={k}>
                 <path d={`M ${sx(e.at[0])} ${sy(e.at[1])} L ${sx(p1[0])} ${sy(p1[1])} A ${r * scale} ${r * scale} 0 ${a2 - a1 > Math.PI ? 1 : 0} 0 ${sx(p2[0])} ${sy(p2[1])} Z`} fill="#fbbf24" fillOpacity={0.45} stroke={INK} strokeWidth={1.2} />
-                {e.label && late.push(label(e.at[0] + 1.9 * r * Math.cos(mid), e.at[1] + 1.9 * r * Math.sin(mid), e.label, `${k}l`)) && null}
+                {e.label && late.push(label(e.at[0] + (crowded.has(e) ? 1.4 : a2 - a1 < 0.8 ? 2.8 : 1.9) * r * Math.cos(mid), e.at[1] + (crowded.has(e) ? 1.4 : a2 - a1 < 0.8 ? 2.8 : 1.9) * r * Math.sin(mid), e.label.replace(/ ?deg$/, "°"), `${k}l`)) && null}
               </g>
             )
           }
@@ -434,6 +455,7 @@ function Drawing({ f }: { f: DrawingFigure }) {
             const gx = pts.reduce((a, p) => a + p.x, 0) / pts.length
             const gy = pts.reduce((a, p) => a + p.y, 0) / pts.length
             let ux = (e.x - gx) * scale, uy = -(e.y - gy) * scale
+            if (Math.hypot(ux, uy) < 1e-6) { ux = e.x * scale; uy = -e.y * scale; if (Math.hypot(ux, uy) < 1e-6) { ux = 1; uy = -1 } } // the only point (or in the centre): away from the origin, so the letter does not cover the dot
             const ul = Math.hypot(ux, uy) || 1
             ux /= ul; uy /= ul
             return (

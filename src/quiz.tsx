@@ -72,6 +72,10 @@ import { IneqLine } from './ineq-line'
 import { MarkLine } from './mark-line'
 import { PlotPoints } from './plot-points'
 import { SystemDraw } from './system-draw'
+import { ParabSystem } from './parab-system'
+import { IneqDraw } from './ineq-draw'
+import { RegionPick } from './region-pick'
+import { AngleSketch } from './angle-sketch'
 import { NODES, NODES52, NODES53, NODES54, NODES55, NODES61, NODES62, NODES63, NODES64, NODES65, NODES66, NODES41, NODES42, NODES43, NODES44, NODES45, NODES31, NODES32, NODES33, NODES34, NODES35, NODES11, NODES12, NODES13, NODES14, NODES15, NODES16, NODES17, NODES18, CHALLENGE_OF, REGULAR_OF } from './section-data'
 import { EX_SQRT13, EX_SQRT13H } from './sqrt13-data'
 import { EX_SQRT12, EX_SQRT12H } from './sqrt12-data'
@@ -545,7 +549,15 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
         )}
 
         {(inPractice ? pr.draw : q.draw) && (
-          (inPractice ? pr.draw : q.draw)!.sys ? (
+          (inPractice ? pr.draw : q.draw)!.ang !== undefined ? (
+            <AngleSketch key={`${no}${q.part}-${px}-${inPractice}`} spec={(inPractice ? pr.draw : q.draw)!} disabled={!(stage === 'ask' || stage === 'practice')} onSubmit={(ok) => pick(ok ? 0 : 1)} />
+          ) : (inPractice ? pr.draw : q.draw)!.reg ? (
+            <RegionPick key={`${no}${q.part}-${px}-${inPractice}`} spec={(inPractice ? pr.draw : q.draw)!} disabled={!(stage === 'ask' || stage === 'practice')} onSubmit={(ok) => pick(ok ? 0 : 1)} />
+          ) : (inPractice ? pr.draw : q.draw)!.ineq ? (
+            <IneqDraw key={`${no}${q.part}-${px}-${inPractice}`} spec={(inPractice ? pr.draw : q.draw)!} disabled={!(stage === 'ask' || stage === 'practice')} onSubmit={(ok) => pick(ok ? 0 : 1)} />
+          ) : (inPractice ? pr.draw : q.draw)!.par ? (
+            <ParabSystem key={`${no}${q.part}-${px}-${inPractice}`} spec={(inPractice ? pr.draw : q.draw)!} disabled={!(stage === 'ask' || stage === 'practice')} onSubmit={(ok) => pick(ok ? 0 : 1)} />
+          ) : (inPractice ? pr.draw : q.draw)!.sys ? (
             <SystemDraw key={`${no}${q.part}-${px}-${inPractice}`} spec={(inPractice ? pr.draw : q.draw)!} disabled={!(stage === 'ask' || stage === 'practice')} onSubmit={(ok) => pick(ok ? 0 : 1)} />
           ) : (
             <GraphDraw key={`${no}${q.part}-${px}-${inPractice}`} spec={(inPractice ? pr.draw : q.draw)!} disabled={!(stage === 'ask' || stage === 'practice')} onSubmit={(ok) => pick(ok ? 0 : 1)} />
