@@ -29,7 +29,7 @@ import { ineqSystemParts } from './ineq-systems.mjs'
 import { ineqNonlinearParts } from './ineq-nonlinear.mjs'
 import { angleSketchParts } from './angle-sketch.mjs'
 import { compositeParts } from './graph-composite.mjs'
-import { graphComboParts } from './graph-combos.mjs'
+import { graphComboParts, makePairs } from './graph-combos.mjs'
 import { graphTransformParts } from './graph-transform.mjs'
 import { reciprocalParts } from './graph-reciprocal.mjs'
 import { inverseParts } from './graph-inverse.mjs'
@@ -376,9 +376,9 @@ if (fs.existsSync(TRANSFORM2_FILE)) {
   OVERRIDES['Precal-12|2|4|19'] = { name: 'Choose the graph of a combined transformation', parts: () => graphTransformParts(readJson(TRANSFORM2_FILE), 19) }
 }
 if (fs.existsSync(TRANSFORM_FILE)) OVERRIDES['Precal-12|2|4|9'] = { name: 'Choose the transformed graph', parts: () => graphTransformParts(readJson(TRANSFORM_FILE)) }
-if (fs.existsSync(COMBO_FILE)) {
-  const pairs = readJson(COMBO_FILE)
-  for (const n of ['5', '6', '7', '8']) if (pairs[n]?.length) OVERRIDES[`Precal-12|2|2|${n}`] = { name: 'Graph combinations of functions from graphs', parts: () => graphComboParts(hash, n, pairs[n]) }
+{
+  const pairs = fs.existsSync(COMBO_FILE) ? readJson(COMBO_FILE) : {}
+  for (const n of ['5', '6', '7', '8']) OVERRIDES[`Precal-12|2|2|${n}`] = { name: 'Graph combinations of functions from graphs', parts: () => graphComboParts(hash, n, pairs[n]?.length >= 10 ? pairs[n] : makePairs(hash, n)) } // Gemini's pairs when there are enough, else made here
 }
 for (const r of RESTORE) removed.delete(r)
 for (const r of ['G8|2|2|8', 'G8|2|2|9', 'G8|5|4|5', 'Math 10|1|2|16', 'Math 10|1|2|17', 'Math 10|1|2|18', 'Math 10|1|2|19', 'Math 10|2|2|7', 'Math 10|2|4|19', 'Math 10|3|1|4', 'Math 10|3|1|5', 'Math 10|3|1|6', 'Math 10|3|1|9', 'Math 10|4|2|3', 'Math 10|5|5|1', 'Math 10|5|5|14', 'Math 10|6|1|7', 'Math 10|6|1|8', 'Math 10|6|1|9', 'Math 10|6|1|10', 'Math 10|6|1|11', 'Math 10|6|1|12', 'Math 10|6|1|13', 'Math 10|6|1|14', 'Math 10|6|6|7', 'Precal-11|1|1|1', 'Precal-11|1|3|1', 'Precal-11|1|4|6', 'Precal-11|1|4|7', 'Precal-11|2|3|1', 'Precal-11|2|3|6', 'Precal-11|2|3|7', 'Precal-11|3|1|1', 'Precal-11|3|1|3', 'Precal-11|3|1|9', 'Precal-11|3|2|1', 'Precal-11|4|1|5', 'Precal-11|4|3|1', 'Precal-11|4|3|7', 'Precal-11|5|3|1', 'Precal-11|5|3|3', 'Precal-11|5|3|4', 'Precal-11|5|3|9', 'Precal-11|5|4|1', 'Precal-11|6|1|1', 'Precal-11|6|1|8', 'Precal-11|6|1|9', 'Precal-11|6|2|1', 'Precal-11|6|3|1', 'Precal-11|6|4|4', 'Precal-11|6|4|5', 'Precal-11|6|4|6', 'Precal-11|6|4|7', 'Precal-11|6|5|1', 'Precal-11|7|2|7', 'Precal-11|7|2|8', 'Precal-11|7|2|9', 'Precal-11|7|2|10', 'Precal-11|7|4|1', 'Precal-11|7|4|2', 'Precal-11|7|5|1', 'Precal-11|7|5|2', 'Precal-11|7|6|1', 'Precal-11|7|6|4', 'Precal-11|7|6|5', 'Precal-11|7|6|6', 'Precal-11|3|3|8', 'Precal-12|1|2|7', 'Precal-12|1|4|6', 'Precal-12|1|4|10', 'Precal-12|1|4|20', 'Precal-12|2|1|1', 'Precal-12|1|1|1', 'Precal-12|1|1|12', 'Precal-12|1|1|13', 'Precal-12|2|3|9', 'Precal-12|2|3|10', 'Precal-12|2|3|11', 'Precal-12|2|3|12', 'Precal-12|2|4|3', 'Precal-12|2|4|4', 'Precal-12|2|4|5', 'Precal-12|2|4|6', 'Precal-12|2|4|7', 'Precal-12|2|4|8', 'Precal-12|2|4|16', 'Precal-12|2|4|17', 'Precal-12|2|5|8', 'Precal-12|2|5|9', 'Precal-12|2|5|10', 'Precal-12|2|5|11', 'Precal-12|2|5|12', 'Precal-12|3|1|1', 'Precal-12|3|1|8', 'Precal-12|3|2|5', 'Precal-12|3|2|8', 'Precal-12|4|1|1', 'Precal-12|4|2|1', 'Precal-12|4|2|5', 'Precal-12|4|3|1', 'Precal-12|4|4|3', 'Precal-12|5|1|3', 'Precal-12|5|1|6', 'Precal-12|5|1|7', 'Precal-12|5|1|8', 'Precal-12|5|2|7', 'Precal-12|5|2|8', 'Precal-12|5|2|9', 'Precal-12|5|2|10', 'Precal-12|5|2|11', 'Precal-12|5|4|8', 'Precal-12|6|2|7', 'Precal-12|6|2|9', 'Precal-12|6|2|10', 'Precal-12|6|2|11', 'Precal-12|6|2|12', 'Precal-12|6|2|13', 'Precal-12|6|2|14', 'Precal-12|6|2|15', 'Precal-12|6|3|14', 'Precal-12|6|3|15', 'Precal-12|7|3|6', 'Precal-12|7|4|8', 'Precal-12|7|4|9']) removed.add(r) // taken out by the user, on top of removed.json

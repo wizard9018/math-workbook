@@ -49,6 +49,36 @@ const figureOf = (f, g, Y) => {
   return { bbox: [-6, Y, 6, -Y], big: true, elements: [...segs, ...texts] }
 }
 
+// pairs of graphs made here (used when Gemini's file has no pairs for an exercise): 10 per exercise, the first five with 3-4 vertices, the last five with 5-6, all x from -5 to 5
+export function makePairs(hash, ex) {
+  const out = []
+  for (let n = 0; out.length < 10 && n < 600; n++) {
+    const level = out.length < 5 ? 1 : 2
+    const nv = (k) => (level === 1 ? 3 + (hash('nv' + ex + n + k) % 2) : 5 + (hash('nv' + ex + n + k) % 2))
+    const make = (k) => {
+      const mid = [-4, -3, -2, -1, 0, 1, 2, 3, 4].sort((a, b) => (hash('x' + ex + n + k + a) % 997) - (hash('x' + ex + n + k + b) % 997)).slice(0, nv(k) - 2).sort((a, b) => a - b)
+      const xs = [-5, ...mid, 5]
+      // walk from the left: every piece has a slope that is a multiple of 1/2 and ends on an integer, |y| <= 3
+      const SL = [-2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2]
+      const v = [[-5, (hash('y0' + ex + n + k) % 7) - 3]]
+      for (let i = 1; i < xs.length; i++) {
+        const dx = xs[i] - xs[i - 1], y = v[i - 1][1]
+        const ok = SL.filter((m) => Number.isInteger(m * dx) && Math.abs(y + m * dx) <= 3)
+        const m = ok.length ? ok[hash('s' + ex + n + k + i) % ok.length] : 0
+        v.push([xs[i], y + m * dx])
+      }
+      return v
+    }
+    const q = { l: level, f: make('f'), g: make('g') }
+    if (!valid(q.f) || !valid(q.g)) continue
+    if (OPS.some((o, i) => OPS.some((o2, j) => i < j && same(combine(q.f, q.g, o.k), combine(q.f, q.g, o2.k))))) continue
+    if (OPS.some((o) => combine(q.f, q.g, o.k).some((p) => Math.abs(p[1]) > 7.5))) continue
+    if (out.some((r) => same(r.f, q.f) && same(r.g, q.g))) continue
+    out.push(q)
+  }
+  return out
+}
+
 export function graphComboParts(hash, ex, pairs) {
   const ok = (pairs ?? []).filter((q) => valid(q.f) && valid(q.g) && OPS.every((o, i) => OPS.every((o2, j) => i >= j || !same(combine(q.f, q.g, o.k), combine(q.f, q.g, o2.k)))) && OPS.every((o) => combine(q.f, q.g, o.k).every((p) => Math.abs(p[1]) <= 7.5)))
   return OPS.map((op) => {
