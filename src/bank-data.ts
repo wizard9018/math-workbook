@@ -144,7 +144,28 @@ const endFormula = (q: string): string | null => {
   if ((head.match(/\\\(/g) ?? []).length !== (head.match(/\\\)/g) ?? []).length) return null
   return `<div>${rich(head)}</div><div class="mt-2 max-w-full overflow-x-auto overflow-y-hidden py-1">${rich(`\\(${f}${end === '?' ? '\\ \\text{?}' : ''}\\)`)}</div>`
 }
+// "Given the functions \(f(x) = ...\), \(g(x) = ...\), and \(k(x) = ...\), find ...": the intro, then every function on its own line, then the question on its own line
+const funcList = (q: string): string | null => {
+  const m = /^((?:Given|Let|For|If|Consider)\b[^\\]*)/i.exec(q)
+  if (!m) return null
+  const lead = m[1].trim()
+  if (lead.length > 40 && !/functions?:?$/i.test(lead)) return null
+  const head = /functions?:?$/i.test(lead) ? lead : 'Given the functions'
+  let rest = q.slice(m[0].length)
+  const defs: string[] = []
+  for (;;) {
+    const d = /^\\\(((?:(?!\\\))[\s\S])*?)\\\)/.exec(rest)
+    if (!d || !/^[a-zA-Z]\([a-zA-Z]\)\s*=/.test(d[1])) break
+    defs.push(d[1])
+    rest = rest.slice(d[0].length).replace(/^\s*[,;]?\s*(?:and\s+)?/, '')
+  }
+  if (defs.length < 2 || !rest.trim()) return null
+  return `<div>${rich(head)}</div>${defs.map((x) => `<div class="mt-1">${rich(`\\(${x}\\)`)}</div>`).join('')}<div class="mt-2">${rich(rest.trim().replace(/^[.,;]\s*/, '').replace(/^[a-z]/, (c) => c.toUpperCase()))}</div>`
+}
 const stem = (q: string) => {
+  if (/^\s*\|[\s:|-]+\|\s*$/m.test(q)) return rich(q) // a table in the text (its ":---:" lines are not the colon that ends the instruction)
+  const fl = funcList(q)
+  if (fl) return fl
   // the last "colon + space" that is not the colon of a "Note:" (a note stays inside its line)
   let at = -1
   // (a colon after a short label at the start of a later line, "Option 2: 6 notebooks for $7.50", is a list item, not the end of the instruction)
@@ -163,6 +184,7 @@ const card = (b: BankQ) => {
   const text = `<div class="px-2 py-3 text-center text-xl leading-relaxed">${stem(b.q)}</div>`
   const pic = b.sv ? `<div class="w-full max-w-xs">${b.sv}</div>` : b.f ? `<div class="w-full max-w-[15.5rem]">${figureHtml(b.f)}</div>` : ''
   if (!pic) return text
+  if (b.f && (b.f as { big?: boolean }).big) return `<div class="flex flex-col items-center gap-2"><div class="w-full max-w-md">${figureHtml(b.f)}</div>${text}</div>` // a graph that needs room: big, with the question under it
   return `<div class="flex flex-col items-center gap-3 md:flex-row md:items-center md:gap-6"><div class="flex shrink-0 justify-center md:w-[16rem]">${pic}</div><div class="min-w-0 flex-1">${text}</div></div>`
 }
 const span = (s: string) => `<span>${rich(s)}</span>`

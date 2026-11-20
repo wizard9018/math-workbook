@@ -47,14 +47,14 @@ export interface DotPlotFigure {
 export type Pt = [number, number]
 export type DrawingElement =
   | { t: 'point'; x: number; y: number; label?: string; open?: boolean }
-  | { t: 'segment'; p: Pt; q: Pt; label?: string; dashed?: boolean; arrow?: 'start' | 'end' | 'both' }
+  | { t: 'segment'; p: Pt; q: Pt; label?: string; dashed?: boolean; arrow?: 'start' | 'end' | 'both'; color?: string }
   | { t: 'line'; p: Pt; q: Pt }
   | { t: 'polygon'; pts: Pt[]; fill?: string | null; label?: string }
   | { t: 'circle'; c: Pt; r: number; fill?: string }
   | { t: 'ellipse'; c: Pt; rx: number; ry: number; a0?: number; a1?: number; dashed?: boolean; fill?: string }
   | { t: 'angle'; at: Pt; from: Pt; to: Pt; label?: string }
   | { t: 'function'; expr: string; from: number; to: number; dashed?: boolean; arrow?: 'start' | 'end' | 'both'; swap?: boolean }
-  | { t: 'text'; x: number; y: number; s: string }
+  | { t: 'text'; x: number; y: number; s: string; color?: string; anchor?: 'start' | 'middle' | 'end' }
 export interface DrawingFigure {
   type: 'drawing'
   bbox: [number, number, number, number]
@@ -289,9 +289,9 @@ function Drawing({ f }: { f: DrawingFigure }) {
   const axisX = xmin <= 0 && 0 <= xmax ? 0 : xmin
   const clipId = `clip-${xmin}-${xmax}-${ymin}-${ymax}`
   const dash = '5 4'
-  const label = (x: number, y: number, text: string, key: string, anchor: 'start' | 'middle' | 'end' = 'middle') => (
+  const label = (x: number, y: number, text: string, key: string, anchor: 'start' | 'middle' | 'end' = 'middle', color?: string) => (
     // a white halo behind the text (paintOrder stroke): a label on a line or an edge does not run into the line
-    <text key={key} x={sx(x)} y={sy(y)} textAnchor={anchor} fontSize={13} fontWeight={600} fill={INK} stroke="white" strokeWidth={7} strokeLinejoin="round" paintOrder="stroke" dominantBaseline="middle">
+    <text key={key} x={sx(x)} y={sy(y)} textAnchor={anchor} fontSize={13} fontWeight={600} fill={INK} color={color} stroke="white" strokeWidth={7} strokeLinejoin="round" paintOrder="stroke" dominantBaseline="middle">
       {text}
     </text>
   )
@@ -365,7 +365,7 @@ function Drawing({ f }: { f: DrawingFigure }) {
           const k = `e${i}`
           if (e.t === 'segment')
             return (
-              <g key={k}>
+              <g key={k} color={e.color}>
                 <line x1={sx(e.p[0])} y1={sy(e.p[1])} x2={sx(e.q[0])} y2={sy(e.q[1])} stroke={INK} strokeWidth={2} strokeDasharray={e.dashed ? dash : undefined} />
                 {(e.arrow === 'end' || e.arrow === 'both') && arrowHead(sx(e.p[0]), sy(e.p[1]), sx(e.q[0]), sy(e.q[1]), `${k}ae`)}
                 {(e.arrow === 'start' || e.arrow === 'both') && arrowHead(sx(e.q[0]), sy(e.q[1]), sx(e.p[0]), sy(e.p[1]), `${k}as`)}
@@ -456,6 +456,8 @@ function Drawing({ f }: { f: DrawingFigure }) {
             const gy = pts.reduce((a, p) => a + p.y, 0) / pts.length
             let ux = (e.x - gx) * scale, uy = -(e.y - gy) * scale
             if (Math.hypot(ux, uy) < 1e-6) { ux = e.x * scale; uy = -e.y * scale; if (Math.hypot(ux, uy) < 1e-6) { ux = 1; uy = -1 } } // the only point (or in the centre): away from the origin, so the letter does not cover the dot
+            if (e.x === 0 && e.y !== 0) { ux = 1; uy = uy >= 0 ? 0.5 : -0.5 } // a point on the y-axis: its letter beside the axis (not on the axis numbers)
+            else if (e.y === 0 && e.x !== 0) { uy = -1; ux = ux >= 0 ? 0.5 : -0.5 } // on the x-axis: above the axis
             const ul = Math.hypot(ux, uy) || 1
             ux /= ul; uy /= ul
             return (
@@ -470,7 +472,7 @@ function Drawing({ f }: { f: DrawingFigure }) {
             )
           }
 
-          if (e.t === 'text') return label(e.x, e.y, e.s, k)
+          if (e.t === 'text') return label(e.x, e.y, e.s, k, e.anchor ?? 'middle', e.color)
           return null
         })}
         {late}
