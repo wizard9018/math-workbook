@@ -81,11 +81,23 @@ import { EX_SQRT13, EX_SQRT13H } from './sqrt13-data'
 import { EX_SQRT12, EX_SQRT12H } from './sqrt12-data'
 import { EX_REAL11, EX_REAL11H } from './real11-data'
 import { MultiPick } from './multi-pick'
+import { ChapterTest } from './chapter-test'
 import { EX_REVIEW35, EX_REVIEW35H } from './review35-data'
 
 // the page opens at the newest section (change these two when a new section is added)
 const LAST_NO = 2902
 const LAST_OPEN = ['Chapter 1', '1.8 Chapter review']
+// every chapter review (grades 8, 10, 11, 12) runs as one test: answer everything, then the score and the answers
+const TESTS: Record<number, Exercise[]> = {} // the key of the test's first exercise -> every exercise of the section (all variants kept)
+const makeTests = (b: ReturnType<typeof buildBankExercises>) => {
+  for (const sec of b.chapters.flatMap((c) => c.sections)) {
+    if (!/^\d+\.\d+ Chapter review/i.test(sec.title) || !sec.nodes.length) continue
+    const first = sec.nodes[0]
+    TESTS[first.no] = sec.nodes.map((n) => b.exercises[n.no])
+    for (const n of sec.nodes.slice(1)) delete EXERCISES[n.no]
+    sec.nodes = [{ ...first, name: 'Chapter test', parts: sec.nodes.length }]
+  }
+}
 const html = (s: string) => ({ __html: katex.renderToString(s, { throwOnError: false }) })
 
 // a long sentence (\text{...}, with $math$ or other math between) is plain text that wraps; KaTeX would keep it on one line
@@ -353,6 +365,7 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
       .then((d) => {
         const b = buildBankExercises(d)
         for (const [k, e] of Object.entries(b.exercises)) EXERCISES[Number(k)] = varied(e)
+        makeTests(b)
         setBank((cur) => ({ ...cur, [g]: b.chapters }))
       })
       .catch((e) => console.error('load grade', g, e))
@@ -612,6 +625,9 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
     <div className="flex h-[calc(100dvh-3rem)] overflow-hidden"> {/* the list on the left and the exercise on the right scroll on their own */}
       <Side key={`${grade}-${!!bank[grade]}-${sideNonce}`} current={no} onOpen={open} results={results} grade={grade} loaded={loaded} resumeRef={resumeRef} bankChapters={bank[grade]} />
       <div ref={mainRef} className="min-w-0 flex-1 overflow-y-auto overscroll-contain">
+        {TESTS[no] ? (
+          <ChapterTest key={no} exercises={TESTS[no]} onFinish={(score, total) => setResults((cur) => ({ ...cur, [no]: Array(EXERCISES[no].questions.length).fill(score === total ? 'first' : 'learned') }))} />
+        ) : (<>
         {stage === 'lesson' || stage === 'plesson' ? (
           <div className="flex items-center gap-3 px-4 pt-3">
             <div id="lesson-controls" className="flex shrink-0 items-center gap-2" />
@@ -621,6 +637,7 @@ function Quiz({ userId, email }: { userId: string; email: string }) {
           <Road ex={ex} i={stage === 'done' ? -1 : i} result={result} onJump={jump} />
         )}
         {body}
+        </>)}
       </div>
     </div>
     </>
